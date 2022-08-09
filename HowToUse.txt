@@ -5,3 +5,4 @@ fukuhara test
 nishio test
 fukuhara2 test
 kawano test
+nampo test
