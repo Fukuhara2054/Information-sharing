@@ -7,8 +7,8 @@ var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 var options = {
-  key: fs.readFileSync("server-dsa2.key"),
-  cert: fs.readFileSync("server-dsa2.crt"),
+  key: fs.readFileSync("server.key"),
+  cert: fs.readFileSync("server.crt"),
 };
 var server = https.createServer(options, app);
 
