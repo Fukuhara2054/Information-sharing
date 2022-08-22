@@ -1,8 +1,10 @@
 import { FC, memo, ReactNode, useState } from "react";
 import Link from "next/link";
 import styles from "./Layout.module.scss";
-import HomeIcon from "@mui/icons-material/Home";
 import { useRouter } from "next/router";
+import HomeIcon from "@mui/icons-material/Home";
+import InventoryIcon from '@mui/icons-material/Inventory';
+import StarIcon from '@mui/icons-material/Star';
 
 
 type Props = {
@@ -17,25 +19,25 @@ type Navigation = {
 
 const navigations: Navigation[] = [
   {
-    pageName: "トップ",
+    pageName: "共有事項",
     path: "/",
     icon: <HomeIcon className={styles.icon}/>
   },
   {
-    pageName: "ページ2",
+    pageName: "質問箱",
     path: "/page2",
-    icon: <HomeIcon className={styles.icon}/>
+    icon: <InventoryIcon className={styles.icon}/>
   },
   {
-    pageName: "ページ3",
+    pageName: "お気に入り",
     path: "/page3",
-    icon: <HomeIcon className={styles.icon}/>
+    icon: <StarIcon className={styles.icon}/>
   },
-  {
-    pageName: "ページ4",
-    path: "/page4",
-    icon: <HomeIcon className={styles.icon}/>
-  },
+//   {
+//     pageName: "...",
+//     path: "/page4",
+//     icon: <HomeIcon className={styles.icon}/>
+//   },
 
 ]
 
@@ -66,7 +68,7 @@ export const Layout: FC<Props> = memo((props) => {
           <Link href={navigation.path} key={navigation.pageName}>
             <a
               className={styles.flexContainer}
-              style={{ background: isPageActive(navigation.path) ? "#1B555A" : "none" }}>
+              style={{ background: isPageActive(navigation.path) ? "#969BBE" : "none" }}>
               { navigation.icon }
               { menuOpen && <p className={styles.pageName}>{ navigation.pageName }</p> }
             </a>

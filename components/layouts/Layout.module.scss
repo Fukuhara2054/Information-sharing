@@ -28,7 +28,9 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      background-color: #4CAF93;
+      background-color: #356CC7;
+      border-right: 1.5px solid;
+      border-right-color: #979797;
   
       padding-left: $paddings;
       padding-right: $paddings;
@@ -126,7 +128,7 @@
   
       &:hover {
   
-        background-color: #1B555A;
+        background-color: #87A5C7;
       }
     }
   
@@ -135,7 +137,7 @@
   
       display: block;
       flex-shrink: 0;
-      fill: white;
+      fill: #F7F5F7;
       width: 25px;
   
       margin-top: 12px; // 微調整
@@ -151,7 +153,7 @@
   
     .mainContent {
   
-      background: #F6F8FA;
+      background: #DDDCDD;
       width: 100%;
     }
   }
