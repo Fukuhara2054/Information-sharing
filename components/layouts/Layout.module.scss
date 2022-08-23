@@ -1,3 +1,5 @@
+@import "colors";
+
 .root {
 
     $paddings: 15px;
@@ -7,7 +9,7 @@
   
       height: 1px;
       width: 30px;
-      background: white;
+      background: $white-l0;
   
       margin-bottom: 10px;
   
@@ -28,9 +30,7 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      background-color: #356CC7;
-      border-right: 1.5px solid;
-      border-right-color: #979797;
+      background-color: $blue-d0;
   
       padding-left: $paddings;
       padding-right: $paddings;
@@ -128,7 +128,7 @@
   
       &:hover {
   
-        background-color: #87A5C7;
+        background-color: $black-l0;
       }
     }
   
@@ -137,7 +137,7 @@
   
       display: block;
       flex-shrink: 0;
-      fill: #F7F5F7;
+      fill: $white-l3;
       width: 25px;
   
       margin-top: 12px; // 微調整
@@ -147,13 +147,14 @@
   
     .pageName {
       font-size: 14px;
-      color: white;
+      color: $white-l3;
     }
   
   
     .mainContent {
   
-      background: #DDDCDD;
+      background: $white-l3;
       width: 100%;
+      color: $black-d0;
     }
   }
