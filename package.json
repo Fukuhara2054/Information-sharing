@@ -1,23 +1,29 @@
 {
-  "name": "onelink",
-  "version": "0.0.0",
+  "name": "information-sharing",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "node": "nodemon -e ejs,js,json ./bin/www",
-    "sass": "sass public/scss/:public/css/ --no-source-map --watch",
-    "start": "node ./bin/www & npm run sass"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "bootstrap": "^5.2.0",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "fs": "^0.0.1-security",
-    "http-errors": "^2.0.0",
-    "http-server": "^14.1.1",
-    "https": "^1.0.0",
-    "jade": "^1.11.0",
-    "morgan": "^1.10.0",
-    "sass": "^1.54.4"
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.1",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.54.5"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.9",
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.22.0",
+    "eslint-config-next": "12.2.5",
+    "typescript": "4.7.4"
   }
 }
