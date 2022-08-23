@@ -1,0 +1,27 @@
+ローカルでhttpsを行う方法(MAC版)
+・cdでpackage.jsonがあるフォルダに移動
+・以下のコマンドを実行してopensslコマンドをインストール
+    brew install openssl
+・以下のコマンドを実行して、server.key（鍵）とserver.crt（証明書）を作成
+    openssl req \
+    -newkey rsa:2048 \
+    -x509 \
+    -nodes \
+    -keyout server.key \
+    -new \
+    -out server.crt \
+    -subj /CN=localhost \
+    -reqexts SAN \
+    -extensions SAN \
+    -config <(cat /etc/ssl/openssl.cnf \
+        <(printf '[SAN]\nsubjectAltName=DNS:localhost,IP:192.168.0.1')) \
+    -sha256 \
+    -days 3650
+・以下のコマンドでキーチェーンアクセスを開く
+    open -a 'keychain access'
+・localhostという証明書が追加されていることを確認し、ダブルクリックで開く
+・「信頼」項目を全て「常に信頼」にする
+・キーチェーンアクセスを閉じる（パスワードが要求されるので入力）
+・以下のコマンドを実行して、ローカルサーバーを立ち上げる
+    npm run start
+・「https://localhost:3000/views/office-list.html」にアクセスし、表示されれば成功
