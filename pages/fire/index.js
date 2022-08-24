@@ -1,0 +1,30 @@
+import {useState, useEffect} from 'react'
+import Layout from '../../components/layout'
+import db from '../../components/fire'
+import { collection, getDocs } from 'firebase/firestore';
+
+export default function Home(){
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        const postData = collection(db, "mydata")
+        getDocs(postData).then((snapshot)=>{
+           setData(snapshot.docs.map((doc)=> doc.data()))
+        })
+
+    },[])
+    return(
+        <div>
+            <Layout header='next.js' title='topPage'>
+                {data.map((dat, key) =>(
+                    <ul key={key}>
+                        <li>{dat.name}</li>
+                        <li>{dat.mail}</li>
+                        <li>{dat.age}</li>
+                    </ul>
+                ))}
+                {/* <img src='pack.png' width='300' height='400' /> */}
+            </Layout>
+        </div>
+    )
+}
