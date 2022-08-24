@@ -1,0 +1,77 @@
+body {
+  background-image:url("C:\Users\240\Pictures\Camera Roll\イーブイ.png");
+  overflow-y: hidden;
+}
+
+h1 {
+  text-align: center;
+}
+
+.App {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App form {
+  background-color: rgb(229, 219, 219);
+  width: 30%;
+  height: 50%;
+  max-width: 450px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+.uiForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 230px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.formField input { 
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.formField label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+button {
+  background-color: #0e528d;
+  width: 60%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: #0c477b;
+}
+
+.errormsg{
+  color: red;
+  margin: 0;
+  padding-right: 120px;
+  text-align: left;
+  font-size: 30%;
+}
