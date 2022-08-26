@@ -1,0 +1,56 @@
+.box2 {
+    padding: 0.5em 1em;
+    margin: 3em 0;
+    color: #111111;/*文字色黒色*/
+    background: #FFF;
+    border: solid 3px #080808;/*線*/
+    border-radius: 20px;/*角の丸み*/
+    display:inline-block;
+}
+.box2 p {
+    margin: 0; 
+    padding: 0;
+}
+.uta{
+    font-weight: bold;
+    width: 1;
+
+}
+.jason{
+    display: flex;
+    flex: auto;
+    font-size: 20px;
+}
+
+
+p.pic{
+    
+    float: right;
+}
+.btn1 + * {
+	clear: both;
+}
+
+
+.abc ,.pic{
+    
+
+   
+}
+
+/*.box2 ,.main ,.abc ,.pic{
+    display: block;
+    margin: 0 0 0 auto;
+}*/
+
+/*.box2 ,.main ,.abc ,.pic{
+    text-align: right;
+    
+    margin: 0 0 0 auto;
+
+}*/
+
+.box2 ,.main ,.abc ,.pic{
+    display: block;
+  margin: 0 0 0 auto;
+}
