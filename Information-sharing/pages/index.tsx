@@ -9,7 +9,7 @@ const Home = () => {
   const auth = getAuth(app)
   const handleLogout = async () => {
     await signOut(auth)
-    await router.push("/about")
+    await router.push("/login")
 }
 
   
