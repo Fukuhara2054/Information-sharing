@@ -6,6 +6,7 @@ import styles from "../styles/Add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import InfoText from "./infoText";
 
 const Add: FC = () => {
   // アプリのルートを識別するクエリセレクタを指定する。
@@ -72,48 +73,9 @@ const Add: FC = () => {
         <IconButton onClick={closeModal} className={styles.closeicon}>
           <CloseIcon />
         </IconButton>
-        <div className={styles.textsection}>
-          <h2>
-            命題　：
-            <TextField
-              id="outlined-basic"
-              label="タイトル"
-              variant="outlined"
-              className={styles.input}
-            />
-          </h2>
 
-          <h2>
-            投稿者：
-            <TextField
-              id="outlined-basic"
-              label="名前"
-              variant="outlined"
-              className={styles.input}
-            />
-          </h2>
-
-          <h2>
-            回答者：
-            <TextField
-              id="outlined-basic"
-              label="回答者名"
-              variant="outlined"
-              className={styles.input}
-            />
-          </h2>
-
-          <h2>
-            詳細　：
-            <TextField
-              id="outlined-multiline-static"
-              label="投稿内容"
-              multiline
-              rows={6}
-              className={styles.detail}
-            />
-          </h2>
-        </div>
+        {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
+        <InfoText />
 
         {/* ↓後でonclick変える */}
         <div className={styles.button}>
