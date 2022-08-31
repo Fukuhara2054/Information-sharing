@@ -1,0 +1,48 @@
+.Add {
+    position: relative;
+}
+
+.closeicon {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .addbutton {
+    margin: auto;
+  }
+  
+  .closebutton {
+    margin: auto;
+  }
+  
+  .plus {
+    position: absolute;
+    right: 0px;
+    font-size: 15px;
+    margin-right: 20px;
+    padding: 11px 30px 11px 30px;
+  }
+
+  .textsection {
+    padding: auto;
+    h2 {
+        font-size: 1.8vw;
+        display: flex;
+        .input {
+            max-width: 85%;
+            width: 100vw;
+            vertical-align: 4px;
+        }
+        .detail {
+            font-size: 1vw;
+            width: 85%;
+            height: 200px;
+        }
+    }
+  }

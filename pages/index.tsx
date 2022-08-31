@@ -1,36 +1,20 @@
-import type { NextPage } from 'next'
+import type { NextPage } from "next";
+import Add from "../components/add";
+import Post from "../components/post";
+import Search from "../components/search";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
-      <p>テキスト</p>
+      <div>
+        <Add />
+        <Search />
+      </div>
+      <div>
+        <Post />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,0 +1,186 @@
+@import "colors";
+
+.root {
+
+  @mixin borderStyle() {
+
+    display: block;
+
+    height: 1px;
+    width: 30px;
+    background: $white-l0;
+
+    margin-bottom: 10px;
+
+
+    &:last-child {
+
+      margin-bottom: 30px;
+    }
+  }
+
+  $paddings: 15px;
+  display: flex;
+  width: 100%;
+  background: $white-l2;
+
+
+  .sidebar {
+
+    position: -webkit-sticky;
+    /* Safari対応 */
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background-color: $blue-d2;
+
+    padding-left: $paddings;
+    padding-right: $paddings;
+  }
+
+
+  .hamburger {
+
+    cursor: pointer;
+    width: 40px;
+
+    margin-top: 15px;
+
+
+    /* メニューを閉じるアニメーション ==================================================================================== */
+    .menuCloseArrow {
+      @include borderStyle
+    }
+
+
+    &:hover>.menuCloseArrow {
+
+      transition: 0.2s;
+
+      &:nth-child(1) {
+
+        width: 15px;
+        height: 2px;
+        transform: translateY(7px) translateX(-1px) rotate(140deg);
+      }
+
+
+      &:nth-child(2) {
+
+        height: 2px;
+      }
+
+      &:nth-child(3) {
+        width: 15px;
+        height: 2px;
+        transform: translateY(-7px) translateX(-1px) rotate(-140deg);
+
+        margin-bottom: 27px;
+        /* アニメーションの際の調整 */
+      }
+    }
+
+
+    /* メニューを開くアニメーション ====================================================================================== */
+    .menuOpenArrow {
+      @include borderStyle
+    }
+
+
+    &:hover>.menuOpenArrow {
+
+      transition: 0.2s;
+
+      &:nth-child(1) {
+
+        width: 15px;
+        height: 2px;
+        transform: translateY(7px) translateX(16px) rotate(-140deg);
+      }
+
+
+      &:nth-child(2) {
+
+        height: 2px;
+      }
+
+      &:nth-child(3) {
+        width: 15px;
+        height: 2px;
+        transform: translateY(-7px) translateX(16px) rotate(140deg);
+
+        margin-bottom: 27px;
+        /* アニメーションの際の調整 */
+      }
+    }
+  }
+
+
+  .flexContainer {
+
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    margin-top: 10px;
+
+    margin-right: -$paddings;
+    margin-left: -$paddings;
+
+    padding-right: $paddings;
+    padding-left: $paddings;
+
+    &:hover {
+
+      background-color: $black-l0;
+    }
+  }
+
+
+  .icon {
+
+    display: block;
+    flex-shrink: 0;
+    fill: $white-l3;
+    width: 25px;
+    font-size: 30px;
+
+    margin-top: 12px; // 微調整
+    margin-bottom: 12px; // 微調整
+  }
+
+
+  .pageName {
+    font-size: 14px;
+    color: $white-l3;
+    flex-direction: column;
+  }
+
+
+  .main {
+    width: 100vw;
+  }
+
+  .header {
+    width: 100%;
+    height: 70px;
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #f5faff;
+    border-bottom: 2px solid;
+    border-bottom-color: #979797;
+  }
+
+  .mainContent {
+    width: 100%;
+    background: $white-l2;
+    color: $black-d0;
+    padding:10px;
+    p,h3{
+      margin:0px;
+      padding:5px;
+    }
+  }
+
+}
