@@ -91,7 +91,7 @@ const Post: FC = () => {
                   </div>
                 </div>
                 <div>
-                  <p>回答者: {dat.anserUser}　記載者:{dat.writeUser}　時間：{dayjs(dat.time.toDate()).format('YYYY/MM/DD HH:mm')}</p>
+                  <p>回答者: {dat.answerUser}　記載者:{dat.writeUser}　時間：{dayjs(dat.time.toDate()).format('YYYY/MM/DD HH:mm')}</p>
                 </div>
               </div>
             </div>
