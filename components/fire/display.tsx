@@ -9,6 +9,7 @@ const Display: FC =() => {
         const postData = collection(db, "mydata")
         getDocs(postData).then((snapshot)=>{
            setData(snapshot.docs.map((doc)=> doc.data()))
+           console.log(data)
         })
 
     },[])
