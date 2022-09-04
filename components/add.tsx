@@ -74,6 +74,8 @@ const Add: FC = () => {
         style={{
           overlay: {
             position: "fixed",
+            //MUIのz-indexが1100に設定されているため
+            zIndex: 1102,
             top: 0,
             left: 0,
             right: 0,

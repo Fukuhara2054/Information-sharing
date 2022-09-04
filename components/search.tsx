@@ -4,17 +4,29 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
+
+
 const Search: FC = () => {
   return (
     <Paper
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 350 }}
+      //影
+      elevation={3}
+      sx={{
+        p: "0px 2px",
+        display: "flex",
+        alignItems: "center",
+        width: "30%",
+        height: 35,
+        borderRadius: "15px",
+        marginLeft: "10px",
+      }}
     >
-      <IconButton sx={{ p: "10px" }} aria-label="menu">
+      <IconButton sx={{ p: "4%" }} aria-label="menu">
         <SearchIcon />
       </IconButton>
       <InputBase
-        sx={{ ml: 1, flex: 1 }}
+        sx={{ flex: 1 }}
         placeholder="検索"
         inputProps={{ "aria-label": "search" }}
       />
