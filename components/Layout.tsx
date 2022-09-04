@@ -41,6 +41,8 @@ const navigations: Navigation[] = [
 ];
 
 // FC = Function Component 関数コンポーネントを定義
+//↓eslintを無効にしている
+/* eslint-disable */
 export const Layout: FC<Props> = memo((props) => {
   const { children } = props;
 
@@ -98,3 +100,4 @@ export const Layout: FC<Props> = memo((props) => {
     </div>
   );
 });
+/* eslint-enable */
