@@ -145,22 +145,6 @@ export const Layout: FC<Props> = memo((props) => {
           </ElevationScroll>
 
           <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
-          <main className={styles.mainContent}>{children}</main>
         </div>
       </main>
     </div>

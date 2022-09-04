@@ -39,7 +39,11 @@ const Add: FC = () => {
   };
   const handleClickAddButton = () => {
 
-
+    const data = collection(db, "users")
+    getDocs(data).then((snapshot) => {
+      const a =(snapshot.docs.map((doc) => doc.data().map))
+      a.map((d) => console.log(d.title))
+    })
 
     // console.log(map)
     // const docRef = setDoc(doc(db, "users", 'V0K3WWjQJDljHDNjGFUy'), {
