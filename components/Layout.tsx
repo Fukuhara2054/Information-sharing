@@ -103,7 +103,7 @@ export const Layout: FC<Props> = memo((props) => {
             <a
               className={styles.flexContainer}
               style={{
-                background: isPageActive(navigation.path) ? "#969BBE" : "none",
+                background: isPageActive(navigation.path) ? "#BAACB0" : "none",
               }}
             >
               {navigation.icon}
