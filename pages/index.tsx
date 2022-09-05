@@ -5,7 +5,7 @@ import { app } from "./firebase"
 import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "next/router"
 import { Button } from "@mui/material"
-import { css } from "@emotion/react"
+import { Layout } from "../components/Layout";
 
 const Home: NextPage = () => {
 
@@ -17,17 +17,19 @@ const Home: NextPage = () => {
   }
 
   return (
+    <Layout>
     <div>
-
+      <p>{auth.currentUser?.email}でログイン中</p>
+      <div>
+        <Post />
+      </div>
       <div>
         <Button type="submit" variant="outlined" onClick={handleLogout}>
             ログアウト
           </Button>
       </div>
-      <div>
-        <Post />
-      </div>
     </div>
+    </Layout>
   );
 };
 

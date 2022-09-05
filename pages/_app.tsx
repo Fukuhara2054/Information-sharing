@@ -7,9 +7,7 @@ import Add from '../components/add'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-    <Layout>
       <Component {...pageProps} />
-    </Layout>
     </AuthProvider>
   )
 }
