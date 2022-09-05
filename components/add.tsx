@@ -1,14 +1,25 @@
 import { FC, useState } from "react";
+import db from '../components/fire/fire'
+import { collection, addDoc, query, where } from "firebase/firestore";
+import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "../styles/Add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import InfoText from "./infoText";
+import { convertLength } from "@mui/material/styles/cssUtils";
+import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
+//型指定
 const Add: FC = () => {
+  const [title, setTitle] = useState('') //命題
+  const [content, setContent] = useState('')// 詳細
+  const [questioner, setQuestioner] = useState('')//質問者
+  const [answer, setAnswer] = useState('')//回答者
+  const [map, setMap] = useState([{}])
+
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -26,6 +37,22 @@ const Add: FC = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const handleClickAddButton = () => {
+
+
+
+    // console.log(map)
+    // const docRef = setDoc(doc(db, "users", 'V0K3WWjQJDljHDNjGFUy'), {
+    //   map: {
+    //     title: title,
+    //     content: content,
+    //     questioner: questioner,
+    //     answer: answer,
+    //   }
+
+    // }
+    // )
+  }
   return (
     <div className={styles.Add}>
       <Button
@@ -47,6 +74,8 @@ const Add: FC = () => {
         style={{
           overlay: {
             position: "fixed",
+            //MUIのz-indexが1100に設定されているため
+            zIndex: 1102,
             top: 0,
             left: 0,
             right: 0,
@@ -75,15 +104,20 @@ const Add: FC = () => {
         </IconButton>
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
-        <InfoText />
-
+        {/* 子コンポーネントから親コンポーネントに渡している */}
+        <InfoText
+          setTitle={setTitle}
+          setContent={setContent}
+          setQuestioner={setQuestioner}
+          setAnswer={setAnswer}
+        />
         {/* ↓後でonclick変える */}
         <div className={styles.button}>
           <Button
             variant="contained"
             color="success"
             className={styles.addbutton}
-            onClick={closeModal}
+            onClick={handleClickAddButton}
           >
             追加
           </Button>

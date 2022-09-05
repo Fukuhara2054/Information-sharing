@@ -1,7 +1,5 @@
 import type { NextPage } from "next";
-import Add from "../components/add";
 import Post from "../components/post";
-import Search from "../components/search";
 
 import { app } from "./firebase"
 import { getAuth, signOut } from "firebase/auth"
@@ -20,6 +18,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       <div>
         <Button type="submit" variant="outlined" onClick={handleLogout}>
             ログアウト
@@ -30,6 +29,9 @@ const Home: NextPage = () => {
       <div>
         <Post />
       </div>
+=======
+      <Post />
+>>>>>>> 13407d25e18f559113266c26c3c34c74b6055b9a
     </div>
   );
 };

@@ -23,6 +23,12 @@ const Add: FC = () => {
         setMessage('データベースに登録しました。')
 
     }
+    //mapフィールドの取得(最初単位)
+    // const data = collection(db, "users")
+    // getDocs(data).then((snapshot) => {
+    //   const a =(snapshot.docs.map((doc) => doc.data().map))
+    //   a.map((d) => console.log(d.content))
+    // })
 
     return (
         <div>

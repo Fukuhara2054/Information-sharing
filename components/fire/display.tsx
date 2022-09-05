@@ -3,7 +3,7 @@ import db from './fire'
 import { collection, getDocs } from 'firebase/firestore';
 
 const Display: FC =() => {
-    const [data, setData] = useState([])
+    const [data, setData] = useState()
 
     useEffect(() => {
         const postData = collection(db, "mydata")
