@@ -18,20 +18,15 @@ const Home: NextPage = () => {
 
   return (
     <div>
-<<<<<<< HEAD
+
       <div>
         <Button type="submit" variant="outlined" onClick={handleLogout}>
             ログアウト
           </Button>
-        <Add />
-        <Search />
       </div>
       <div>
         <Post />
       </div>
-=======
-      <Post />
->>>>>>> 13407d25e18f559113266c26c3c34c74b6055b9a
     </div>
   );
 };
