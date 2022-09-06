@@ -1,34 +1,37 @@
+import type { NextPage } from "next";
+import Post from "../components/post";
+
 import { app } from "./firebase"
 import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "next/router"
 import { Button } from "@mui/material"
-import { css } from "@emotion/react"
+import { Layout } from "../components/Layout";
 
-const Home = () => {
+const Home: NextPage = () => {
+
   const router = useRouter()
   const auth = getAuth(app)
   const handleLogout = async () => {
+    console.log(auth.currentUser?.email)
     await signOut(auth)
     await router.push("/login")
-}
-
-  
-    return (
-      <div>
-        <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 16px;
-          `}
-        >
-          <Button type="submit" variant="outlined" onClick={handleLogout}>
-            ログアウト
-          </Button>
-        </div>
-      </div>
-    );
   }
 
+  return (
+    <Layout>
+    <div>
+      <p>{auth.currentUser?.email}でログイン中</p>
+      <div>
+        <Post />
+      </div>
+      <div>
+        <Button type="submit" variant="outlined" onClick={handleLogout}>
+            ログアウト
+          </Button>
+      </div>
+    </div>
+    </Layout>
+  );
+};
 
 export default Home;

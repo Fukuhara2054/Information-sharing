@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { Alert, Button, InputLabel, Snackbar, TextField } from "@mui/material"
-import { css } from "@emotion/react"
+// import { css } from "@emotion/react"
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { useAuthContext } from "./context/AuthContext"
@@ -32,12 +32,12 @@ const Signup = () => {
   }
   return (
     <div
-      css={css`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-flow: column;
-      `}
+    //   css={css`
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+    //     flex-flow: column;
+    //   `}
     >
       <Snackbar
         open={isLoggedIn}
@@ -53,11 +53,11 @@ const Signup = () => {
       <h2>ユーザー登録</h2>
       <form onSubmit={handleSubmit}>
         <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //   `}
         >
           <InputLabel>メールアドレス</InputLabel>
           <TextField
@@ -65,18 +65,18 @@ const Signup = () => {
             type="email"
             size="small"
             onChange={handleChangeEmail}
-            css={css`
-              padding-left: 12px;
-            `}
+            // css={css`
+            //   padding-left: 12px;
+            // `}
           />
         </div>
         <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 16px;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     align-items: center;
+        //     margin-top: 16px;
+        //   `}
         >
           <InputLabel>パスワード</InputLabel>
           <TextField
@@ -84,28 +84,28 @@ const Signup = () => {
             type="password"
             size="small"
             onChange={handleChangePassword}
-            css={css`
-              padding-left: 12px;
-            `}
+            // css={css`
+            //   padding-left: 12px;
+            // `}
           />
         </div>
         <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 16px;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     margin-top: 16px;
+        //   `}
         >
           <Button type="submit" variant="outlined">
             登録
           </Button>
         </div>
         <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 24px;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     margin-top: 24px;
+        //   `}
         >
           <Link href={"/login"}>
             <a>すでに登録している人はこちら</a>

@@ -2,9 +2,9 @@ import React, { useState } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { Alert, Button, InputLabel, Snackbar, TextField } from "@mui/material"
-import { css } from "@emotion/react"
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+//import { css } from "@emotion/react"
+import firebase from 'firebase/compat/app';
+import { getAuth, signInWithEmailAndPassword, getIdToken, setPersistence, browserSessionPersistence } from "firebase/auth"
 import { useAuthContext } from "./context/AuthContext"
 import { app } from "./firebase"
 
@@ -17,7 +17,27 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await signInWithEmailAndPassword(auth, email, password)
+    await setPersistence(auth, browserSessionPersistence)
+    .then(() => {
+      // Existing and future Auth states are now persisted in the current
+      // session only. Closing the window would clear any existing state even
+      // if a user forgets to sign out.
+      // ...
+      // New sign-in will be persisted with session persistence.
+      return signInWithEmailAndPassword(auth, email, password);
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+    //await signInWithEmailAndPassword(auth, email, password)
+    // .then(({user}) => {
+    //   const currentUser:firebase.User|null = firebase.auth().currentUser;
+    //     if (currentUser && !currentUser.emailVerified) {
+    //         firebase.auth().signOut();
+    //   }
+    // })
     router.push("/")
   }
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,12 +52,12 @@ const Login = () => {
 
   return (
     <div
-      css={css`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-flow: column;
-      `}
+    //   css={css`
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+    //     flex-flow: column;
+    //   `}
     >
       <Snackbar
         open={isLoggedIn}
@@ -61,11 +81,11 @@ const Login = () => {
       <h2>ログイン</h2>
       <form onSubmit={handleSubmit}>
         <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //   `}
         >
           <InputLabel>メールアドレス</InputLabel>
           <TextField
@@ -73,18 +93,18 @@ const Login = () => {
             type="email"
             size="small"
             onChange={handleChangeEmail}
-            css={css`
-              padding-left: 12px;
-            `}
+            // css={css`
+            //   padding-left: 12px;
+            // `}
           />
         </div>
         <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-top: 16px;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     align-items: center;
+        //     margin-top: 16px;
+        //   `}
         >
           <InputLabel>パスワード</InputLabel>
           <TextField
@@ -92,28 +112,28 @@ const Login = () => {
             type="password"
             size="small"
             onChange={handleChangePassword}
-            css={css`
-              padding-left: 12px;
-            `}
+            // css={css`
+            //   padding-left: 12px;
+            // `}
           />
         </div>
         <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 16px;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     margin-top: 16px;
+        //   `}
         >
           <Button type="submit" variant="outlined">
             ログイン
           </Button>
         </div>
         <div
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 24px;
-          `}
+        //   css={css`
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     margin-top: 24px;
+        //   `}
         >
           ユーザ登録は
           <Link href={"/signup"}>
