@@ -22,7 +22,7 @@
   $paddings: 15px;
   display: flex;
   width: 100%;
-  background: $white-l2;
+  background: $white-l5;
 
 
   .sidebar {
@@ -32,7 +32,7 @@
     top: 0;
     height: 100vh;
     z-index: 1101;
-    background-color: $blue-d2;
+    background-color: $blue-l0;
     padding-left: $paddings;
     padding-right: $paddings;
   }
@@ -140,7 +140,7 @@
 
     display: block;
     flex-shrink: 0;
-    fill: $white-l3;
+    fill: $white-l4;
     width: 25px;
     font-size: 30px;
 
@@ -151,7 +151,7 @@
 
   .pageName {
     font-size: 14px;
-    color: $white-l3;
+    color: $white-l4;
     flex-direction: column;
   }
 
@@ -169,10 +169,12 @@
     width: 100%;
     background: $white-l5;
     color: $black-d0;
-    padding:10px;
-    p,h3{
-      margin:0px;
-      padding:5px;
+    padding: 10px;
+
+    p,
+    h3 {
+      margin: 0px;
+      padding: 5px;
     }
   }
 
