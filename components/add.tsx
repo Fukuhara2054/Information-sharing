@@ -11,14 +11,13 @@ import { IconButton } from "@mui/material";
 import InfoText from "./infoText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
-
-//型指定
+import { Value } from "sass";//型指定
 const Add: FC = () => {
   const [title, setTitle] = useState('') //命題
   const [content, setContent] = useState('')// 詳細
   const [questioner, setQuestioner] = useState('')//質問者
   const [answer, setAnswer] = useState('')//回答者
-  const [map, setMap] = useState([{}])
+  const [map, setMap] = useState({})
 
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
@@ -39,23 +38,13 @@ const Add: FC = () => {
   };
   const handleClickAddButton = () => {
 
-    const data = collection(db, "users")
-    getDocs(data).then((snapshot) => {
-      const a =(snapshot.docs.map((doc) => doc.data().map))
-      a.map((d) => console.log(d.title))
+    const ref = collection(db, "users", 'xz25R8RJn4dRgTnQb6rp','info')
+    setDoc(doc(ref), {
+      title: title,
+      content: content,
+      questioner: questioner,
+      answer: answer,
     })
-
-    // console.log(map)
-    // const docRef = setDoc(doc(db, "users", 'V0K3WWjQJDljHDNjGFUy'), {
-    //   map: {
-    //     title: title,
-    //     content: content,
-    //     questioner: questioner,
-    //     answer: answer,
-    //   }
-
-    // }
-    // )
   }
   return (
     <div className={styles.Add}>
