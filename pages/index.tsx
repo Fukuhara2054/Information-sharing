@@ -12,7 +12,6 @@ const Home: NextPage = () => {
   const router = useRouter()
   const auth = getAuth(app)
   const {} = useAuthContext()
-  console.log(auth.currentUser?.displayName)
   const handleLogout = async () => {
     await signOut(auth)
     await router.push("/login")
