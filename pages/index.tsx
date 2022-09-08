@@ -6,10 +6,13 @@ import { useRouter } from "next/router"
 import { Button } from "@mui/material"
 import { Layout } from "../components/Layout";
 import React from "react"
+import {useAuthContext} from "./context/AuthContext";
 
 const Home: NextPage = () => {
   const router = useRouter()
   const auth = getAuth(app)
+  const {} = useAuthContext()
+  console.log(auth.currentUser?.displayName)
   const handleLogout = async () => {
     await signOut(auth)
     await router.push("/login")

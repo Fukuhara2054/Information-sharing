@@ -1,18 +1,18 @@
-import React, { useState } from "react"
 import { useRouter } from "next/router"
 import { GoogleAuthProvider } from "firebase/auth";
 import { Alert, Button, Snackbar } from "@mui/material"
 import { getAuth, signInWithRedirect, setPersistence, browserSessionPersistence } from "firebase/auth"
 import { app } from "./firebase"
-import {useAuthState} from 'react-firebase-hooks/auth'
+import { useAuthContext } from "./context/AuthContext"
 
 const Login = () => {
   const auth = getAuth(app)
-  const [ user ] = useAuthState(auth)
+  const { user } = useAuthContext()
   const isLoggedIn = !!user
   const router = useRouter()
   const provider = new GoogleAuthProvider();
-  const handleLogin = () => {
+  const handleLogin = (e: { preventDefault: () => void; }) => {
+    e.preventDefault()
     setPersistence(auth, browserSessionPersistence)
     .then(() => {
      
