@@ -5,11 +5,14 @@ import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "next/router"
 import { Button } from "@mui/material"
 import { Layout } from "../components/Layout";
+import React from "react"
+import {useAuthContext} from "./context/AuthContext";
 
 const Home: NextPage = () => {
 
   const router = useRouter()
   const auth = getAuth(app)
+  const {} = useAuthContext()
   const handleLogout = async () => {
     await signOut(auth)
     await router.push("/login")
