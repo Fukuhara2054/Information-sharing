@@ -1,33 +1,17 @@
 import type { NextPage } from "next";
 import InfoPost from "../components/infoPost";
-import { app } from "../components/fire/fire"
-import { getAuth, signOut } from "firebase/auth"
-import { useRouter } from "next/router"
-import { Button } from "@mui/material"
 import { Layout } from "../components/Layout";
+import React from "react";
+
 
 const Home: NextPage = () => {
-
-  const router = useRouter()
-  const auth = getAuth(app)
-  const handleLogout = async () => {
-    await signOut(auth)
-    await router.push("/login")
-  }
-
   return (
-    <Layout title='共有事項'>
-    <div>
-      <p>{auth.currentUser?.displayName}でログイン中</p>
+    <Layout title="共有事項">
       <div>
-        <InfoPost />
+        <div>
+          <InfoPost />
+        </div>
       </div>
-      <div>
-        <Button type="submit" variant="outlined" onClick={handleLogout}>
-            ログアウト
-          </Button>
-      </div>
-    </div>
     </Layout>
   );
 };
