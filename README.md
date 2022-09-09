@@ -20,6 +20,19 @@ user(c):{
                 bookmark(いいね): boolean(f)
             },
         }(info)
+        質問箱(sc):{
+            documentId(d):{
+               title(質問): String(f)
+                content(内容): String(f)
+                (観覧数):number(f)
+                (回答数):number(f)
+                回答map(f):{
+                    0:{
+                        answer1(回答):String(f)
+                        timeStamp(タイムスタンプ): timeStamp(f)
+                    },
+                }
+            }      
         }
     }
 }
@@ -32,6 +45,11 @@ user(c):{
                 content(内容): String(f)
                 (観覧数):number(f)
                 (回答数):number(f)
+                回答map(f):{
+                    0:{
+                        answer1(回答):String(f)
+                        timeStamp(タイムスタンプ): timeStamp(f)
+                    },
                 
             }
 ------------------------

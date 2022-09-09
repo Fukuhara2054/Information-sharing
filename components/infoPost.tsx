@@ -37,8 +37,8 @@ const Post: FC = () => {
   return (
     <div className={styles.box2}>
     <div className={styles.main}>
-      {/* お気に入りボタン */}
-      <Checkbox
+            {/* お気に入りボタン */}
+            <Checkbox
         {...label}
         icon={<StarBorderIcon />}
         checkedIcon={<StarIcon />}

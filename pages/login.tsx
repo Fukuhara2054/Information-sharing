@@ -6,7 +6,7 @@ import { Alert, Button, InputLabel, Snackbar, TextField } from "@mui/material"
 import firebase from 'firebase/compat/app';
 import { getAuth, signInWithEmailAndPassword, getIdToken, setPersistence, browserSessionPersistence } from "firebase/auth"
 import { useAuthContext } from "./context/AuthContext"
-import { app } from "./firebase"
+import { app } from "../components/fire/fire"
 
 const Login = () => {
   const { user } = useAuthContext()

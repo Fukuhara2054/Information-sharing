@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
-import Post from "../components/post";
-
-import { app } from "./firebase"
+import InfoPost from "../components/infoPost";
+import { app } from "../components/fire/fire"
 import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "next/router"
 import { Button } from "@mui/material"
@@ -17,11 +16,11 @@ const Home: NextPage = () => {
   }
 
   return (
-    <Layout>
+    <Layout title='共有事項'>
     <div>
-      <p>{auth.currentUser?.email}でログイン中</p>
+      <p>{auth.currentUser?.displayName}でログイン中</p>
       <div>
-        <Post />
+        <InfoPost />
       </div>
       <div>
         <Button type="submit" variant="outlined" onClick={handleLogout}>

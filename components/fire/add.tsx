@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from 'react'
 import { useRouter } from 'next/router'
-import db from './fire'
+import {db} from './fire'
 import { collection, addDoc } from "firebase/firestore";
 import Link from 'next/link';
 const Add: FC = () => {
