@@ -32,7 +32,9 @@
     top: 0;
     height: 100vh;
     z-index: 1101;
-    background-color: $blue-l0;
+    transition: 0.2s;
+    background: linear-gradient(168.92deg, #1A1620 27.6%, rgba(118, 114, 92, 0.86) 94.79%, rgba(32, 32, 22, 0.35) 100%);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding-left: $paddings;
     padding-right: $paddings;
   }
@@ -153,8 +155,31 @@
     font-size: 14px;
     color: $white-l4;
     flex-direction: column;
+    white-space: nowrap;
   }
 
+  .sidebarbottom {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+  }
+
+  .loginName {
+    text-align: center;
+    margin: auto;
+    color: $white-l4;
+    white-space: nowrap;
+  }
+
+  .loginNameNone {
+    display: none;
+  }
+
+  .logout {
+    margin: 16px 0;
+    margin-right: 10px;
+    color: white;
+  }
 
   .main {
     width: 100vw;

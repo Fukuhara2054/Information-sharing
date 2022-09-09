@@ -1,4 +1,4 @@
-import { FC, memo, ReactNode, useState,createContext } from "react";
+import { FC, memo, ReactNode, useState, createContext } from "react";
 import Link from "next/link";
 import styles from "../styles/Layout.module.scss";
 import { useRouter } from "next/router";
@@ -10,12 +10,17 @@ import Add from "../components/add";
 import Search from "../components/search";
 import * as React from "react";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { app } from "./fire/fire";
+import { getAuth, signOut } from "firebase/auth";
+import IconButton from "@mui/material/IconButton";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuthContext } from "../pages/context/AuthContext";
 
 //ReactNodeからReactElementに変えた
 //もしかしたらここでエラー出るかも？
 type Props = {
   children: React.ReactElement;
-  title: string
+  title: string;
   window?: () => Window;
 };
 
@@ -68,7 +73,13 @@ const navigations: Navigation[] = [
 /* eslint-disable */
 export const Layout: FC<Props> = memo((props) => {
   const router = useRouter();
-  const [path, setPath] = useState(router.route)
+  const [path, setPath] = useState(router.route);
+  const auth = getAuth(app);
+  const {} = useAuthContext();
+  const handleLogout = async () => {
+    await signOut(auth);
+    await router.push("/login");
+  };
 
   const { children } = props;
   //falseで初回レンダーでメニューを閉じた状態にできる
@@ -76,12 +87,9 @@ export const Layout: FC<Props> = memo((props) => {
   const isPageActive = (pagePath: string): boolean => {
     return pagePath === String(router.route);
   };
-  
-  
-
 
   return (
-          <div className={styles.root}>
+    <div className={styles.root}>
       {/* サイドバーの記述 */}
       <aside
         className={styles.sidebar}
@@ -116,6 +124,14 @@ export const Layout: FC<Props> = memo((props) => {
             </a>
           </Link>
         ))}
+        <div className={styles.sidebarbottom}>
+          <IconButton className={styles.logout} onClick={handleLogout}>
+            <LogoutIcon />
+          </IconButton>
+          <p className={menuOpen ? styles.loginName : styles.loginNameNone}>
+            {auth.currentUser?.displayName}
+          </p>
+        </div>
       </aside>
       {/* 右側コンテンツ部分の記述 */}
       <main className={styles.main}>
@@ -140,7 +156,6 @@ export const Layout: FC<Props> = memo((props) => {
               <div>
                 <div className={styles.line}></div>
                 <div className={styles.appbarbottom}>
-                  
                   <Add path={path} />
                   <Search />
                 </div>
