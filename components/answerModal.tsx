@@ -125,9 +125,4 @@ const Add: FC = () => {
     </div>
   );
 };
-
-<<<<<<< HEAD
 export default Add;
-=======
-export default Add;
->>>>>>> 63fc7b92759fd03f6c38aa8585ce0cef74f630fc
