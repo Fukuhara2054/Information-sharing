@@ -24,6 +24,7 @@ const questionText: FC<props> = (props) =>{
             <TextField
               id="outlined-basic"
               label="タイトル"
+              rows={2}
               variant="outlined"
               className={styles.input}
               onChange={changeTitle}

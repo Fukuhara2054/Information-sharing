@@ -8,27 +8,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import styles from "../styles/Add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton } from "@mui/material";
-import InfoText from "./infoText";
-import QuestionText from "./questionText";
-import { convertLength } from "@mui/material/styles/cssUtils";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
-import { Value } from "sass";//型指定
+import TextField from "@mui/material/TextField";
 
-type path = {
-  path :string 
-}
-const Add: FC<path> = ({path}) => {
-  const [title, setTitle] = useState('') //命題・質問
-  const [content, setContent] = useState('')// 詳細・内容
-  const [questioner, setQuestioner] = useState('')//質問者
+
+
+const Add: FC = () => {
   const [answer, setAnswer] = useState('')//回答者
-  const [pass, setPass] = useState(false)
 
-  useEffect(() => {
-    if(path == '/'){
-      setPass(true)
-    }
-  },[])
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -48,13 +34,6 @@ const Add: FC<path> = ({path}) => {
   };
   const handleClickAddButton = () => {
 
-    const ref = collection(db, "users", 'xz25R8RJn4dRgTnQb6rp','info')
-    setDoc(doc(ref), {
-      title: title,
-      content: content,
-      questioner: questioner,
-      answer: answer,
-    })
     
   }
   return (
@@ -62,7 +41,6 @@ const Add: FC<path> = ({path}) => {
       <Button
         variant="contained"
         onClick={openModal}
-        className={styles.plus}
         startIcon={<AddIcon />}
       >
         投稿
@@ -109,19 +87,21 @@ const Add: FC<path> = ({path}) => {
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
         {/* 子コンポーネントから親コンポーネントに渡している */}
-        {pass ? (        
-        <InfoText
-          setTitle={setTitle}
-          setContent={setContent}
-          setQuestioner={setQuestioner}
-          setAnswer={setAnswer}
-        />
-        ):(
-          <QuestionText
-          setTitle={setTitle}
-          setContent={setContent}
-          />
-        )}
+        <div className={styles.textsection}>
+            <h2>質問：明日の天気 </h2>   
+            <br></br>
+            <h2>内容：明日の北参道駅の天気</h2>
+          <h2>
+            回答：
+            <TextField
+              id="outlined-multiline-static"
+              label="投稿内容"
+              multiline
+              rows={6}
+              className={styles.detail}
+            />
+          </h2>
+        </div> 
         {/* ↓後でonclick変える */}
         <div className={styles.button}>
           <Button

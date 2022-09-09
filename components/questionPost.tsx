@@ -8,6 +8,7 @@ import { pink } from '@mui/material/colors';
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Link from "next/link";
+import AnswerModal from './answerModal'
 
 const Post: FC = () => {
     //これはなんだろう（福原）
@@ -74,7 +75,7 @@ const Post: FC = () => {
                         <label htmlFor="">回答1:wwwwwwwwww</label>
                     </div>
                     <div>
-                    <Button>回答</Button>
+                    <AnswerModal />
                     </div>
                 </div>
             </div>
