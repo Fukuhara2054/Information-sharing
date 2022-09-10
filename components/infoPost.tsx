@@ -70,7 +70,7 @@ const Post: FC = () => {
           </p> */}
         <label htmlFor="">詳細:pppppppppppppppppp </label>
         <div className={styles.link}>
-        <EditButton/>
+        <EditButton />
         </div>
       </div>
       <div>

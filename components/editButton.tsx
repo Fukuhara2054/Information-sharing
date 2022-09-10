@@ -14,10 +14,8 @@ import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 import { Value } from "sass";//EditAttributesTwoTone
 import EditText from "./EditText";
-type path = {
-  path :string 
-}
-const EditButton: FC<path> = ({path}) => {
+
+const EditButton: FC = () => {
   const [title, setTitle] = useState('') //命題・質問
   const [content, setContent] = useState('')// 詳細・内容
   const [questioner, setQuestioner] = useState('')//質問者
