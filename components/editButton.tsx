@@ -22,11 +22,7 @@ const EditButton: FC = () => {
   const [answer, setAnswer] = useState('')//回答者
   const [pass, setPass] = useState(false)
 
-  useEffect(() => {
-    if(path == '/'){
-      setPass(true)
-    }
-  },[])
+
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
