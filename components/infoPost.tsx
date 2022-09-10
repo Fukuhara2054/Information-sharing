@@ -7,7 +7,8 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { pink } from '@mui/material/colors';
 import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
-
+import { Edit, EditAttributesTwoTone } from "@mui/icons-material";
+import EditButton from "./editButton";
 const Post: FC = () => {
   //これはなんだろう（福原）
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -69,7 +70,7 @@ const Post: FC = () => {
           </p> */}
         <label htmlFor="">詳細:pppppppppppppppppp </label>
         <div className={styles.link}>
-          <Link href="page2">編集</Link>
+        <EditButton/>
         </div>
       </div>
       <div>

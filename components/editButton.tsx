@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import {db} from '../components/fire/fire'
+import {db} from './fire/fire'
 import { collection, addDoc, query, where } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
@@ -13,11 +13,11 @@ import QuestionText from "./questionText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 import { Value } from "sass";//EditAttributesTwoTone
-
+import EditText from "./EditText";
 type path = {
   path :string 
 }
-const Add: FC<path> = ({path}) => {
+const EditButton: FC<path> = ({path}) => {
   const [title, setTitle] = useState('') //命題・質問
   const [content, setContent] = useState('')// 詳細・内容
   const [questioner, setQuestioner] = useState('')//質問者
@@ -62,7 +62,6 @@ const Add: FC<path> = ({path}) => {
       <Button
         variant="contained"
         onClick={openModal}
-        className={styles.plus}
         startIcon={<AddIcon />}
       >
         投稿
@@ -108,20 +107,14 @@ const Add: FC<path> = ({path}) => {
         </IconButton>
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
-        {/* 子コンポーネントから親コンポーネントに渡している */}
-        {pass ? (        
-        <InfoText
+        {/* 子コンポーネントから親コンポーネントに渡している */}    
+        <EditText
           setTitle={setTitle}
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
         />
-        ):(
-          <QuestionText
-          setTitle={setTitle}
-          setContent={setContent}
-          />
-        )}
+
         {/* ↓後でonclick変える */}
         <div className={styles.button}>
           <Button
@@ -146,4 +139,4 @@ const Add: FC<path> = ({path}) => {
   );
 };
 
-export default Add;
+export default EditButton;

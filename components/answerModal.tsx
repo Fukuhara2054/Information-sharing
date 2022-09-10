@@ -86,7 +86,6 @@ const Add: FC = () => {
         </IconButton>
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
-        {/* 子コンポーネントから親コンポーネントに渡している */}
         <div className={styles.textsection}>
             <h2>質問：明日の天気 </h2>   
             <br></br>

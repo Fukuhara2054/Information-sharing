@@ -11,7 +11,7 @@ type props = {
   setAnswer: Dispatch<SetStateAction<string>>
 }
 //情報共有の時しか使わないコンポーネント
-const InfoText: FC<props> = (props) =>{
+const EditText: FC<props> = (props) =>{
   const changeTitle = (e) =>{
     props.setTitle(e.target.value)
   }
@@ -31,7 +31,7 @@ const InfoText: FC<props> = (props) =>{
             命題　：
             <TextField
               id="outlined-basic"
-              label="タイトル"
+              label="タイトル(編集）"
               variant="outlined"
               className={styles.input}
               onChange={changeTitle}
@@ -42,7 +42,7 @@ const InfoText: FC<props> = (props) =>{
             投稿者：
             <TextField
               id="outlined-basic"
-              label="名前"
+              label="名前(編集）"
               variant="outlined"
               className={styles.input}
               onChange={changeContent}
@@ -53,7 +53,7 @@ const InfoText: FC<props> = (props) =>{
             回答者：
             <TextField
               id="outlined-basic"
-              label="回答者名"
+              label="回答者名(編集）"
               variant="outlined"
               className={styles.input}
               onChange={changeQuestioner}
@@ -63,7 +63,7 @@ const InfoText: FC<props> = (props) =>{
             詳細　：
             <TextField
               id="outlined-multiline-static"
-              label="投稿内容"
+              label="投稿内容(編集）"
               multiline
               rows={6}
               className={styles.detail}
@@ -73,4 +73,4 @@ const InfoText: FC<props> = (props) =>{
         </div> 
     )
 }
-export default InfoText
+export default EditText
