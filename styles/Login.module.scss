@@ -2,6 +2,11 @@
     display: flex;
 }
 
+@font-face {
+    font-family: 'NovaMono';
+    src: url('../fonts/NovaMono-Regular.ttf') format('truetype');
+}
+
 .sideimage {
     /* Rectangle 44 */
     width: 40vw;
@@ -19,6 +24,7 @@
         opacity: 0.8;
         font-size: 165px;
     }
+
     @media screen and (max-width: 1100px) {
         a {
             display: none;
