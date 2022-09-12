@@ -100,7 +100,7 @@ const Post: FC = () => {
                   dtitle = {dat.title}
                   dcontent = {dat.content}
                   did = {dat.id}
-                  duid = {dat.uid}
+                  duserID = {dat.userID}
                   dquestioner = {dat.questioner}
                   danswer = {dat.answer}
 

@@ -49,17 +49,17 @@ const Add: FC<path> = ({path}) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = () => {
+  const handleClickAddButton = async() => {
 
     const ref = collection(db, "users", auth.currentUser?.uid, 'info')
-    addDoc(ref, {
+    await addDoc(ref, {
       title: title,
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       questioner: questioner,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
-      uid: auth.currentUser?.uid, 
+      userID: auth.currentUser?.uid, 
       Timestamp: serverTimestamp(),
     })
     
