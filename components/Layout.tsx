@@ -1,13 +1,27 @@
-import { FC, memo, ReactNode, useState } from "react";
+import { FC, memo, ReactNode, useState, createContext } from "react";
 import Link from "next/link";
 import styles from "../styles/Layout.module.scss";
 import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StarIcon from "@mui/icons-material/Star";
+import { AppBar, Typography } from "@mui/material";
+import Add from "../components/add";
+import Search from "../components/search";
+import * as React from "react";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { app } from "./fire/fire";
+import { getAuth, signOut } from "firebase/auth";
+import IconButton from "@mui/material/IconButton";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuthContext } from "../pages/context/AuthContext";
 
+//ReactNodeからReactElementに変えた
+//もしかしたらここでエラー出るかも？
 type Props = {
-  children: ReactNode;
+  children: React.ReactElement;
+  title: string;
+  window?: () => Window;
 };
 
 type Navigation = {
@@ -16,7 +30,21 @@ type Navigation = {
   icon: JSX.Element;
 };
 
+//スクロール時Appbarに影を作る
+export const ElevationScroll: FC<Props> = (props) => {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
 
+  return React.cloneElement(children, {
+    elevation: trigger ? 5 : 0,
+  });
+};
+
+//サイドバーのルーティング
 const navigations: Navigation[] = [
   {
     pageName: "共有事項",
@@ -37,18 +65,25 @@ const navigations: Navigation[] = [
   //   pageName: "お気に入り",
   //   path: "/",
   //   icon: <HomeIcon className={styles.icon}/>
-  // }, 
+  // },
 ];
 
 // FC = Function Component 関数コンポーネントを定義
+//↓eslintを無効にしている
+/* eslint-disable */
 export const Layout: FC<Props> = memo((props) => {
-  const { children } = props;
+  const router = useRouter();
+  const [path, setPath] = useState(router.route);
+  const auth = getAuth(app);
+  const {} = useAuthContext();
+  const handleLogout = async () => {
+    await signOut(auth);
+    await router.push("/login");
+  };
 
+  const { children } = props;
   //falseで初回レンダーでメニューを閉じた状態にできる
   const [menuOpen, setMenuOpen] = useState(true);
-
-  const router = useRouter();
-
   const isPageActive = (pagePath: string): boolean => {
     return pagePath === String(router.route);
   };
@@ -79,7 +114,7 @@ export const Layout: FC<Props> = memo((props) => {
             <a
               className={styles.flexContainer}
               style={{
-                background: isPageActive(navigation.path) ? "#969BBE" : "none",
+                background: isPageActive(navigation.path) ? "#BAACB0" : "none",
               }}
             >
               {navigation.icon}
@@ -89,12 +124,50 @@ export const Layout: FC<Props> = memo((props) => {
             </a>
           </Link>
         ))}
+        <div className={styles.sidebarbottom}>
+          <IconButton className={styles.logout} onClick={handleLogout}>
+            <LogoutIcon />
+          </IconButton>
+          <p className={menuOpen ? styles.loginName : styles.loginNameNone}>
+            {auth.currentUser?.displayName}
+          </p>
+        </div>
       </aside>
       {/* 右側コンテンツ部分の記述 */}
       <main className={styles.main}>
-        <main className={styles.header}>共有事項</main>
-        <main className={styles.mainContent}>{children}</main>
+        {/* ヘッダー */}
+        <div>
+          <ElevationScroll {...props}>
+            <AppBar
+              position="sticky"
+              sx={{
+                backgroundColor: "white",
+                color: "black",
+              }}
+              className={styles.header}
+            >
+              <Typography
+                variant="h5"
+                fontWeight={"bold"}
+                padding="20px 20px 0px 20px"
+              >
+                {props.title}
+              </Typography>
+              <div>
+                <div className={styles.line}></div>
+                <div className={styles.appbarbottom}>
+                  <Add path={path} />
+                  <Search />
+                </div>
+              </div>
+            </AppBar>
+          </ElevationScroll>
+
+          <main className={styles.mainContent}>{children}</main>
+        </div>
       </main>
     </div>
   );
 });
+
+/* eslint-enable */

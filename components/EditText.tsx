@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import styles  from '../styles/Add.module.scss'
 import TextField from "@mui/material/TextField";
 import { VaccinesTwoTone } from '@mui/icons-material';
@@ -9,9 +9,17 @@ type props = {
   setContent: Dispatch<SetStateAction<string>>
   setQuestioner: Dispatch<SetStateAction<string>>
   setAnswer: Dispatch<SetStateAction<string>>
+
+  title: JSX.Element
+  content: JSX.Element
+  questioner: JSX.Element
+  answer: JSX.Element
 }
 //情報共有の時しか使わないコンポーネント
-const InfoText: FC<props> = (props) =>{
+const EditText: FC<props> = (props) =>{
+  const { title, content, questioner, answer } = props
+
+
   const changeTitle = (e) =>{
     props.setTitle(e.target.value)
   }
@@ -25,16 +33,19 @@ const InfoText: FC<props> = (props) =>{
     props.setAnswer(e.target.value)
   }
   
-    return(
+  
+  return(
         <div className={styles.textsection}>
           <h2>
             命題　：
             <TextField
               id="outlined-basic"
-              label="タイトル"
+              label="タイトル(編集）"
               variant="outlined"
               className={styles.input}
+              value={title}
               onChange={changeTitle}
+              
             />
           </h2>
 
@@ -42,10 +53,12 @@ const InfoText: FC<props> = (props) =>{
             投稿者：
             <TextField
               id="outlined-basic"
-              label="名前"
+              label="名前(編集）"
               variant="outlined"
               className={styles.input}
-              onChange={changeContent}
+              value={questioner}
+              onChange={changeQuestioner}
+              
             />
           </h2>
 
@@ -53,24 +66,28 @@ const InfoText: FC<props> = (props) =>{
             回答者：
             <TextField
               id="outlined-basic"
-              label="回答者名"
+              label="回答者名(編集）"
               variant="outlined"
               className={styles.input}
-              onChange={changeQuestioner}
+              value={answer}
+              onChange={changeAnswer}
+              
             />
           </h2>
           <h2>
             詳細　：
             <TextField
               id="outlined-multiline-static"
-              label="投稿内容"
+              label="投稿内容(編集）"
               multiline
               rows={6}
               className={styles.detail}
-              onChange={changeAnswer}
+              value={content}
+              onChange={changeContent}
+              
             />
           </h2>
         </div> 
     )
 }
-export default InfoText
+export default EditText

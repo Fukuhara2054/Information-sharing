@@ -1,21 +1,17 @@
 import type { NextPage } from "next";
-import Add from "../components/add";
-import Display from "../components/fire/display";
-import Post from "../components/post";
-import Search from "../components/search";
+import InfoPost from "../components/infoPost";
+import { Layout } from "../components/Layout";
+import React from "react";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Layout title="共有事項">
       <div>
-        <Add />
-        <Search />
-        {/* <Display /> */}
+        <div>
+          <InfoPost />
+        </div>
       </div>
-      <div>
-        <Post />
-      </div>
-    </div>
+    </Layout>
   );
 };
 

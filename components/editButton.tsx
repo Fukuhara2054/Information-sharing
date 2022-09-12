@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import {db} from '../components/fire/fire'
+import {db} from './fire/fire'
 import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
@@ -13,25 +13,30 @@ import QuestionText from "./questionText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 import { Value } from "sass";//EditAttributesTwoTone
-import { app } from "../components/fire/fire"
+import EditText from "./EditText";
+import { app } from "./fire/fire"
 import { getAuth, signOut } from "firebase/auth"
+import dayjs from 'dayjs';
 
-type path = {
-  path :string 
+type props = {
+  dtitle: JSX.Element
+  dcontent: JSX.Element
+  did: JSX.Element
+  duid: JSX.Element
+  dquestioner: JSX.Element
+  danswer: JSX.Element
 }
-const Add: FC<path> = ({path}) => {
-  const auth = getAuth(app)
-  const [title, setTitle] = useState('') //命題・質問
-  const [content, setContent] = useState('')// 詳細・内容
-  const [questioner, setQuestioner] = useState('')//質問者
-  const [answer, setAnswer] = useState('')//回答者
-  const [pass, setPass] = useState(false)
 
-  useEffect(() => {
-    if(path == '/'){
-      setPass(true)
-    }
-  },[])
+const EditButton: FC<props> = (props) => {
+  const { dtitle, dcontent, did, duid, dquestioner, danswer } = props
+  const [title, setTitle] = useState(dtitle) //命題・質問
+  const [content, setContent] = useState(dcontent)// 詳細・内容
+  const [questioner, setQuestioner] = useState(dquestioner)//質問者
+  const [answer, setAnswer] = useState(danswer)//回答者
+  const [pass, setPass] = useState(false)
+  
+
+  const auth = getAuth(app)
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -49,17 +54,16 @@ const Add: FC<path> = ({path}) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = () => {
+  const handleClickAddButton = async() => {
 
-    const ref = collection(db, "users", auth.currentUser?.uid, 'info')
-    addDoc(ref, {
+    const ref = doc(db, "users", auth.currentUser?.uid,'info', did)
+    await setDoc(ref, {
       title: title,
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       questioner: questioner,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
-      uid: auth.currentUser?.uid, 
       Timestamp: serverTimestamp(),
     })
     
@@ -70,10 +74,9 @@ const Add: FC<path> = ({path}) => {
       <Button
         variant="contained"
         onClick={openModal}
-        className={styles.plus}
         startIcon={<AddIcon />}
       >
-        投稿
+        編集
       </Button>
       <Modal
         // isOpenがtrueならモダールが起動する
@@ -116,20 +119,19 @@ const Add: FC<path> = ({path}) => {
         </IconButton>
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
-        {/* 子コンポーネントから親コンポーネントに渡している */}
-        {pass ? (        
-        <InfoText
+        {/* 子コンポーネントから親コンポーネントに渡している */}    
+        <EditText
           setTitle={setTitle}
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
+          
+          title={title}
+          content={content}
+          questioner={questioner}
+          answer={answer}
         />
-        ):(
-          <QuestionText
-          setTitle={setTitle}
-          setContent={setContent}
-          />
-        )}
+
         {/* ↓後でonclick変える */}
         <div className={styles.button}>
           <Button
@@ -154,4 +156,4 @@ const Add: FC<path> = ({path}) => {
   );
 };
 
-export default Add;
+export default EditButton;
