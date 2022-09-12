@@ -22,13 +22,13 @@ type props = {
   dtitle: JSX.Element
   dcontent: JSX.Element
   did: JSX.Element
-  duid: JSX.Element
+  duserID: JSX.Element
   dquestioner: JSX.Element
   danswer: JSX.Element
 }
 
 const EditButton: FC<props> = (props) => {
-  const { dtitle, dcontent, did, duid, dquestioner, danswer } = props
+  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props
   const [title, setTitle] = useState(dtitle) //命題・質問
   const [content, setContent] = useState(dcontent)// 詳細・内容
   const [questioner, setQuestioner] = useState(dquestioner)//質問者
