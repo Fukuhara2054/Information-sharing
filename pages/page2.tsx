@@ -1,12 +1,12 @@
 //Appbar position stickyのテスト
 //後で置き換え
-import { app } from "./firebase"
+import  { app, db } from "../components/fire/fire";
 import { getAuth, signOut } from "firebase/auth"
 import type { NextPage } from 'next'
 import React, { useEffect, useState, SetStateAction } from "react";
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { collection, doc, setDoc } from "firebase/firestore";
-import db from "./firebase"
+
 
 const Page2: NextPage = () => {
   const auth = getAuth(app)

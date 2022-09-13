@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Post from "../components/post";
-import { app } from "./firebase"
+import  { app } from "../components/fire/fire";
 import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "next/router"
 import { Button } from "@mui/material"
