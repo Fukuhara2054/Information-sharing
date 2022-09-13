@@ -1,3 +1,88 @@
+user(c):{
+    documentId(d):{
+        name:string
+        email:String(f)
+        pass:String(f)
+
+        info(sc):{
+            documentId(d):{
+                title(命題): String(f)
+                content(詳細): String(f)
+                questioner(質問者): String(f)
+                timeStamp(タイムスタンプ): timeStamp(f)
+                bookmark(いいね): boolean(f)
+            },
+            documentId(d):{
+                title(命題): String(f)
+                content(詳細): String(f)
+                questioner(質問者): String(f)
+                timeStamp(タイムスタンプ): timeStamp(f)
+                bookmark(いいね): boolean(f)
+            },
+        }(info)
+        質問箱(sc):{
+            documentId(d):{
+               title(質問): String(f)
+                content(内容): String(f)
+                (観覧数):number(f)
+                (回答数):number(f)
+                回答map(f):{
+                    0:{
+                        answer1(回答):String(f)
+                        timeStamp(タイムスタンプ): timeStamp(f)
+                    },
+                }
+            }      
+        }
+    }
+}
+
+
+------------------------
+        question(sc):{
+            document(d):{
+                title(質問): String(f)
+                content(内容): String(f)
+                (観覧数):number(f)
+                (回答数):number(f)
+                回答map(f):{
+                    0:{
+                        answer1(回答):String(f)
+                        timeStamp(タイムスタンプ): timeStamp(f)
+                    },
+                
+            }
+------------------------
+users(c):{
+    document(d):{
+
+            1:{
+                title(命題): String(f)
+                content(詳細): String(f)
+                questioner(質問者): String(f)
+                timeStamp(タイムスタンプ): timeStamp(f)
+                bookmark(いいね): boolean(f) 
+            }
+        }
+        質問箱map(f):{
+            0:{
+                title(質問): String(f)
+                content(内容): String(f)
+                (観覧数):number(f)
+                (回答数):number(f)
+                回答map(f):{
+                    0:{
+                        answer1(回答):String(f)
+                        timeStamp(タイムスタンプ): timeStamp(f)
+                    },
+                    1:{
+                        ...
+                    },
+                }
+            },  
+    }(document)
+}
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

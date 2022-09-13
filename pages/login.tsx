@@ -8,7 +8,7 @@ import {
   setPersistence,
   browserSessionPersistence,
 } from "firebase/auth";
-import  { app } from "../components/fire/fire";
+import { app } from "../components/fire/fire";
 import { useAuthContext } from "./context/AuthContext";
 import styles from "../styles/Login.module.scss";
 import GoogleIcon from '@mui/icons-material/Google';
