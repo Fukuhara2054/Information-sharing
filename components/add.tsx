@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
-import db from '../components/fire/fire'
-import { collection, addDoc, query, where } from "firebase/firestore";
+import { FC, useState, useEffect } from "react";
+import {db} from '../components/fire/fire'
+import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
@@ -9,17 +9,29 @@ import styles from "../styles/Add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton } from "@mui/material";
 import InfoText from "./infoText";
+import QuestionText from "./questionText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
+import { Value } from "sass";//EditAttributesTwoTone
+import { app } from "../components/fire/fire"
+import { getAuth, signOut } from "firebase/auth"
 
-//型指定
-const Add: FC = () => {
-  const [title, setTitle] = useState('') //命題
-  const [content, setContent] = useState('')// 詳細
+type path = {
+  path :string 
+}
+const Add: FC<path> = ({path}) => {
+  const auth = getAuth(app)
+  const [title, setTitle] = useState('') //命題・質問
+  const [content, setContent] = useState('')// 詳細・内容
   const [questioner, setQuestioner] = useState('')//質問者
   const [answer, setAnswer] = useState('')//回答者
-  const [map, setMap] = useState([{}])
+  const [pass, setPass] = useState(false)
 
+  useEffect(() => {
+    if(path == '/'){
+      setPass(true)
+    }
+  },[])
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -39,19 +51,19 @@ const Add: FC = () => {
   };
   const handleClickAddButton = () => {
 
-
-
-    // console.log(map)
-    // const docRef = setDoc(doc(db, "users", 'V0K3WWjQJDljHDNjGFUy'), {
-    //   map: {
-    //     title: title,
-    //     content: content,
-    //     questioner: questioner,
-    //     answer: answer,
-    //   }
-
-    // }
-    // )
+    const ref = collection(db, "users", auth.currentUser?.uid, 'info')
+    addDoc(ref, {
+      title: title,
+      content: content,
+      // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
+      questioner: questioner,
+      // questioner: auth.currentUser?.displayName,
+      answer: answer,
+      uid: auth.currentUser?.uid, 
+      Timestamp: serverTimestamp(),
+    })
+    
+    window.location.reload()
   }
   return (
     <div className={styles.Add}>
@@ -105,12 +117,19 @@ const Add: FC = () => {
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
         {/* 子コンポーネントから親コンポーネントに渡している */}
+        {pass ? (        
         <InfoText
           setTitle={setTitle}
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
         />
+        ):(
+          <QuestionText
+          setTitle={setTitle}
+          setContent={setContent}
+          />
+        )}
         {/* ↓後でonclick変える */}
         <div className={styles.button}>
           <Button

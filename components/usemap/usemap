@@ -1,0 +1,49 @@
+
+
+//このファイルはmapフィールドの取得方法（消さないでください
+// _______________________________________________
+//POst.tsx
+// type obj = {
+//     value : any
+//     key : string
+//   }
+  
+    
+//             命題:{value.title}
+
+//           <label htmlFor="">詳細:{value.content} </label>
+  
+  
+
+
+// _______________________________________________________
+//         index.js
+//     const Home: NextPage = () => {
+//         console.log('index.tsx')
+//         const [map, setMap] = useState([])
+      
+//       useEffect(() =>{
+//         let l = []
+      
+//         const data = collection(db, "users")
+//         getDocs(data).then((snapshot) => {
+//           let  m = (snapshot.docs.map((doc) => doc.data().tags))
+//          for(let key in m){
+//           for(let value in m[key]){
+//             // console.log(m[key][value])
+//             l.push(m[key][value])
+           
+//           }
+//         }
+//         setMap(l)
+//         })
+      
+//       },[])
+      
+//         return (
+//           <div>
+//             {Object.keys(map).map(key => <Post key={key} value={map[key]}/>)}
+      
+//           </div>
+//         );
+//       };

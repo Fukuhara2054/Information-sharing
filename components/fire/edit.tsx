@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from 'react'
-import db from './fire'
+import {db} from './fire'
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import Link from 'next/link';
 const Edit: FC =() => {
