@@ -60,7 +60,6 @@ const Add: FC<path> = ({path}) => {
   return (
     <div className={styles.Add}>
       <Button
-        variant="contained"
         onClick={openModal}
         className={styles.plus}
         startIcon={<AddIcon />}

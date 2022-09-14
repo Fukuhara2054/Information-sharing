@@ -114,7 +114,7 @@ export const Layout: FC<Props> = memo((props) => {
             <a
               className={styles.flexContainer}
               style={{
-                background: isPageActive(navigation.path) ? "#BAACB0" : "none",
+                background: isPageActive(navigation.path) ? "#0055FF" : "none",
               }}
             >
               {navigation.icon}
@@ -144,12 +144,9 @@ export const Layout: FC<Props> = memo((props) => {
                 backgroundColor: "white",
                 color: "black",
               }}
-              className={styles.header}
             >
               <Typography
-                variant="h5"
-                fontWeight={"bold"}
-                padding="20px 20px 0px 20px"
+                className={styles.title}
               >
                 {props.title}
               </Typography>

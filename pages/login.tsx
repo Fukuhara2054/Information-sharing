@@ -1,6 +1,9 @@
+import * as React from "react";
 import { useRouter } from "next/router";
 import { GoogleAuthProvider } from "firebase/auth";
-import { Alert, Button, Snackbar } from "@mui/material";
+import { Alert, Button, Snackbar, Collapse, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import GoogleIcon from '@mui/icons-material/Google';
 import {
   getAuth,
   signInWithRedirect,
@@ -27,12 +30,15 @@ const Login = () => {
   const handleClose = async () => {
     await router.push("/");
   };
+  const [open, setOpen] = React.useState(true);
 
   return (
     <div className={styles.login}>
       <div className={styles.sideimage}>
-        <a>OneLink</a>
-        <img src="/Logo.png" />
+        <img src="/Logo_ver2.png" className={styles.logo} />
+        <a className={styles.onelink1}>OneLink</a>
+        <a className={styles.onelink2}>OneLink</a>
+        <img src="/Satellite.png" className={styles.satellite} />
       </div>
       <div className={styles.content}>
         <Snackbar
@@ -52,12 +58,38 @@ const Login = () => {
           autoHideDuration={3000}
           key={"top" + "center"}
         >
-          <Alert severity="warning">ログインしてください</Alert>
+          <Collapse in={open}>
+            <Alert
+              severity="info"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              ログインしてください
+            </Alert>
+          </Collapse>
         </Snackbar>
-        <h2 className={styles.title}>ひとつに繋がる</h2>
-        <h3 className={styles.subtitle}>OneLinkで情報を見つけよう</h3>
-        <h2>Googleアカウント</h2>
-        <Button variant="outlined" onClick={handleLogin}>
+        <h2 className={styles.title}>繋げる。</h2>
+        <h2 className={styles.title}>全てをひとつに。</h2>
+        <h3 className={styles.subtitle}>
+          OneLinkであなたに必要な情報を見つけよう！
+        </h3>
+        <h2 className={styles.gmtext}>Gmailアカウントでログイン</h2>
+        <Button
+          variant="contained"
+          onClick={handleLogin}
+          className={styles.loginbtn}
+          startIcon={<GoogleIcon />}
+        >
           ログイン
         </Button>
       </div>

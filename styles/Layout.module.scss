@@ -1,4 +1,8 @@
 @import "colors";
+@font-face {
+  font-family: 'NovaMono';
+  src: url('../fonts/NovaMono-Regular.ttf') format('truetype');
+}
 
 .root {
 
@@ -33,7 +37,7 @@
     height: 100vh;
     z-index: 1101;
     transition: 0.2s;
-    background: linear-gradient(168.92deg, #1A1620 27.6%, rgba(118, 114, 92, 0.86) 94.79%, rgba(32, 32, 22, 0.35) 100%);
+    background: linear-gradient(168.92deg, #00091A 64.21%, #001745 82.24%, #0043CA 90.43%, #8FB5FF 99.83%);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding-left: $paddings;
     padding-right: $paddings;
@@ -44,7 +48,6 @@
 
     cursor: pointer;
     width: 40px;
-
     margin-top: 15px;
 
 
@@ -133,7 +136,7 @@
 
     &:hover {
 
-      background-color: $black-l0;
+      background-color: rgb(255, 255, 255);
     }
   }
 
@@ -185,8 +188,10 @@
     width: 100vw;
   }
 
-  .header {
-    font-size: 30px;
+  .title {
+    font-size: 26px;
+    padding:20px 20px 20px 20px;
+    font-family: 'NovaMono';
     font-weight: bold;
   }
 

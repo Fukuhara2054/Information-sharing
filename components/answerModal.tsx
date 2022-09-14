@@ -39,11 +39,11 @@ const Add: FC = () => {
   return (
     <div className={styles.Add}>
       <Button
-        variant="contained"
         onClick={openModal}
+        className={styles.answer}
         startIcon={<AddIcon />}
       >
-        投稿
+        回答
       </Button>
       <Modal
         // isOpenがtrueならモダールが起動する

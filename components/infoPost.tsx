@@ -4,7 +4,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { pink } from '@mui/material/colors';
+import { pink } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
 import { Edit, EditAttributesTwoTone } from "@mui/icons-material";
@@ -23,61 +23,59 @@ const Post: FC = () => {
   //   }
   // };
 
-
   //詳細などの開閉処理の問題を解決しました。
-  const [open, setOpen] = useState(styles.display1)
-  
+  const [open, setOpen] = useState(styles.display1);
+
   const onClick = () => {
-    if(open == styles.display1){
-      setOpen(styles.display2)
-    }else{
-      setOpen(styles.display1)
+    if (open == styles.display1) {
+      setOpen(styles.display2);
+    } else {
+      setOpen(styles.display1);
     }
-  }
+  };
 
   return (
     <div className={styles.box2}>
-    <div className={styles.main}>
-            {/* お気に入りボタン */}
-            <Checkbox
-        {...label}
-        icon={<StarBorderIcon />}
-        checkedIcon={<StarIcon />}
-        sx={{
-          color: pink[600],
-          '&.Mui-checked': {
-            color: pink[500],
-          },
-        }}
-        className={styles.okiniiri}
-      />
-      <div className={styles.abc}>
-        <h2>
-          命題:qqqqqqqqqqqqqqqqqqqq
-          {/* 開閉ボタン */}
+      <div className={styles.main}>
+        <div className={styles.okiniiri}>
+          <EditButton />
+          {/* お気に入りボタン */}
           <Checkbox
             {...label}
-            icon={<ExpandMoreIcon />}
-            checkedIcon={<ExpandLessIcon />}
-            onClick={onClick}
+            icon={<StarBorderIcon />}
+            checkedIcon={<StarIcon />}
+            sx={{
+              color: "#00B2FF",
+              "&.Mui-checked": {
+                color: "#00B2FF",
+              },
+            }}
           />
-        </h2>
-      </div>
-      <div id="honbun" className={open}  >
-        {/* <p className={styles.uta}>詳細:</p>
+        </div>
+        <div className={styles.abc}>
+          <h2>
+            命題:qqqqqqqqqqqqqqqqqqqq
+            {/* 開閉ボタン */}
+            <Checkbox
+              {...label}
+              icon={<ExpandMoreIcon />}
+              checkedIcon={<ExpandLessIcon />}
+              onClick={onClick}
+            />
+          </h2>
+        </div>
+        <div id="honbun" className={open}>
+          {/* <p className={styles.uta}>詳細:</p>
           <p>
             現在研修に入っている全員が参加対象です場所はGATE5階セミナールームですが、オンラインでも参加可能です。
           </p> */}
-        <label htmlFor="">詳細:pppppppppppppppppp </label>
-        <div className={styles.link}>
-        <EditButton />
+          <label htmlFor="">詳細:pppppppppppppppppp </label>
+        </div>
+        <div>
+          <p>回答者: 関口さん　記載者:岩崎さん　2022/8/12:33:12</p>
         </div>
       </div>
-      <div>
-        <p>回答者: 関口さん　記載者:岩崎さん　2022/8/12:33:12</p>
-      </div>
     </div>
-  </div>
   );
 };
 

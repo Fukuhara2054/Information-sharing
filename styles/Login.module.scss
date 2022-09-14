@@ -13,16 +13,27 @@
     height: 100vh;
     left: 0px;
     top: -4px;
-    background: linear-gradient(168.92deg, #1A1620 27.6%, rgba(118, 114, 92, 0.86) 94.79%, rgba(32, 32, 22, 0.35) 100%);
+    /* Rectangle 44 */
+    background: linear-gradient(168.92deg, #00091A 64.21%, #001745 82.24%, #0043CA 90.43%, #8FB5FF 99.83%);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     text-align: center;
 
-    a {
+    .onelink1 {
+        position: absolute;
+        left: 9%;
         font-family: 'NovaMono';
-        margin-left: -30px;
-        color: white;
-        opacity: 0.8;
-        font-size: 165px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 80px;
+    }
+
+    .onelink2 {
+        position: absolute;
+        left: 9%;
+        font-family: 'NovaMono';
+        font-size: 80px;
+        line-height: 111px;
+        color: rgba(255, 255, 255, 0.9);
+        filter: blur(20px);
     }
 
     @media screen and (max-width: 1100px) {
@@ -31,21 +42,30 @@
         }
     }
 
-    img {
+    .logo {
         display: flex;
-        margin: -150px auto;
+        margin: -20px auto 20px auto;
         width: 60%;
         height: auto;
     }
 
+    .satellite {
+        display: block;
+        margin: 180px auto;
+        width: 20%;
+    }
+
     @media screen and (max-width: 1100px) {
-        img {
+        .logo {
+            display: none;
+        }
+        .satellite {
             display: none;
         }
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        img {
+        .logo {
             animation: logo-spin infinite 60s linear;
         }
     }
@@ -60,34 +80,51 @@
         }
     }
 
+    @media (prefers-reduced-motion: no-preference) {
+        .satellite {
+            animation: satellite-opacity 7s linear;
+        }
+    }
+
+    @keyframes satellite-opacity {
+        0%{
+            opacity: 0;
+        }  
+        50% {
+            opacity: 0.3;
+        }
+        100%{
+            opacity: 0.9;
+        }
+    }
+
 }
 
 
 .content {
-    margin-top: 150px;
+    margin-top: 120px;
     margin-left: 50px;
 }
 
 .title {
-    margin: 38.1px 0px;
-    font-size: 70px;
+    margin: 0 10px;
+    font-size: 60px;
 }
 
 .subtitle {
+    margin-left: 15px;
     font-size: 30px;
-    padding-top: 0px;
+    margin-top: 80px;
 }
 
-.mail {
-    margin: 10px 0px;
-}
-
-.pass {
-    margin: 10px 0px;
+.gmtext {
+    text-align: center;
+    margin: 80px 0 10px 15px;
 }
 
 .loginbtn {
-    margin: 10px 0px;
+    white-space: nowrap;
+    margin: 10px 43%;
 }
 
 .link {
