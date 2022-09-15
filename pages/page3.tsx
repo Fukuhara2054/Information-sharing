@@ -5,6 +5,7 @@ import { db } from "../components/fire/fire";
 import { collection, addDoc, query, where } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
+import BookmarkPost from "../components/bookmarkPost"
 
 const Page3: NextPage = () => {
   // const [map, setMap] = useState({})
@@ -25,32 +26,7 @@ const Page3: NextPage = () => {
     <div className="">
       <Layout title="お気に入り">
         <div>
-          <div>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-            <h1>おはようございます</h1>
-            <h1>こんにちは</h1>
-            <h1>こんばんは</h1>
-          </div>
+          <BookmarkPost />
         </div>
       </Layout>
     </div>
