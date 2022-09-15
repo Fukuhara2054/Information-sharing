@@ -1,9 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from "react";
 import styles from "../styles/Post.module.scss";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import SearchIcon from "@mui/icons-material/Search";
 import { pink } from '@mui/material/colors';
 import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import { app } from "../components/fire/fire"
 import { getAuth, signOut } from "firebase/auth"
 import { Edit, EditAttributesTwoTone } from "@mui/icons-material";
 import EditButton from "./editButton";
+import { Paper, IconButton, InputBase } from "@mui/material";
 
 const Post: FC = () => {
   //これはなんだろう（福原）
@@ -43,10 +45,24 @@ const Post: FC = () => {
     }
   }
 
-  const [data, setData] = useState([])
 
+  type dat = {
+    dtitle: string;
+    dcontent: string;
+    did: string;
+    duid: string;
+    dquestioner: string;
+    danswer: string;
+  };
+  
+  type DataList = Array<dat>;
+
+  const [data, setData] = useState([])
+  const postData = collectionGroup(db, "info")
+  
+  
+  //console.log(allDataList)
   useEffect(() => {
-    const postData = collectionGroup(db, "info")
     const q = query(postData, orderBy('Timestamp', 'desc')
     // // , where('title', '==', '研修3')
     )
@@ -56,11 +72,74 @@ const Post: FC = () => {
       //  console.log(data);
     })
   },[])
+  
+
+  const [inputValue, setInputValue] = useState("");
+  //const [dataList, setDataList] = useState(data);
+  //console.log(dataList)
+
+  const search = (value: string) => {
+    if (value !== "") {
+      console.log(data)
+      const filteredList = data.filter((dat: dat) =>
+        Object.values(dat).some(
+          (item: string) =>
+            item?.toString().toUpperCase().indexOf(value.trim().toUpperCase()) !== -1
+        )
+      );
+      setData(filteredList);
+      console.log(filteredList)
+      return;
+    }
+
+    setData(data);
+    return;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    search(e.target.value);
+    console.log(e.target.value)
+  };
 
   return (
     <div>
-      {data.map((dat) => (
-      <ul key={dat.id}>
+      <Paper
+      component="form"
+      //影
+      elevation={3}
+      sx={{
+        p: "0px 2px",
+        display: "flex",
+        alignItems: "center",
+        width: "30%",
+        height: 35,
+        borderRadius: "15px",
+        marginLeft: "10px",
+      }}
+    >
+      <IconButton sx={{ p: "4%" }} aria-label="menu">
+        <SearchIcon />
+      </IconButton>
+      <InputBase
+        type="text" 
+        value={inputValue} 
+        onChange={handleChange}
+        sx={{ flex: 1 }}
+        placeholder="検索"
+        inputProps={{ "aria-label": "search" }} />
+    </Paper>
+    {/* {data.map((data) => {
+          return (
+            <li key={data.id}>
+              {data.title} / {data.content} / {data.questioner}
+            </li>
+          );
+        })} */}
+
+      {data.map((dat, index) => {
+      return (
+      <ul key={index}>
         <div className={styles.box2}>
           <div className={styles.main}>
             {/* お気に入りボタン */}
@@ -114,9 +193,15 @@ const Post: FC = () => {
           </div>
         </div>
       </ul> 
-    ))}
+      
+    )})}
     </div>
   );
 };
 
 export default Post;
+function allDataList(allDataList: any) {
+  throw new Error("Function not implemented.");
+}
+
+
