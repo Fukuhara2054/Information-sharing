@@ -80,7 +80,7 @@ const Post: FC = () => {
       return;
     }
 
-    setData(data);
+    setData(data2);
     return;
   };
 
