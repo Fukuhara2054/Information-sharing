@@ -37,9 +37,10 @@ const Post: FC = () => {
   const bookmark = async(id, title, content, Timestamp, questioner, answer) => {
     if(saved === false){
       setSaved(true)
-      const savedPosts = ({ questioner, content, answer, title, id, Timestamp});
+      const savedPosts = ({ questioner, content, answer, title, id, Timestamp, data: "info"});
       const ref = doc(db, "user", auth.currentUser?.uid, "bookmark", id);
       await setDoc(ref, savedPosts);
+      console.log(savedPosts)
     } else {
       setSaved(false)
       const b = doc(db, 'user', auth.currentUser?.uid, 'bookmark', id);

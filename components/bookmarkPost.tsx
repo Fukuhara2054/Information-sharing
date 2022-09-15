@@ -71,7 +71,7 @@ const BookmarkPost: FC = () => {
 
     const postData = collectionGroup(db, "bookmark")
     const q = query(postData, orderBy('Timestamp', 'desc')
-    // // , where('title', '==', '研修3')
+    , where('data', '==', 'info')
     )
 
     getDocs(q).then((snapshot)=>{
