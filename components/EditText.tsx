@@ -13,9 +13,15 @@ type props = {
   setContent: Dispatch<SetStateAction<string>>;
   setQuestioner: Dispatch<SetStateAction<string>>;
   setAnswer: Dispatch<SetStateAction<string>>;
+  title: JSX.Element
+  content: JSX.Element
+  questioner: JSX.Element
+  answer: JSX.Element
 };
 //情報共有の時しか使わないコンポーネント
 const EditText: FC<props> = (props) => {
+  const { title, content, questioner, answer } = props
+
   const changeTitle = (e) => {
     props.setTitle(e.target.value);
   };
@@ -37,32 +43,14 @@ const EditText: FC<props> = (props) => {
           id="outlined-basic"
           label="タイトル(編集）"
           variant="outlined"
+          value={title}
           className={styles.input}
           onChange={changeTitle}
         />
       </h2>
 
       <h2>
-        投稿者：
-        <FormControl fullWidth>
-          <InputLabel htmlFor="uncontrolled-native">投稿者</InputLabel>
-          <Select
-            defaultValue={20}
-            label="投稿者"
-            inputProps={{
-              name: "投稿者",
-              id: "uncontrolled-native",
-            }}
-            className={styles.inputform}
-            onChange={changeContent}
-          >
-            <MenuItem value={10}>クラウド</MenuItem>
-            <MenuItem value={20}>ザックス</MenuItem>
-            <MenuItem value={30}>ティーダ</MenuItem>
-            <MenuItem value={40}>ユウナ</MenuItem>
-            <MenuItem value={50}>ノクティス</MenuItem>
-          </Select>
-        </FormControl>
+        投稿者：{questioner}
       </h2>
 
       <h2>
@@ -77,7 +65,7 @@ const EditText: FC<props> = (props) => {
               id: "uncontrolled-native",
             }}
             className={styles.inputform}
-            onChange={changeContent}
+            onChange={changeAnswer}
           >
             <MenuItem value={10}>クラウド</MenuItem>
             <MenuItem value={20}>ザックス</MenuItem>
@@ -92,10 +80,11 @@ const EditText: FC<props> = (props) => {
         <TextField
           id="outlined-multiline-static"
           label="投稿内容(編集）"
+          value={content}
           multiline
           rows={6}
           className={styles.detail}
-          onChange={changeAnswer}
+          onChange={changeContent}
         />
       </h2>
     </div>

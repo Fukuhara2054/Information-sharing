@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import {db} from '../components/fire/fire'
-import { collection, addDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, query, where,serverTimestamp } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
@@ -13,11 +13,14 @@ import QuestionText from "./questionText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 import { Value } from "sass";//EditAttributesTwoTone
+import { app } from "../components/fire/fire"
+import { getAuth, signOut } from "firebase/auth"
 
 type path = {
   path :string 
 }
 const Add: FC<path> = ({path}) => {
+  const auth = getAuth(app)
   const [title, setTitle] = useState('') //命題・質問
   const [content, setContent] = useState('')// 詳細・内容
   const [questioner, setQuestioner] = useState('')//質問者
@@ -46,16 +49,21 @@ const Add: FC<path> = ({path}) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = () => {
+  const handleClickAddButton = async() => {
 
-    const ref = collection(db, "users", 'xz25R8RJn4dRgTnQb6rp','info')
-    setDoc(doc(ref), {
+    const ref = collection(db, "users", auth.currentUser?.uid, 'info')
+    await addDoc(ref, {
       title: title,
       content: content,
-      questioner: questioner,
+      // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
+      questioner: auth.currentUser?.displayName,
       answer: answer,
+      userID: auth.currentUser?.uid, 
+      Timestamp: serverTimestamp(),
+      bookmark: false
     })
     
+    window.location.reload()
   }
   return (
     <div className={styles.Add}>

@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import GoogleIcon from '@mui/icons-material/Google';
 import {
   getAuth,
-  signInWithRedirect,
+  signInWithPopup,
   setPersistence,
   browserSessionPersistence,
 } from "firebase/auth";
@@ -21,9 +21,8 @@ const Login = () => {
   const router = useRouter();
   const provider = new GoogleAuthProvider();
   const handleLogin = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
     setPersistence(auth, browserSessionPersistence).then(() => {
-      return signInWithRedirect(auth, provider);
+      return signInWithPopup(auth, provider);
     });
     router.push("/");
   };

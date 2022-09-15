@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FC, useState, useEffect } from "react";
 import { db } from "./fire/fire";
-import { collection, addDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,14 +10,29 @@ import styles from "../styles/Add.module.scss";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, IconButton, Collapse, Alert } from "@mui/material";
 import EditText from "./EditText";
+import { app } from "./fire/fire"
+import { getAuth, signOut } from "firebase/auth"
 
-const EditButton: FC = () => {
-  const [title, setTitle] = useState(""); //命題・質問
-  const [content, setContent] = useState(""); // 詳細・内容
-  const [questioner, setQuestioner] = useState(""); //質問者
-  const [answer, setAnswer] = useState(""); //回答者
+type props = {
+  dtitle: JSX.Element
+  dcontent: JSX.Element
+  did: JSX.Element
+  duserID: JSX.Element
+  dquestioner: JSX.Element
+  danswer: JSX.Element
+}
+
+const EditButton: FC<props> = (props) => {
+  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props
+  const [title, setTitle] = useState(dtitle); //命題・質問
+  const [content, setContent] = useState(dcontent); // 詳細・内容
+  const [questioner, setQuestioner] = useState(dquestioner); //質問者
+  const [answer, setAnswer] = useState(danswer); //回答者
   const [pass, setPass] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
+
+  const auth = getAuth(app)
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -35,16 +50,21 @@ const EditButton: FC = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = () => {
-    const ref = collection(db, "users", "xz25R8RJn4dRgTnQb6rp", "info");
-    setDoc(doc(ref), {
+  const handleClickAddButton = async() => {
+
+    const ref = doc(db, "users", auth.currentUser?.uid,'info', did)
+    await setDoc(ref, {
       title: title,
       content: content,
+      // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       questioner: questioner,
+      // questioner: auth.currentUser?.displayName,
       answer: answer,
-    });
-  };
-  const [open, setOpen] = React.useState(false);
+      Timestamp: serverTimestamp(),
+    })
+    
+    window.location.reload()
+  }
   return (
     <div className={styles.Add}>
       <IconButton onClick={openModal} className={styles.textbtn}>
@@ -97,6 +117,10 @@ const EditButton: FC = () => {
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
+          title={title}
+          content={content}
+          questioner={questioner}
+          answer={answer}
         />
 
         {/* ↓後でonclick変える */}

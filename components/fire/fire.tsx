@@ -5,13 +5,14 @@ import { getFirestore } from 'firebase/firestore'
 
 //Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAdkW7zDEumvsQ71Dvjifnb-HUG88T0RDE",
-  authDomain: "onelink-4be1f.firebaseapp.com",
-  projectId: "onelink-4be1f",
-  storageBucket: "onelink-4be1f.appspot.com",
-  messagingSenderId: "878476602685",
-  appId: "1:878476602685:web:e5549ade0b8d17c2c9e954"
+  apiKey: "AIzaSyC1Y2ETPNfXkP8ESJs6B7SOZuRA78NTrII",
+  authDomain: "onelink-2.firebaseapp.com",
+  projectId: "onelink-2",
+  storageBucket: "onelink-2.appspot.com",
+  messagingSenderId: "77219991443",
+  appId: "1:77219991443:web:090be08b65fdf56ab86266"
 };
+
 
 //Initialize Firebase
 const app = initializeApp(firebaseConfig);
