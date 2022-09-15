@@ -47,7 +47,7 @@ const Post: FC = () => {
 
 
   const [data, setData] = useState([])
-  const [da, setDa] = useState([])
+  const [data2, setData2] = useState([])
   const postData = collectionGroup(db, "info")
   
   
@@ -58,7 +58,7 @@ const Post: FC = () => {
     )
     getDocs(q).then((snapshot)=>{
        setData(snapshot.docs.map((doc)=> ({ ...doc.data(), id: doc.id })))
-       setDa(snapshot.docs.map((doc)=> ({ ...doc.data(), id: doc.id })))
+       setData2(snapshot.docs.map((doc)=> ({ ...doc.data(), id: doc.id })))
        //コンソールで確認のため
       //  console.log(data);
     })
@@ -70,7 +70,7 @@ const Post: FC = () => {
 
   const search = (value: string) => {
     if (value !== "") {
-      const filteredList = da.filter((dat: string) =>
+      const filteredList = data2.filter((dat: string) =>
         Object.values(dat).some(
           (item: string) =>
             item?.toString().toUpperCase().indexOf(value.trim().toUpperCase()) !== -1
