@@ -14,17 +14,7 @@ import { app } from "../components/fire/fire"
 import { getAuth, signOut } from "firebase/auth"
 import { Edit, EditAttributesTwoTone } from "@mui/icons-material";
 import EditButton from "./editButton";
-import { IconButton } from "@mui/material";
 
-// type props = {
-//     title: JSX.Element
-//     content: JSX.Element
-//     id: JSX.Element
-//     userID: JSX.Element
-//     questioner: JSX.Element
-//     answer: JSX.Element
-//     Timestamp: JSX.Element
-//   }
 
 const BookmarkPost: FC = () => {
   //これはなんだろう（福原）
@@ -32,10 +22,8 @@ const BookmarkPost: FC = () => {
 
   const auth = getAuth(app)
 
-  // const { title, content, id, userID, questioner, answer, Timestamp } = props
 
 
-  // const { currentUser, savePostToBookmark, removePostFromBookmark } = useAuth();
   const [saved, setSaved] = useState(false)
   const [savedId, setSavedId] = useState('')
 
@@ -66,37 +54,6 @@ const BookmarkPost: FC = () => {
     
   }
 
-  //useEffect内では、ログアウトして再度ログインした際や、画面を再読み込みした際などにも
-  //ブックマークした投稿が消えないようにするために、ログインユーザーのサブコレクションbookmarksを参照し、
-  //もしpostのidと保存された投稿のpostのidが等しければsaved=trueとすることでブックマークされた状態を表示するようにしています。
-  // useEffect(() => {
-  //   const uid = auth.currentUser?.uid
-  //   const postData = collectionGroup(db, "info")
-  //   const q = query(postData, orderBy('Timestamp', 'desc')
-  //   // // , where('title', '==', '研修3')
-  //   )
-  //   getDocs(postData)
-  //   .then(doc => {
-        
-  //           getDocs(collection(db, "user", uid, "bookmarks"))
-  //          .then(snapshots => {
-  //           setData(snapshots.docs.map(doc => {
-  //             const data = doc.data();
-
-  //             const post_id = data.id
-  //             const saveId = data.saveId
-  //             if (saveId === post_id) {
-  //                setSaved(true)
-  //                setSavedId(saveId)
-  //             }
-  //           }))
-  //         })
-        
-  //     })
-
-  // }, [saved])
-
-
   //詳細などの開閉処理の問題を解決しました。
   const [open, setOpen] = useState(styles.display1)
   
@@ -112,7 +69,7 @@ const BookmarkPost: FC = () => {
 
   useEffect(() => {
 
-    const postData = collectionGroup(db, "info")
+    const postData = collectionGroup(db, "bookmark")
     const q = query(postData, orderBy('Timestamp', 'desc')
     // // , where('title', '==', '研修3')
     )
@@ -147,19 +104,7 @@ const BookmarkPost: FC = () => {
                 () => bookmark(dat.id, dat.title, dat.content, dat.Timestamp, dat.questioner, dat.answer)
               }
             />
-            {/* {saved === true ? 
-            <IconButton
-              {...label}
-              onClick={() => removeBookmark(dat.id)}>
-              <StarIcon />
-            </IconButton>
-            :
-            <IconButton 
-              {...label}
-              onClick={() => savePost(dat.id, dat.title, dat.content, dat.Timestamp, dat.questioner, dat.answer)}>
-               <StarBorderIcon />
-            </IconButton>
-            } */}
+
             <div className={styles.abc}>
               <h2>
                 命題: {dat.title}
@@ -204,7 +149,3 @@ const BookmarkPost: FC = () => {
 };
 
 export default BookmarkPost;
-// function useAuth(): { currentUser: any; savePostToBookmark: any; removePostFromBookmark: any; } {
-//     throw new Error("Function not implemented.");
-// }
-

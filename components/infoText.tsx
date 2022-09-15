@@ -45,7 +45,7 @@ const InfoText: FC<props> = (props) =>{
               label="名前"
               variant="outlined"
               className={styles.input}
-              onChange={changeContent}
+              onChange={changeAnswer}
             />
           </h2>
 
@@ -67,7 +67,7 @@ const InfoText: FC<props> = (props) =>{
               multiline
               rows={6}
               className={styles.detail}
-              onChange={changeAnswer}
+              onChange={changeContent}
             />
           </h2>
         </div> 

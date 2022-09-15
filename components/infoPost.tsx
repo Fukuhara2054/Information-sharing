@@ -8,7 +8,7 @@ import { pink } from '@mui/material/colors';
 import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
 import dayjs from "dayjs"
-import { collectionGroup, getDocs, where, orderBy, query, deleteDoc, doc, collection, getDoc } from "firebase/firestore";
+import { collectionGroup, getDocs, where, orderBy, query, deleteDoc, doc, collection, getDoc, setDoc } from "firebase/firestore";
 import {db} from "./fire/fire";
 import { app } from "../components/fire/fire"
 import { getAuth, signOut } from "firebase/auth"
@@ -30,6 +30,25 @@ const Post: FC = () => {
   //     target1.style.display = "block";
   //   }
   // };
+
+  
+  const [saved, setSaved] = useState(false)
+
+  const bookmark = async(id, title, content, Timestamp, questioner, answer) => {
+    if(saved === false){
+      setSaved(true)
+      const savedPosts = ({ questioner, content, answer, title, id, Timestamp});
+      const ref = doc(db, "user", auth.currentUser?.uid, "bookmark", id);
+      await setDoc(ref, savedPosts);
+    } else {
+      setSaved(false)
+      const b = doc(db, 'user', auth.currentUser?.uid, 'bookmark', id);
+
+      await deleteDoc(b);
+    }
+    
+  }
+
 
 
   //詳細などの開閉処理の問題を解決しました。
@@ -75,6 +94,9 @@ const Post: FC = () => {
                 },
               }}
               className={styles.okiniiri}
+              onClick={
+                () => bookmark(dat.id, dat.title, dat.content, dat.Timestamp, dat.questioner, dat.answer)
+              }
             />
             <div className={styles.abc}>
               <h2>
