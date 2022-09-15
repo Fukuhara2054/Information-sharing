@@ -46,28 +46,19 @@ const Post: FC = () => {
   }
 
 
-  type dat = {
-    dtitle: string;
-    dcontent: string;
-    did: string;
-    duid: string;
-    dquestioner: string;
-    danswer: string;
-  };
-  
-  type DataList = Array<dat>;
-
   const [data, setData] = useState([])
+  const [da, setDa] = useState([])
   const postData = collectionGroup(db, "info")
   
   
-  //console.log(allDataList)
+  
   useEffect(() => {
     const q = query(postData, orderBy('Timestamp', 'desc')
     // // , where('title', '==', '研修3')
     )
     getDocs(q).then((snapshot)=>{
        setData(snapshot.docs.map((doc)=> ({ ...doc.data(), id: doc.id })))
+       setDa(snapshot.docs.map((doc)=> ({ ...doc.data(), id: doc.id })))
        //コンソールで確認のため
       //  console.log(data);
     })
@@ -75,20 +66,17 @@ const Post: FC = () => {
   
 
   const [inputValue, setInputValue] = useState("");
-  //const [dataList, setDataList] = useState(data);
   //console.log(dataList)
 
   const search = (value: string) => {
     if (value !== "") {
-      console.log(data)
-      const filteredList = data.filter((dat: dat) =>
+      const filteredList = da.filter((dat: string) =>
         Object.values(dat).some(
           (item: string) =>
             item?.toString().toUpperCase().indexOf(value.trim().toUpperCase()) !== -1
         )
       );
       setData(filteredList);
-      console.log(filteredList)
       return;
     }
 
@@ -137,9 +125,9 @@ const Post: FC = () => {
           );
         })} */}
 
-      {data.map((dat, index) => {
+      {data.map((dat) => {
       return (
-      <ul key={index}>
+      <ul key={dat}>
         <div className={styles.box2}>
           <div className={styles.main}>
             {/* お気に入りボタン */}
@@ -200,8 +188,3 @@ const Post: FC = () => {
 };
 
 export default Post;
-function allDataList(allDataList: any) {
-  throw new Error("Function not implemented.");
-}
-
-
