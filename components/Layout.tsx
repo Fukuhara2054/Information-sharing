@@ -157,7 +157,7 @@ export const Layout: FC<Props> = memo((props) => {
                 <div className={styles.line}></div>
                 <div className={styles.appbarbottom}>
                   <Add path={path} />
-                  <Search />
+                  {/* <Search /> */}
                 </div>
               </div>
             </AppBar>
