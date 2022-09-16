@@ -20,6 +20,7 @@ type props = {
   duserID: JSX.Element
   dquestioner: JSX.Element
   danswer: JSX.Element
+  dtag: JSX.Element
 }
 
 const EditButton: FC<props> = (props) => {
@@ -28,6 +29,7 @@ const EditButton: FC<props> = (props) => {
   const [content, setContent] = useState(dcontent); // 詳細・内容
   const [questioner, setQuestioner] = useState(dquestioner); //質問者
   const [answer, setAnswer] = useState(danswer); //回答者
+  const [tag, setTag] = useState('')//タグ付け
   const [pass, setPass] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -57,6 +59,7 @@ const EditButton: FC<props> = (props) => {
       title: title,
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
+      tag: tag,
       questioner: questioner,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
@@ -117,10 +120,12 @@ const EditButton: FC<props> = (props) => {
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
+          setTag={setTag}
           title={title}
           content={content}
           questioner={questioner}
           answer={answer}
+          tag={tag}
         />
 
         {/* ↓後でonclick変える */}

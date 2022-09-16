@@ -25,6 +25,7 @@ const Add: FC<path> = ({path}) => {
   const [content, setContent] = useState('')// 詳細・内容
   const [questioner, setQuestioner] = useState('')//質問者
   const [answer, setAnswer] = useState('')//回答者
+  const [tag, setTag] = useState('')//タグ付け
   const [pass, setPass] = useState(false)
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const Add: FC<path> = ({path}) => {
       title: title,
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
+      tag: tag,
       questioner: auth.currentUser?.displayName,
       answer: answer,
       userID: auth.currentUser?.uid, 
@@ -122,6 +124,7 @@ const Add: FC<path> = ({path}) => {
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
+          setTag={setTag}
         />
         ):(
           <QuestionText

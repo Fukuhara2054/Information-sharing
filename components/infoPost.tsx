@@ -134,6 +134,7 @@ const Post: FC = () => {
                     duserID={dat.userID}
                     dquestioner={dat.questioner}
                     danswer={dat.answer}
+                    dtag={dat.tag}
                   />
                   ) : (
                     <></>
@@ -167,8 +168,8 @@ const Post: FC = () => {
                 </div>
                 <div>
                   <p>
-                    回答者: {dat.answer} 記載者: {dat.questioner}{" "}
-                    {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm")}
+                    回答者: {dat.answer} 記載者: {dat.questioner}{" "} タグ: {dat.tag}
+                    {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm") }
                   </p>
                 </div>
               </div>
@@ -187,6 +188,7 @@ const Post: FC = () => {
                     duserID={dat.userID}
                     dquestioner={dat.questioner}
                     danswer={dat.answer}
+                    dtag={dat.tag}
                   />
                   ) : (
                     <></>
@@ -220,7 +222,7 @@ const Post: FC = () => {
                 </div>
                 <div>
                   <p>
-                    回答者: {dat.answer} 記載者: {dat.questioner}{" "}
+                    回答者: {dat.answer} 記載者: {dat.questioner}{" "} タグ: {dat.tag}
                     {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm")}
                   </p>
                 </div>

@@ -17,6 +17,7 @@ type props = {
   setContent: Dispatch<SetStateAction<string>>;
   setQuestioner: Dispatch<SetStateAction<string>>;
   setAnswer: Dispatch<SetStateAction<string>>;
+  setTag: Dispatch<SetStateAction<string>>;
 };
 //情報共有の時しか使わないコンポーネント
 const InfoText: FC<props> = (props) => {
@@ -25,6 +26,9 @@ const InfoText: FC<props> = (props) => {
   };
   const changeContent = (e) => {
     props.setContent(e.target.value);
+  };
+  const changeTag = (e) => {
+    props.setTag(e.target.value);
   };
   const changeAnswer = (e) => {
     props.setAnswer(e.target.value);
@@ -45,6 +49,24 @@ const InfoText: FC<props> = (props) => {
 
       <h2>
         投稿者：{auth.currentUser?.displayName}
+      </h2>
+
+      <h2>
+        タグ名：
+        <FormControl fullWidth>
+          <InputLabel>タグ</InputLabel>
+          <Select
+            label="タグ"
+            className={styles.inputform}
+            onChange={changeTag}
+          >
+            <MenuItem value={"緊急"}>緊急</MenuItem>
+            <MenuItem value={"報告"}>報告</MenuItem>
+            <MenuItem value={"ツール"}>ツール</MenuItem>
+            <MenuItem value={"学習"}>学習</MenuItem>
+            <MenuItem value={"確認"}>確認</MenuItem>
+          </Select>
+        </FormControl>
       </h2>
 
       <h2>
