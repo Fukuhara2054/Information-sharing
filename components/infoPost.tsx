@@ -26,6 +26,8 @@ import { db } from "./fire/fire";
 import Checkboxx from "./checkbox";
 import dayjs from "dayjs";
 import { Paper, IconButton, InputBase } from "@mui/material";
+import { app } from "./fire/fire";
+import { getAuth, signOut } from "firebase/auth";
 
 const Post: FC = () => {
   //これはなんだろう（福原）
@@ -86,6 +88,8 @@ const Post: FC = () => {
     console.log(e.target.value);
   };
 
+  const auth = getAuth(app);
+
   return (
     <div>
       <div className={styles.searchbtn}>
@@ -122,7 +126,7 @@ const Post: FC = () => {
             <div className={styles.box2}>
               <div className={styles.main}>
                 <div className={styles.link}>
-                  
+                  { auth.currentUser?.displayName === dat.questioner ? (
                   <EditButton
                     dtitle={dat.title}
                     dcontent={dat.content}
@@ -131,6 +135,9 @@ const Post: FC = () => {
                     dquestioner={dat.questioner}
                     danswer={dat.answer}
                   />
+                  ) : (
+                    <></>
+                  )}
                   {/* お気に入りボタン */}
                   <Checkboxx
                     id={dat.id}
@@ -172,6 +179,7 @@ const Post: FC = () => {
             <div className={styles.box2}>
               <div className={styles.main}>
                 <div className={styles.link}>
+                { auth.currentUser?.displayName === dat.questioner ? (
                   <EditButton
                     dtitle={dat.title}
                     dcontent={dat.content}
@@ -180,6 +188,9 @@ const Post: FC = () => {
                     dquestioner={dat.questioner}
                     danswer={dat.answer}
                   />
+                  ) : (
+                    <></>
+                  )}
                   {/* お気に入りボタン */}
                   <Checkboxx
                     id={dat.id}
