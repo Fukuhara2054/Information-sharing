@@ -1,6 +1,6 @@
-import { FC, useState, useEffect } from "react";
-import {db} from '../components/fire/fire'
-import { collection, addDoc, query, where } from "firebase/firestore";
+import { FC, useState, useEffect, SetStateAction } from "react";
+import {app, db} from '../components/fire/fire'
+import { collection, addDoc, query, where, serverTimestamp, collectionGroup } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
@@ -9,11 +9,36 @@ import styles from "../styles/Add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { getAuth } from "firebase/auth";
 
+type props = {
+  dtitle: JSX.Element
+  dcontent: JSX.Element
+  did: JSX.Element
+  duserID: JSX.Element
+  dquestioner: JSX.Element
+  danswer: JSX.Element
+  
+}
 
-
-const Add: FC = () => {
+const Add: FC<props> = (props) => {
+  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props
+  const [title, setTitle] = useState('') //命題・質問
+  const [content, setContent] = useState('')// 詳細・内容
+  const [questioner, setQuestioner] = useState('')//質問者
   const [answer, setAnswer] = useState('')//回答者
+  const [pass, setPass] = useState(false)
+  
+  const changeContent = (e) =>{
+    setContent(e.target.value)
+  }
+
+  // useEffect(() => {
+  //   if(path == '/'){
+  //     setPass(true)
+  //   }
+  // },[])
+  const auth = getAuth(app)
 
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
@@ -32,18 +57,29 @@ const Add: FC = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = () => {
 
+//質問に対する回答ボタン
+  const handleClickAddButton = async() => {
+    const auth = getAuth(app)
+    const ref = collection(db, "users", duserID,"ques", did,"ans")
+    await addDoc(ref, {
+      content: content,
+      // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
+      // questioner: auth.currentUser?.displayName,
+      Timestamp: serverTimestamp(),
+    })
     
+    window.location.reload()
   }
+
   return (
     <div className={styles.Add}>
       <Button
+        variant="contained"
         onClick={openModal}
-        className={styles.answer}
         startIcon={<AddIcon />}
       >
-        回答
+        回答する
       </Button>
       <Modal
         // isOpenがtrueならモダールが起動する
@@ -87,17 +123,19 @@ const Add: FC = () => {
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
         <div className={styles.textsection}>
-            <h2>質問：明日の天気 </h2>   
+            <h2>質問: {title}</h2>   
             <br></br>
-            <h2>内容：明日の北参道駅の天気</h2>
+            <h2>内容：{content}</h2>
           <h2>
             回答：
             <TextField
+              
               id="outlined-multiline-static"
               label="投稿内容"
               multiline
               rows={6}
               className={styles.detail}
+              onChange={changeContent}
             />
           </h2>
         </div> 

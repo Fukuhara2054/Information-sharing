@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import {db} from '../components/fire/fire'
-import { collection, addDoc, query, where,serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
@@ -12,7 +12,7 @@ import InfoText from "./infoText";
 import QuestionText from "./questionText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
-import { Value } from "sass";//EditAttributesTwoTone
+//import { Value } from "sass";//EditAttributesTwoTone
 import { app } from "../components/fire/fire"
 import { getAuth, signOut } from "firebase/auth"
 
@@ -25,7 +25,6 @@ const Add: FC<path> = ({path}) => {
   const [content, setContent] = useState('')// 詳細・内容
   const [questioner, setQuestioner] = useState('')//質問者
   const [answer, setAnswer] = useState('')//回答者
-  const [tag, setTag] = useState('')//タグ付け
   const [pass, setPass] = useState(false)
 
   useEffect(() => {
@@ -50,6 +49,7 @@ const Add: FC<path> = ({path}) => {
   const closeModal = () => {
     setIsOpen(false);
   };
+//共有投稿ボタン
   const handleClickAddButton = async() => {
 
     const ref = collection(db, "users", auth.currentUser?.uid, 'info')
@@ -57,19 +57,34 @@ const Add: FC<path> = ({path}) => {
       title: title,
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
-      tag: tag,
-      questioner: auth.currentUser?.displayName,
+      questioner: questioner,
+      // questioner: auth.currentUser?.displayName,
       answer: answer,
       userID: auth.currentUser?.uid, 
       Timestamp: serverTimestamp(),
-      bookmark: false
     })
     
     window.location.reload()
   }
+
+//質問投稿ボタン
+const handleClickAddQuestButton = async()=>{
+  const ref = collection(db,"users", auth.currentUser?.uid,"ques")
+  await addDoc(ref,{
+     title:title,
+     content:content,
+     userID: auth.currentUser?.uid,
+     questioner: questioner,
+     Timestamp: serverTimestamp(),
+  })
+
+  window.location.reload()
+ }
+
   return (
     <div className={styles.Add}>
       <Button
+        variant="contained"
         onClick={openModal}
         className={styles.plus}
         startIcon={<AddIcon />}
@@ -124,7 +139,6 @@ const Add: FC<path> = ({path}) => {
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
-          setTag={setTag}
         />
         ):(
           <QuestionText
@@ -142,6 +156,16 @@ const Add: FC<path> = ({path}) => {
           >
             追加
           </Button>
+
+          <Button
+           variant="contained"
+           color="success"
+           className={styles.addbutton}
+           onClick={handleClickAddQuestButton}
+         >
+          質問追加
+          </Button>
+           
           <Button
             variant="contained"
             color="error"
