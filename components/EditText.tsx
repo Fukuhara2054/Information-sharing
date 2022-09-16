@@ -67,11 +67,11 @@ const EditText: FC<props> = (props) => {
             className={styles.inputform}
             onChange={changeAnswer}
           >
-            <MenuItem value={10}>クラウド</MenuItem>
-            <MenuItem value={20}>ザックス</MenuItem>
-            <MenuItem value={30}>ティーダ</MenuItem>
-            <MenuItem value={40}>ユウナ</MenuItem>
-            <MenuItem value={50}>ノクティス</MenuItem>
+            <MenuItem value={"鴨川さん"}>鴨川さん</MenuItem>
+            <MenuItem value={"関口さん"}>関口さん</MenuItem>
+            <MenuItem value={"秋山さん"}>秋山さん</MenuItem>
+            <MenuItem value={"柿沼さん"}>柿沼さん</MenuItem>
+            <MenuItem value={"山光さん"}>山光さん</MenuItem>
           </Select>
         </FormControl>
       </h2>

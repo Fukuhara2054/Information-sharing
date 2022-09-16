@@ -27,7 +27,7 @@
     margin: 0 0 0 auto;
 }
 
-.okiniiri {
+.link {
     float: right;
     display: flex;
     align-items: center;
@@ -46,25 +46,33 @@
 .display2 {
     display: block;
 }
-.bookmark1{
-    color:  #d81b60;
-    float: right;
+
+.bookmark1 {
+    color: #d81b60;
 }
-.bookmark2{
+
+.bookmark2 {
     color: #e91e63;
-    float: right;
-    
+}
+
+.searchbtn {
+    position: fixed;
+    top: 90px;
+    z-index: 1100;
+    width: 30%;
 }
 
 .QStext {
     display: flex;
     align-items: center;
     margin: 0 0 0 auto;
+
     h2 {
         margin: 0;
         white-space: nowrap;
         font-size: 1.6vmax;
     }
+
     p {
         font-size: 1.2vmax;
     }
