@@ -7,7 +7,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import { pink } from '@mui/material/colors';
 import { db } from "./fire/fire";
-import { app } from "../components/fire/fire"
+import { app } from "./fire/fire"
 import { getAuth, signOut } from "firebase/auth"
 import { collectionGroup, getDocs, where, orderBy, query, deleteDoc, doc, collection, getDoc, updateDoc } from "firebase/firestore";
 
@@ -17,7 +17,7 @@ type id = {
     onMark: IntrinsicAttributes
     check: boolean
 }
-const Checkboxx: FC<id> = ({ id, onMark, check }) => {
+const Like: FC<id> = ({ id, onMark, check }) => {
     const auth = getAuth(app)
     const [mark, setMark] = useState()
 
@@ -68,4 +68,4 @@ const Checkboxx: FC<id> = ({ id, onMark, check }) => {
         </>
     )
 }
-export default Checkboxx
+export default Like

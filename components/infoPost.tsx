@@ -12,8 +12,6 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -23,26 +21,36 @@ import Link from "next/link";
 import { Edit, EditAttributesTwoTone } from "@mui/icons-material";
 import EditButton from "./editButton";
 import { db } from "./fire/fire";
-import Checkboxx from "./checkbox";
+import Like from "./like";
 import dayjs from "dayjs";
 import { Paper, IconButton, InputBase } from "@mui/material";
 import { app } from "./fire/fire";
 import { getAuth, signOut } from "firebase/auth";
+import { styled } from "@mui/material/styles";
+import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+const Accordion = styled((props: AccordionProps) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `0px solid ${theme.palette.divider}`,
+}));
 
 const Post: FC = () => {
   //これはなんだろう（福原）
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   //詳細などの開閉処理の問題を解決しました。
-  const [open, setOpen] = useState(styles.display1);
+  // const [open, setOpen] = useState(styles.display1);
 
-  const onClick = () => {
-    if (open == styles.display1) {
-      setOpen(styles.display2);
-    } else {
-      setOpen(styles.display1);
-    }
-  };
+  // const onClick = () => {
+  //   if (open == styles.display1) {
+  //     setOpen(styles.display2);
+  //   } else {
+  //     setOpen(styles.display1);
+  //   }
+  // };
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
 
@@ -122,107 +130,127 @@ const Post: FC = () => {
       </div>
       {data.map((dat) =>
         dat.bookmark ? (
-          <ul key={dat.id}>
+          <ul key={dat.id} className={styles.contentbox}>
             <div className={styles.box2}>
               <div className={styles.main}>
                 <div className={styles.link}>
-                  { auth.currentUser?.displayName === dat.questioner ? (
-                  <EditButton
-                    dtitle={dat.title}
-                    dcontent={dat.content}
-                    did={dat.id}
-                    duserID={dat.userID}
-                    dquestioner={dat.questioner}
-                    danswer={dat.answer}
-                    dtag={dat.tag}
-                  />
+                  {auth.currentUser?.displayName === dat.questioner ? (
+                    <EditButton
+                      dtitle={dat.title}
+                      dcontent={dat.content}
+                      did={dat.id}
+                      duserID={dat.userID}
+                      dquestioner={dat.questioner}
+                      danswer={dat.answer}
+                      dtag={dat.tag}
+                    />
                   ) : (
                     <></>
                   )}
                   {/* お気に入りボタン */}
-                  <Checkboxx
+                  <Like
                     id={dat.id}
                     onMark={styles.bookmark1}
                     check={true}
                   />
                 </div>
-                <div className={styles.abc}>
-                  <h2>
-                    命題: {dat.title}
-                    {/* 開閉ボタン */}
-                    <Checkbox
+                <Accordion>
+                  <AccordionSummary
+                    //↓スタイルの適用が難しいから後回し
+                    //expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <h2 className={styles.title}>
+                      命題: {dat.title}
+                      {/* 開閉ボタン */}
+                      {/* <Checkbox
                       {...label}
                       icon={<ExpandMoreIcon />}
                       checkedIcon={<ExpandLessIcon />}
                       onClick={onClick}
-                    />
-                  </h2>
-                </div>
-                <div id="honbun" className={open}>
-                  {/* <p className={styles.uta}>詳細:</p>
+                    /> */}
+                    </h2>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <div id="honbun">
+                      {/* <p className={styles.uta}>詳細:</p>
                   <p>
                     現在研修に入っている全員が参加対象です場所はGATE5階セミナールームですが、オンラインでも参加可能です。
                   </p> */}
-                  <label htmlFor="">詳細: {dat.content} </label>
-                  {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
-                </div>
-                <div>
+                      <label htmlFor="">詳細: {dat.content} </label>
+                      {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
+                    </div>
+                  </AccordionDetails>
+                </Accordion>
+                <div className={styles.bottomtext}>
                   <p>
-                    回答者: {dat.answer} 記載者: {dat.questioner}{" "} タグ: {dat.tag}
-                    {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm") }
+                    回答者: {dat.answer} 記載者: {dat.questioner} タグ:{" "}
+                    {dat.tag}
+                    {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm")}
                   </p>
                 </div>
               </div>
             </div>
           </ul>
         ) : (
-          <ul key={dat.id}>
+          <ul key={dat.id} className={styles.contentbox}>
             <div className={styles.box2}>
               <div className={styles.main}>
                 <div className={styles.link}>
-                { auth.currentUser?.displayName === dat.questioner ? (
-                  <EditButton
-                    dtitle={dat.title}
-                    dcontent={dat.content}
-                    did={dat.id}
-                    duserID={dat.userID}
-                    dquestioner={dat.questioner}
-                    danswer={dat.answer}
-                    dtag={dat.tag}
-                  />
+                  {auth.currentUser?.displayName === dat.questioner ? (
+                    <EditButton
+                      dtitle={dat.title}
+                      dcontent={dat.content}
+                      did={dat.id}
+                      duserID={dat.userID}
+                      dquestioner={dat.questioner}
+                      danswer={dat.answer}
+                      dtag={dat.tag}
+                    />
                   ) : (
                     <></>
                   )}
                   {/* お気に入りボタン */}
-                  <Checkboxx
+                  <Like
                     id={dat.id}
                     onMark={styles.bookmark2}
                     check={false}
                   />
                 </div>
-                <div className={styles.abc}>
-                  <h2>
-                    命題: {dat.title}
-                    {/* 開閉ボタン */}
-                    <Checkbox
+                <Accordion>
+                  <AccordionSummary
+                    //↓スタイルの適用が難しいから後回し
+                    //expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <h2 className={styles.title}>
+                      命題: {dat.title}
+                      {/* 開閉ボタン */}
+                      {/* <Checkbox
                       {...label}
                       icon={<ExpandMoreIcon />}
                       checkedIcon={<ExpandLessIcon />}
                       onClick={onClick}
-                    />
-                  </h2>
-                </div>
-                <div id="honbun" className={open}>
-                  {/* <p className={styles.uta}>詳細:</p>
+                    /> */}
+                    </h2>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <div id="honbun">
+                      {/* <p className={styles.uta}>詳細:</p>
                   <p>
                     現在研修に入っている全員が参加対象です場所はGATE5階セミナールームですが、オンラインでも参加可能です。
                   </p> */}
-                  <label htmlFor="">詳細: {dat.content} </label>
-                  {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
-                </div>
-                <div>
+                      <label htmlFor="">詳細: {dat.content} </label>
+                      {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
+                    </div>
+                  </AccordionDetails>
+                </Accordion>
+                <div className={styles.bottomtext}>
                   <p>
-                    回答者: {dat.answer} 記載者: {dat.questioner}{" "} タグ: {dat.tag}
+                    回答者: {dat.answer} 記載者: {dat.questioner} タグ:{" "}
+                    {dat.tag}
                     {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm")}
                   </p>
                 </div>

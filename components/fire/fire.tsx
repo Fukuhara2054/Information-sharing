@@ -5,12 +5,12 @@ import { getFirestore } from 'firebase/firestore'
 
 //Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBf_IUze2BnR7uDv0870E5JK7OqKZ2eJrs",
-  authDomain: "next-1028.firebaseapp.com",
-  projectId: "next-1028",
-  storageBucket: "next-1028.appspot.com",
-  messagingSenderId: "50087211849",
-  appId: "1:50087211849:web:84e049b056178752f36098"
+  apiKey: "AIzaSyC1Y2ETPNfXkP8ESJs6B7SOZuRA78NTrII",
+  authDomain: "onelink-2.firebaseapp.com",
+  projectId: "onelink-2",
+  storageBucket: "onelink-2.appspot.com",
+  messagingSenderId: "77219991443",
+  appId: "1:77219991443:web:090be08b65fdf56ab86266"
 };
 
 
