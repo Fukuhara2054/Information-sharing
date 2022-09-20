@@ -1,5 +1,5 @@
 import {useState, useEffect, FC} from 'react'
-import db from './fire'
+import {db} from './fire'
 import { collection, getDocs } from 'firebase/firestore';
 
 const Display: FC =() => {

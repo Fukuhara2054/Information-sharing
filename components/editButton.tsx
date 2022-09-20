@@ -16,8 +16,8 @@ import { getAuth, signOut } from "firebase/auth"
 type props = {
   dtitle: JSX.Element
   dcontent: JSX.Element
-  did: JSX.Element
-  duserID: JSX.Element
+  did: string
+  duserID: string
   dquestioner: JSX.Element
   danswer: JSX.Element
   dtag: JSX.Element

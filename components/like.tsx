@@ -13,8 +13,8 @@ import { collectionGroup, getDocs, where, orderBy, query, deleteDoc, doc, collec
 
 
 type id = {
-    id: IntrinsicAttributes
-    onMark: IntrinsicAttributes
+    id: string
+    onMark: string
     check: boolean
 }
 const Like: FC<id> = ({ id, onMark, check }) => {

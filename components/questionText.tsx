@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import styles  from '../styles/Add.module.scss'
 import TextField from "@mui/material/TextField";
 import { VaccinesTwoTone } from '@mui/icons-material';
