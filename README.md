@@ -1,3 +1,32 @@
+セキュリティルール設計
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function checkAuthentication(auth) {
+  return auth != null &&
+         auth.token.email_verified &&
+         auth.token.firebase.sign_in_provider == 'g.dreamcareer.co.jp';
+}
+    どういった時読み取っていいかの記載
+    match /users/{document=**} {
+        どういった時読み取っていいかの記載
+         allow read: if checkAuthentication(request.auth)
+    }
+             match /info/{document=**}{
+            allow read: if checkAuthentication(request.auth)
+         }
+             match /question/{document=**}{
+            allow read: if checkAuthentication(request.auth)
+         }
+                match /answer/{document=**}{
+                allow read: if checkAuthentication(request.auth)
+         }
+  }
+}
+特定のメールアドレスはデータベースへの全ての権利がある
+それがドリームキャリアのメール
+
+@g.dreamcareer.co.jp
 user(c):{
     documentId(d):{
         name:string

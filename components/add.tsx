@@ -32,7 +32,7 @@ const Add: FC<path> = ({ path }) => {
   const [questioner, setQuestioner] = useState(""); //質問者
   const [answer, setAnswer] = useState(""); //回答者
   const [pass, setPass] = useState(false);
-
+  const [tag, setTag] = useState(undefined)
   useEffect(() => {
     if (path == "/") {
       setPass(true);
@@ -66,6 +66,7 @@ const Add: FC<path> = ({ path }) => {
       questioner: questioner,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
+      tag: tag,
       userID: auth.currentUser?.uid,
       Timestamp: serverTimestamp(),
     });
@@ -146,7 +147,7 @@ const Add: FC<path> = ({ path }) => {
               setContent={setContent}
               setQuestioner={setQuestioner}
               setAnswer={setAnswer}
-              setTag={undefined}
+              setTag={setTag}
             />
             <div className={styles.button}>
               <Button

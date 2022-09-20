@@ -23,6 +23,7 @@ type props = {
 const InfoText: FC<props> = (props) => {
   const changeTitle = (e) => {
     props.setTitle(e.target.value);
+    props.setQuestioner(auth.currentUser?.displayName)
   };
   const changeContent = (e) => {
     props.setContent(e.target.value);
