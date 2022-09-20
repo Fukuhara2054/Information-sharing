@@ -1,40 +1,38 @@
+import * as React from "react";
 import { FC, useState, useEffect } from "react";
-import {db} from './fire/fire'
-import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
+import { db } from "./fire/fire";
+import { collection, addDoc, query, where, serverTimestamp, deleteDoc } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
-import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
+import CheckIcon from "@mui/icons-material/Check";
 import styles from "../styles/Add.module.scss";
-import AddIcon from "@mui/icons-material/Add";
-import { IconButton } from "@mui/material";
-import InfoText from "./infoText";
-import QuestionText from "./questionText";
-import { convertLength } from "@mui/material/styles/cssUtils";
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
-import { Value } from "sass";//EditAttributesTwoTone
+import EditIcon from "@mui/icons-material/Edit";
+import { Button, IconButton, Collapse, Alert } from "@mui/material";
 import EditText from "./EditText";
 import { app } from "./fire/fire"
 import { getAuth, signOut } from "firebase/auth"
-import dayjs from 'dayjs';
 
 type props = {
   dtitle: JSX.Element
   dcontent: JSX.Element
   did: JSX.Element
-  duid: JSX.Element
+  duserID: JSX.Element
   dquestioner: JSX.Element
   danswer: JSX.Element
+  dtag: JSX.Element
 }
 
 const EditButton: FC<props> = (props) => {
-  const { dtitle, dcontent, did, duid, dquestioner, danswer } = props
-  const [title, setTitle] = useState(dtitle) //命題・質問
-  const [content, setContent] = useState(dcontent)// 詳細・内容
-  const [questioner, setQuestioner] = useState(dquestioner)//質問者
-  const [answer, setAnswer] = useState(danswer)//回答者
-  const [pass, setPass] = useState(false)
-  
+  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props
+  const [title, setTitle] = useState(dtitle); //命題・質問
+  const [content, setContent] = useState(dcontent); // 詳細・内容
+  const [questioner, setQuestioner] = useState(dquestioner); //質問者
+  const [answer, setAnswer] = useState(danswer); //回答者
+  const [tag, setTag] = useState('')//タグ付け
+  const [pass, setPass] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
 
   const auth = getAuth(app)
   // アプリのルートを識別するクエリセレクタを指定する。
@@ -61,6 +59,7 @@ const EditButton: FC<props> = (props) => {
       title: title,
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
+      tag: tag,
       questioner: questioner,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
@@ -69,15 +68,19 @@ const EditButton: FC<props> = (props) => {
     
     window.location.reload()
   }
+
+  //投稿削除ボタン処理
+  const handleClickDeleteButton = async() => {
+    await deleteDoc(doc(db, "users", auth.currentUser?.uid, "info", did))
+
+    window.location.reload();
+  }
+
   return (
     <div className={styles.Add}>
-      <Button
-        variant="contained"
-        onClick={openModal}
-        startIcon={<AddIcon />}
-      >
-        編集
-      </Button>
+      <IconButton onClick={openModal} className={styles.textbtn}>
+        <EditIcon sx={{ color: "#9f9f9f" }} />
+      </IconButton>
       <Modal
         // isOpenがtrueならモダールが起動する
         isOpen={modalIsOpen}
@@ -119,17 +122,18 @@ const EditButton: FC<props> = (props) => {
         </IconButton>
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
-        {/* 子コンポーネントから親コンポーネントに渡している */}    
+        {/* 子コンポーネントから親コンポーネントに渡している */}
         <EditText
           setTitle={setTitle}
           setContent={setContent}
           setQuestioner={setQuestioner}
           setAnswer={setAnswer}
-          
+          setTag={setTag}
           title={title}
           content={content}
           questioner={questioner}
           answer={answer}
+          tag={tag}
         />
 
         {/* ↓後でonclick変える */}
@@ -146,10 +150,60 @@ const EditButton: FC<props> = (props) => {
             variant="contained"
             color="error"
             className={styles.closebutton}
-            onClick={closeModal}
+            onClick={() => {
+              setOpen(true);
+            }}
           >
-            キャンセル
+            削除
           </Button>
+          <div className={styles.alert}>
+            <Collapse in={open}>
+              <Alert
+                severity="error"
+                sx={{ height: "110px" }}
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+              >
+                本当に投稿を削除してもよろしいですか？
+                <div className={styles.alertbtn}>
+                  <Button
+                    className={styles.alertcancel}
+                    startIcon={<CloseIcon />}
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    キャンセル
+                  </Button>
+                  <div className={styles.alertbtnSpace}></div>
+                  
+                    <Button
+                      variant="contained"
+                      color="error"
+                      startIcon={<CheckIcon />}
+
+                      onClick={() => {
+                        setOpen(false);
+                        closeModal();
+                        handleClickDeleteButton()
+                      }}
+                    >
+                      削除します！
+                    </Button>
+                </div>
+              </Alert>
+            </Collapse>
+          </div>
         </div>
       </Modal>
     </div>

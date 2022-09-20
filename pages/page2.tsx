@@ -7,6 +7,7 @@ import QuestionPost from "../components/questionPost";
 
 
 const Page2: NextPage = () => {
+  let isMorning = true
   return (
     <div className="">
       <Layout title='質問箱'>

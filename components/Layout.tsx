@@ -5,7 +5,13 @@ import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StarIcon from "@mui/icons-material/Star";
-import { AppBar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Typography,
+  Tabs,
+  Tab,
+} from "@mui/material";
+import { pink } from '@mui/material/colors';
 import Add from "../components/add";
 import Search from "../components/search";
 import * as React from "react";
@@ -15,6 +21,7 @@ import { getAuth, signOut } from "firebase/auth";
 import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthContext } from "../pages/context/AuthContext";
+import { fontSize } from "@mui/system";
 
 //ReactNodeからReactElementに変えた
 //もしかしたらここでエラー出るかも？
@@ -88,6 +95,12 @@ export const Layout: FC<Props> = memo((props) => {
     return pagePath === String(router.route);
   };
 
+  //質問箱、お気に入りのページ切り替え用
+  const [value, setValue] = React.useState('one');
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+  
   return (
     <div className={styles.root}>
       {/* サイドバーの記述 */}
@@ -114,7 +127,7 @@ export const Layout: FC<Props> = memo((props) => {
             <a
               className={styles.flexContainer}
               style={{
-                background: isPageActive(navigation.path) ? "#BAACB0" : "none",
+                background: isPageActive(navigation.path) ? "#0055FF" : "none",
               }}
             >
               {navigation.icon}
@@ -144,19 +157,54 @@ export const Layout: FC<Props> = memo((props) => {
                 backgroundColor: "white",
                 color: "black",
               }}
-              className={styles.header}
             >
-              <Typography
-                variant="h5"
-                fontWeight={"bold"}
-                padding="20px 20px 0px 20px"
-              >
-                {props.title}
-              </Typography>
+              <Typography className={styles.title}>{props.title}</Typography>
               <div>
+                {props.title === "質問箱" ? (                  
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    variant="fullWidth"
+                    TabIndicatorProps={{
+                      style: {
+                        backgroundColor: '#0022CC',
+                        height: '3px'
+                      }
+                    }}
+                    aria-label="secondary tabs example"
+                  >
+                    <Tab value="one" label="タイムライン" sx={{ fontSize: "17px"}} />
+                    <Tab value="two" label="回答募集中" sx={{ fontSize: "17px"}} />
+                  </Tabs>
+                ) : (
+                  <></>
+                )}
+                {props.title === "お気に入り" ? (                  
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    variant="fullWidth"
+                    TabIndicatorProps={{
+                      style: {
+                        backgroundColor: '#0022CC',
+                        height: '3px'
+                      }
+                    }}
+                    aria-label="secondary tabs example"
+                  >
+                    <Tab value="one" label="共有事項" sx={{ fontSize: "17px"}} />
+                    <Tab value="two" label="質問箱" sx={{ fontSize: "17px"}} />
+                  </Tabs>
+                ) : (
+                  <></>
+                )}
                 <div className={styles.line}></div>
                 <div className={styles.appbarbottom}>
-                  <Add path={path} />
+                  {props.title === "お気に入り" ? (
+                    <></>
+                  ) : (
+                    <Add path={path} />
+                  )}
                   {/* <Search /> */}
                 </div>
               </div>

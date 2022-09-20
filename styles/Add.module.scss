@@ -1,49 +1,110 @@
 .Add {
-    position: relative;
+  position: relative;
+  z-index: 10;
+}
+
+.textbtn {
+  color: #606060;
+  padding: 0;
 }
 
 .closeicon {
-    position: absolute;
-    right: 0;
-    margin-right: 10px;
-  }
-  
-  .button {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .addbutton {
-    margin: auto;
-  }
-  
-  .closebutton {
-    margin: auto;
-  }
-  
-  .plus {
-    position: absolute;
-    right: 0px;
-    font-size: 15px;
-    margin-right: 30px;
-    padding: 4px 30px 5px 30px;
-    border-radius: 15px;
-  }
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+}
 
-  .textsection {
-    padding: auto;
-    h2 {
-        font-size: 1.8vw;
-        display: flex;
-        .input {
-            max-width: 85%;
-            width: 100vw;
-            vertical-align: 4px;
-        }
-        .detail {
-            font-size: 1vw;
-            width: 85%;
-            height: 200px;
-        }
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.addbutton {
+  margin: auto;
+}
+
+.closebutton {
+  margin: auto;
+}
+
+.alert {
+  display: block;
+  position: absolute;
+  top: 0;
+}
+
+.alertbtn {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 15px;
+}
+
+.alertcancel {
+  background-color: #BCBCBC;
+  color: #222222;
+
+  &:hover {
+    background-color: #9f9f9f;
+  }
+}
+
+.alertbtnSpace {
+  width: 20px;
+}
+
+.plus {
+  position: absolute;
+  right: 0px;
+  font-size: 15px;
+  margin-right: 30px;
+  padding: 4px 30px 4px 30px;
+  border-radius: 15px;
+  background-color: #0055FF;
+  color: white;
+
+  &:hover {
+    background-color: #0022CC;
+  }
+}
+
+.answer {
+  font-size: 15px;
+  margin: 10px 0;
+  padding: 4px 30px 4px 30px;
+  border-radius: 15px;
+  background-color: #0055FF;
+  color: white;
+
+  &:hover {
+    background-color: #0022CC;
+  }
+}
+
+.textsection {
+  padding: auto;
+
+  h2 {
+    font-size: 1.8vw;
+    display: flex;
+    white-space: nowrap;
+
+    .input {
+      max-width: 85%;
+      width: 100vw;
+      vertical-align: 4px;
+    }
+
+    .inputform {
+      max-width: 95%;
+      width: 100vw;
+      vertical-align: 4px;
+    }
+
+    .detail {
+      font-size: 1vw;
+      width: 85%;
+      height: 200px;
     }
   }
+}

@@ -1,5 +1,5 @@
 import {useState, useEffect, FC} from 'react'
-import {db} from './fire'
+import db from './fire'
 import { collection, getDocs } from 'firebase/firestore';
 
 const Display: FC =() => {
@@ -9,7 +9,6 @@ const Display: FC =() => {
         const postData = collection(db, "users")
         getDocs(postData).then((snapshot)=>{
            setData(snapshot.docs.map((doc)=> doc.data().tags))
-
         })
 
     },[])

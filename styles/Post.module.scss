@@ -1,41 +1,24 @@
+.contentbox {
+    padding: 0px;
+}
+
 .box2 {
     padding: 2px 20px;
     color: #111111;
     /*文字色黒色*/
     background: #ffffff;
-    border: solid 2px #080808;
-    /*線*/
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .5);
     border-radius: 20px;
     /*角の丸み*/
     display: inline-block;
     width: 100%;
 }
 
-.box2 p {
-    margin: 0;
-    padding: 0;
-}
 
 .uta {
     font-weight: bold;
     width: 1;
 
-}
-
-.jason {
-    display: flex;
-    flex: auto;
-    font-size: 20px;
-}
-
-
-p.pic {
-
-    float: right;
-}
-
-.btn1+* {
-    clear: both;
 }
 
 .main,
@@ -45,17 +28,19 @@ p.pic {
 }
 
 .link {
-    font-size: 18px;
-    margin-left: 5px;
-    color: red;
-}
-
-.okiniiri {
     float: right;
+    display: flex;
+    align-items: center;
 }
 
-.abc h2 {
-    margin: -0.8px 0;
+.title {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 1.6vmax;
+}
+
+.bottomtext {
+    padding-left: 12px;
 }
 
 .display1 {
@@ -66,9 +51,48 @@ p.pic {
     display: block;
 }
 
+.bookmark1 {
+    color: #d81b60;
+    z-index: 10;
+}
+
+.bookmark2 {
+    color: #e91e63;
+    z-index: 10;
+}
+
 .searchbtn {
     position: fixed;
-    top: 80px;
+    top: 90px;
     z-index: 1100;
-    width: 90%;
+    width: 30%;
+}
+
+.searchbtn_q {
+    position: fixed;
+    top: 140px;
+    z-index: 1100;
+    width: 30%;
+}
+
+.QStext {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    h2 {
+        margin: 0;
+        white-space: nowrap;
+        font-size: 1.6vmax;
+    }
+
+    p {
+        font-size: 1.2vmax;
+    }
+}
+
+.watch {
+    display: flex;
+    margin-left: 78%;
+    white-space: nowrap;
 }
