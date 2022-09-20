@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import styles from "../styles/Add.module.scss";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,6 +23,7 @@ type props = {
 const InfoText: FC<props> = (props) => {
   const changeTitle = (e) => {
     props.setTitle(e.target.value);
+    props.setQuestioner(auth.currentUser?.displayName)
   };
   const changeContent = (e) => {
     props.setContent(e.target.value);
@@ -92,7 +93,7 @@ const InfoText: FC<props> = (props) => {
           id="outlined-multiline-static"
           label="投稿内容"
           multiline
-          rows={6}
+          rows={4}
           className={styles.detail}
           onChange={changeContent}
         />

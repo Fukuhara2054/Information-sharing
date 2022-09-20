@@ -173,7 +173,7 @@ const Post: FC = () => {
                     </h2>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <div id="honbun">
+                    <div id="">
                       {/* <p className={styles.uta}>詳細:</p>
                   <p>
                     現在研修に入っている全員が参加対象です場所はGATE5階セミナールームですが、オンラインでも参加可能です。
@@ -237,11 +237,7 @@ const Post: FC = () => {
                     </h2>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <div id="honbun">
-                      {/* <p className={styles.uta}>詳細:</p>
-                  <p>
-                    現在研修に入っている全員が参加対象です場所はGATE5階セミナールームですが、オンラインでも参加可能です。
-                  </p> */}
+                    <div id="">
                       <label htmlFor="">詳細: {dat.content} </label>
                       {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
                     </div>

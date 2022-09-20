@@ -22,9 +22,9 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
   const handleLogin = (e: { preventDefault: () => void }) => {
     setPersistence(auth, browserSessionPersistence).then(() => {
-      return signInWithPopup(auth, provider);
+      signInWithPopup(auth, provider);
+      //ここにログインの分岐を入れたい
     });
-    router.push("/");
   };
   const handleClose = async () => {
     await router.push("/");

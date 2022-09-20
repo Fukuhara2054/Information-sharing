@@ -14,8 +14,8 @@ import { getAuth } from "firebase/auth";
 type props = {
   dtitle: JSX.Element
   dcontent: JSX.Element
-  did: JSX.Element
-  duserID: JSX.Element
+  did: string
+  duserID: string
   dquestioner: JSX.Element
   danswer: JSX.Element
   
@@ -61,7 +61,7 @@ const Add: FC<props> = (props) => {
 //質問に対する回答ボタン
   const handleClickAddButton = async() => {
     const auth = getAuth(app)
-    const ref = collection(db, "users", duserID,"ques", did,"ans")
+    const ref = collection(db, "users", duserID,"ques", did, "ans")
     await addDoc(ref, {
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
