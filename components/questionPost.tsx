@@ -28,6 +28,8 @@ import { styled } from "@mui/material/styles";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import { Paper, IconButton, InputBase } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -94,6 +96,7 @@ const Post: FC = () => {
   };
 
   const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
   const [ansData, setAnsData] = useState([]);
   //const [show, setShow] = useState([])
   useEffect(() => {
@@ -105,6 +108,7 @@ const Post: FC = () => {
     );
     getDocs(q).then((snapshot) => {
       setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setData2(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       //コンソールで確認のため
       //  console.log(data);
     });
@@ -124,8 +128,74 @@ const Post: FC = () => {
     });
   };
 
+
+  //質問削除ボタン
+  const handleClickDeleteButton = async(userID, id) => {
+    await deleteDoc(doc(db, "users", userID, "ques", id))
+    window.location.reload();
+  }
+
+  const [inputValue, setInputValue] = useState("");
+  //console.log(dataList)
+
+  const search = (value: string) => {
+    if (value !== "") {
+      const filteredList = data2.filter((dat: string) =>
+        Object.values(dat).some(
+          (item: string) =>
+            item
+              ?.toString()
+              .toUpperCase()
+              .indexOf(value.trim().toUpperCase()) !== -1
+        )
+      );
+      setData(filteredList);
+      return;
+    }
+
+    setData(data2);
+    return;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    search(e.target.value);
+    console.log(e.target.value);
+  };
+
+
+  
+
   return (
     <div>
+      <div className={styles.searchbtn_q}>
+        <Paper
+          component="form"
+          //影
+          elevation={3}
+          sx={{
+            p: "0px 2px",
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            height: 35,
+            borderRadius: "15px",
+            marginLeft: "10px",
+          }}
+        >
+          <IconButton sx={{ p: "4%" }} aria-label="menu">
+            <SearchIcon />
+          </IconButton>
+          <InputBase
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            sx={{ flex: 1 }}
+            placeholder="検索"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Paper>
+      </div>
       {data.map((dat) => (
         <ul key={dat.id} className={styles.contentbox}>
           <div className={styles.box2}>
@@ -207,7 +277,15 @@ const Post: FC = () => {
                               handleClickShowButton(dat.userID, dat.id)
                             }
                           >
-                            ほかの
+                            ほかの回答を見る↑
+                          </button>
+                          {/**質問削除 */}
+                          <button
+                          onClick = {() =>
+                            handleClickDeleteButton(dat.userID, dat.id)
+                          }
+                          >
+                            削除
                           </button>
                         </h2>
                       </label>
