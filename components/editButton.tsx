@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FC, useState, useEffect } from "react";
 import { db } from "./fire/fire";
-import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, query, where, serverTimestamp, deleteDoc } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
@@ -68,6 +68,13 @@ const EditButton: FC<props> = (props) => {
     
     window.location.reload()
   }
+
+  const handleClickDeleteButton = async() => {
+    await deleteDoc(doc(db, "users", auth.currentUser?.uid, "info", did))
+
+    window.location.reload();
+  }
+
   return (
     <div className={styles.Add}>
       <IconButton onClick={openModal} className={styles.textbtn}>
@@ -185,6 +192,7 @@ const EditButton: FC<props> = (props) => {
                     onClick={() => {
                       setOpen(false);
                       closeModal();
+                      handleClickDeleteButton();
                     }}
                   >
                     削除します！
