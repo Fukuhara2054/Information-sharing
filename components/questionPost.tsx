@@ -30,6 +30,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { Paper, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import React from "react";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -85,15 +86,15 @@ const Post: FC = () => {
   };
 
   //詳細などの開閉処理の問題を解決しました。
-  const [open, setOpen] = useState(styles.display1);
+  // const [open, setOpen] = useState(styles.display1);
 
-  const onClick = () => {
-    if (open == styles.display1) {
-      setOpen(styles.display2);
-    } else {
-      setOpen(styles.display1);
-    }
-  };
+  // const onClick = () => {
+  //   if (open == styles.display1) {
+  //     setOpen(styles.display2);
+  //   } else {
+  //     setOpen(styles.display1);
+  //   }
+  // };
 
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
@@ -128,12 +129,11 @@ const Post: FC = () => {
     });
   };
 
-
   //質問削除ボタン
-  const handleClickDeleteButton = async(userID, id) => {
-    await deleteDoc(doc(db, "users", userID, "ques", id))
+  const handleClickDeleteButton = async (userID, id) => {
+    await deleteDoc(doc(db, "users", userID, "ques", id));
     window.location.reload();
-  }
+  };
 
   const [inputValue, setInputValue] = useState("");
   //console.log(dataList)
@@ -163,8 +163,11 @@ const Post: FC = () => {
     console.log(e.target.value);
   };
 
-
-  
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+  const AccordionChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   return (
     <div>
@@ -200,6 +203,14 @@ const Post: FC = () => {
         <ul key={dat.id} className={styles.contentbox}>
           <div className={styles.box2}>
             <div className={styles.main}>
+              <div className={styles.link}>
+                <div className={styles.watch}>
+                  <p>いいね：1</p>
+                  <p>回答数：0</p>
+                </div>
+                {/* お気に入りボタン */}
+                <Like id={dat.id} onMark={styles.bookmark1} check={true} />
+              </div>
               <Accordion>
                 <AccordionSummary
                   //↓スタイルの適用が難しいから後回し
@@ -208,34 +219,7 @@ const Post: FC = () => {
                   id="panel1a-header"
                 >
                   <div className={styles.QStext}>
-                    <h2  className={styles.title}>質問:{dat.title}</h2>
-                    <div className={styles.watch}>
-                      <p>いいね：1</p>
-                      <p>回答数：0</p>
-                    </div>
-                    {/* お気に入りボタン */}
-                    <Checkbox
-                      {...label}
-                      icon={<StarBorderIcon />}
-                      checkedIcon={<StarIcon />}
-                      sx={{
-                        color: pink[600],
-                        "&.Mui-checked": {
-                          color: pink[500],
-                        },
-                      }}
-                      className={styles.link}
-                      onClick={() =>
-                        bookmark(
-                          dat.id,
-                          dat.title,
-                          dat.content,
-                          dat.Timestamp,
-                          dat.questioner,
-                          dat.answer
-                        )
-                      }
-                    />
+                    <h2 className={styles.title}>質問:{dat.title}</h2>
                     {/* 開閉ボタン */}
                     {/* <Checkbox
                     {...label}
@@ -279,27 +263,34 @@ const Post: FC = () => {
                           >
                             ほかの回答を見る↑
                           </button>
-                          {/**質問削除 */}
-                          <button
-                          onClick = {() =>
-                            handleClickDeleteButton(dat.userID, dat.id)
-                          }
-                          >
-                            削除
-                          </button>
                         </h2>
                       </label>
                     </div>
-                    <div>
-                      <AnswerModal
-                        dcontent={dat.content}
-                        did={dat.id}
-                        duserID={dat.userID}
-                        dtitle={undefined}
-                        dquestioner={undefined}
-                        danswer={undefined}
-                      />
-                    </div>
+                    {auth.currentUser?.uid === dat.userID ? (
+                      <div className={styles.block}>
+                        <div>あなたの投稿</div>
+                        <Button
+                          variant="contained"
+                          color="error"
+                          onClick={() =>
+                            handleClickDeleteButton(dat.userID, dat.id)
+                          }
+                        >
+                          削除
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        <AnswerModal
+                          dcontent={dat.content}
+                          did={dat.id}
+                          duserID={dat.userID}
+                          dtitle={dat.title}
+                          dquestioner={undefined}
+                          danswer={undefined}
+                        />
+                      </div>
+                    )}
                   </div>
                 </AccordionDetails>
               </Accordion>

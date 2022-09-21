@@ -123,9 +123,9 @@ const Add: FC<props> = (props) => {
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
         <div className={styles.textsection}>
-            <h2>質問: {title}</h2>   
+            <h2>質問：{dtitle}</h2>   
+            <h2>内容：{dcontent}</h2>
             <br></br>
-            <h2>内容：{content}</h2>
           <h2>
             回答：
             <TextField
@@ -147,7 +147,7 @@ const Add: FC<props> = (props) => {
             className={styles.addbutton}
             onClick={handleClickAddButton}
           >
-            追加
+            回答
           </Button>
           <Button
             variant="contained"
