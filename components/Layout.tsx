@@ -20,7 +20,7 @@ import { app } from "./fire/fire";
 import { getAuth, signOut } from "firebase/auth";
 import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useAuthContext } from "../pages/context/AuthContext";
+import { useAuthContext } from "./context/AuthContext";
 import { fontSize } from "@mui/system";
 
 //ReactNodeからReactElementに変えた

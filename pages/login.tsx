@@ -11,7 +11,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { app } from "../components/fire/fire";
-import { useAuthContext } from "./context/AuthContext";
+import { useAuthContext } from "../components/context/AuthContext";
 import styles from "../styles/Login.module.scss";
 
 const Login = () => {
