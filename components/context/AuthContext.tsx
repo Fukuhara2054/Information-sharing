@@ -2,7 +2,7 @@ import { ReactNode, createContext, useState, useContext, useEffect } from "react
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import type { User } from "firebase/auth"
 import { useRouter } from "next/router"
-import { app } from "../../components/fire/fire"
+import { app } from "../fire/fire"
 
 export type UserType = User | null
 

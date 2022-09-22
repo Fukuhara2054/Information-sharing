@@ -5,16 +5,26 @@ import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StarIcon from "@mui/icons-material/Star";
-import { AppBar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Typography,
+  Tabs
+} from "@mui/material";
+import { pink } from '@mui/material/colors';
 import Add from "../components/add";
-import Search from "../components/search";
-import * as React from "react";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { app } from "./fire/fire";
 import { getAuth, signOut } from "firebase/auth";
 import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useAuthContext } from "../pages/context/AuthContext";
+import { useAuthContext } from "./context/AuthContext";
+import { fontSize } from "@mui/system";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 //ReactNodeからReactElementに変えた
 //もしかしたらここでエラー出るかも？
@@ -67,15 +77,13 @@ const navigations: Navigation[] = [
   //   icon: <HomeIcon className={styles.icon}/>
   // },
 ];
-
-// FC = Function Component 関数コンポーネントを定義
-//↓eslintを無効にしている
 /* eslint-disable */
 export const Layout: FC<Props> = memo((props) => {
   const router = useRouter();
+  const [value, setValue] = useState('1');
   const [path, setPath] = useState(router.route);
   const auth = getAuth(app);
-  const {} = useAuthContext();
+  const { } = useAuthContext();
   const handleLogout = async () => {
     await signOut(auth);
     await router.push("/login");
@@ -86,6 +94,11 @@ export const Layout: FC<Props> = memo((props) => {
   const [menuOpen, setMenuOpen] = useState(true);
   const isPageActive = (pagePath: string): boolean => {
     return pagePath === String(router.route);
+  };
+
+  //質問箱、お気に入りのページ切り替え用
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
   };
 
   return (
@@ -114,7 +127,7 @@ export const Layout: FC<Props> = memo((props) => {
             <a
               className={styles.flexContainer}
               style={{
-                background: isPageActive(navigation.path) ? "#BAACB0" : "none",
+                background: isPageActive(navigation.path) ? "#0055FF" : "none",
               }}
             >
               {navigation.icon}
@@ -144,20 +157,75 @@ export const Layout: FC<Props> = memo((props) => {
                 backgroundColor: "white",
                 color: "black",
               }}
-              className={styles.header}
             >
-              <Typography
-                variant="h5"
-                fontWeight={"bold"}
-                padding="20px 20px 0px 20px"
-              >
-                {props.title}
-              </Typography>
+              <Typography className={styles.title}>{props.title}</Typography>
               <div>
+                {/* {props.title === "質問箱" ? (
+                  <div>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      variant="fullWidth"
+                      TabIndicatorProps={{
+                        style: {
+                          backgroundColor: '#0022CC',
+                          height: '3px'
+                        }
+                      }}
+                      aria-label="secondary tabs example"
+                    >
+                      <Tab value="one" label="タイムライン" sx={{ fontSize: "17px" }} />
+                      <Tab value="two" label="回答募集中" sx={{ fontSize: "17px" }} />
+                    </Tabs>
+                  </div>
+
+                ) : (
+                  <></>
+                )}
+                {props.title === "お気に入り" ? (
+                  <div> */}
+                    {/* <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      variant="fullWidth"
+                      TabIndicatorProps={{
+                        style: {
+                          backgroundColor: '#0022CC',
+                          height: '3px'
+                        }
+                      }}
+                      aria-label="secondary tabs example"
+                    >
+                      <Tab value="one" label="共有事項" sx={{ fontSize: "17px" }} />
+                      <Tab value="two" label="質問箱" sx={{ fontSize: "17px" }} />
+                    </Tabs>
+                    <TabPanel value="one">
+                      Item One
+                    </TabPanel> */}
+                    {/* <Box sx={{ width: '100%', typography: 'body1' }}>
+                      <TabContext value={value}>
+                        <Box sx={{ borderBottom: 0, borderColor: 'divider' }}>
+                          <TabList onChange={handleChange} aria-label="lab API tabs example">
+                            <Tab label="Item One" value="1" />
+                            <Tab label="Item Two" value="2" />
+                          </TabList>
+                        </Box>
+                        <TabPanel value="1">Item One</TabPanel>
+                        <TabPanel value="2">Item Two</TabPanel>
+                      </TabContext>
+                    </Box>
+                  </div>
+                ) : (
+                  <></>
+                )} */}
                 <div className={styles.line}></div>
                 <div className={styles.appbarbottom}>
-                  <Add path={path} />
-                  <Search />
+                  {props.title === "お気に入り" ? (
+                    <></>
+                  ) : (
+                    <Add path={path} />
+                  )}
+                  {/* <Search /> */}
                 </div>
               </div>
             </AppBar>

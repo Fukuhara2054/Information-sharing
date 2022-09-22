@@ -1,3 +1,32 @@
+セキュリティルール設計
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function checkAuthentication(auth) {
+  return auth != null &&
+         auth.token.email_verified &&
+         auth.token.firebase.sign_in_provider == 'g.dreamcareer.co.jp';
+}
+    どういった時読み取っていいかの記載
+    match /users/{document=**} {
+        どういった時読み取っていいかの記載
+         allow read: if checkAuthentication(request.auth)
+    }
+             match /info/{document=**}{
+            allow read: if checkAuthentication(request.auth)
+         }
+             match /question/{document=**}{
+            allow read: if checkAuthentication(request.auth)
+         }
+                match /answer/{document=**}{
+                allow read: if checkAuthentication(request.auth)
+         }
+  }
+}
+特定のメールアドレスはデータベースへの全ての権利がある
+それがドリームキャリアのメール
+
+@g.dreamcareer.co.jp
 user(c):{
     documentId(d):{
         name:string
@@ -117,3 +146,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+・git add .
+・git commit -m "名前:何を変更したか一言で記載"
+・git push -u origin ブランチ名

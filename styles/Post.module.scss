@@ -1,57 +1,105 @@
+.contentbox {
+    padding: 0px;
+}
+
 .box2 {
-        padding: 2px 20px;
-        color: #111111;/*文字色黒色*/
-        background: #ffffff;
-        border: solid 2px #080808;/*線*/
-        border-radius: 20px;/*角の丸み*/
-        display:inline-block;
-        width: 100%;
-    }
-    .box2 p {
-        margin: 0; 
-        padding: 0;
-    }
-    .uta{
-        font-weight: bold;
-        width: 1;
-
-    }
-    .jason{
-        display: flex;
-        flex: auto;
-        font-size: 20px;
-    }
+    padding: 2px 20px;
+    color: #111111;
+    /*文字色黒色*/
+    background: #ffffff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    /*角の丸み*/
+    display: inline-block;
+    width: 100%;
+}
 
 
-    p.pic{
+.uta {
+    font-weight: bold;
+    width: 1;
 
-        float: right;
-    }
-    .btn1 + * {
-        clear: both;
+}
+
+.main {
+    width: 100%;
+}
+
+.abc {
+    display: block;
+    margin: 0 0 0 auto;
+}
+
+.link {
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 1.6vmax;
+}
+
+.bottomtext {
+    padding-left: 12px;
+}
+
+.display1 {
+    display: none;
+}
+
+.display2 {
+    display: block;
+}
+
+.bookmark1 {
+    color: #d81b60;
+    z-index: 10;
+}
+
+.bookmark2 {
+    color: #e91e63;
+    z-index: 10;
+}
+
+.searchbtn {
+    position: fixed;
+    top: 90px;
+    z-index: 1100;
+    width: 30%;
+}
+
+.searchbtn_q {
+    position: fixed;
+    top: 140px;
+    z-index: 1100;
+    width: 30%;
+}
+
+.QStext {
+    display: flex;
+    align-items: center;
+    
+
+    h2 {
+        margin: 0;
+        white-space: nowrap;
+        font-size: 1.6vmax;
     }
 
-    .main ,.abc {
-        display: block;
-      margin: 0 0 0 auto;
+    p {
+        font-size: 1.2vmax;
     }
+}
 
-    .link {
-        font-size: 18px;
-        margin-left: 5px;
-        color: red;
-    }
+.watch {
+    display: flex;
+    z-index: 10;
+    white-space: nowrap;
+}
 
-    .okiniiri {
-        float: right;
-    }
-
-    .abc h2 {
-        margin: -0.8px 0;
-    }
-    .display1{
-        display: none;
-    }
-    .display2{
-        display: block;
-    }
+.block {
+    display: block;
+}

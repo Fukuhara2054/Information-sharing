@@ -1,6 +1,12 @@
 import { FC, useState, useEffect } from "react";
-import {db} from '../components/fire/fire'
-import { collection, addDoc, query, where } from "firebase/firestore";
+import { db } from "../components/fire/fire";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  serverTimestamp,
+} from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
@@ -12,23 +18,26 @@ import InfoText from "./infoText";
 import QuestionText from "./questionText";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
-import { Value } from "sass";//EditAttributesTwoTone
+//import { Value } from "sass";//EditAttributesTwoTone
+import { app } from "../components/fire/fire";
+import { getAuth, signOut } from "firebase/auth";
 
 type path = {
-  path :string 
-}
-const Add: FC<path> = ({path}) => {
-  const [title, setTitle] = useState('') //命題・質問
-  const [content, setContent] = useState('')// 詳細・内容
-  const [questioner, setQuestioner] = useState('')//質問者
-  const [answer, setAnswer] = useState('')//回答者
-  const [pass, setPass] = useState(false)
-
+  path: string;
+};
+const Add: FC<path> = ({ path }) => {
+  const auth = getAuth(app);
+  const [title, setTitle] = useState(""); //命題・質問
+  const [content, setContent] = useState(""); // 詳細・内容
+  const [questioner, setQuestioner] = useState(""); //質問者
+  const [answer, setAnswer] = useState(""); //回答者
+  const [pass, setPass] = useState(false);
+  const [tag, setTag] = useState(undefined)
   useEffect(() => {
-    if(path == '/'){
-      setPass(true)
+    if (path == "/") {
+      setPass(true);
     }
-  },[])
+  }, []);
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -36,6 +45,7 @@ const Add: FC<path> = ({path}) => {
   // モーダルを開く処理
   const openModal = () => {
     setIsOpen(true);
+    console.log(collection);
   };
 
   const afterOpenModal = () => {
@@ -46,17 +56,38 @@ const Add: FC<path> = ({path}) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = () => {
-
-    const ref = collection(db, "users", 'xz25R8RJn4dRgTnQb6rp','info')
-    setDoc(doc(ref), {
+  //共有投稿ボタン
+  const handleClickAddButton = async () => {
+    const ref = collection(db, "users", auth.currentUser?.uid, "info");
+    await addDoc(ref, {
       title: title,
       content: content,
+      // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       questioner: questioner,
+      // questioner: auth.currentUser?.displayName,
       answer: answer,
-    })
-    
-  }
+      tag: tag,
+      userID: auth.currentUser?.uid,
+      Timestamp: serverTimestamp(),
+    });
+
+    window.location.reload();
+  };
+
+  //質問投稿ボタン
+  const handleClickAddQuestButton = async () => {
+    const ref = collection(db, "users", auth.currentUser?.uid, "ques");
+    await addDoc(ref, {
+      title: title,
+      content: content,
+      userID: auth.currentUser?.uid,
+      questioner: questioner,
+      Timestamp: serverTimestamp(),
+    });
+
+    window.location.reload();
+  };
+
   return (
     <div className={styles.Add}>
       <Button
@@ -109,38 +140,59 @@ const Add: FC<path> = ({path}) => {
 
         {/* 中身の内容部分をコンポーネントにしました（file: infoText.tsx） */}
         {/* 子コンポーネントから親コンポーネントに渡している */}
-        {pass ? (        
-        <InfoText
-          setTitle={setTitle}
-          setContent={setContent}
-          setQuestioner={setQuestioner}
-          setAnswer={setAnswer}
-        />
-        ):(
-          <QuestionText
-          setTitle={setTitle}
-          setContent={setContent}
-          />
+        {pass ? (
+          <>
+            <InfoText
+              setTitle={setTitle}
+              setContent={setContent}
+              setQuestioner={setQuestioner}
+              setAnswer={setAnswer}
+              setTag={setTag}
+            />
+            <div className={styles.button}>
+              <Button
+                variant="contained"
+                color="success"
+                className={styles.addbutton}
+                onClick={handleClickAddButton}
+              >
+                追加
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                className={styles.closebutton}
+                onClick={closeModal}
+              >
+                キャンセル
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <QuestionText setTitle={setTitle} setContent={setContent} />
+            <div className={styles.button}>
+              <Button
+                variant="contained"
+                color="success"
+                className={styles.addbutton}
+                onClick={handleClickAddQuestButton}
+              >
+                質問追加
+              </Button>
+
+              <Button
+                variant="contained"
+                color="error"
+                className={styles.closebutton}
+                onClick={closeModal}
+              >
+                キャンセル
+              </Button>
+            </div>
+          </>
         )}
         {/* ↓後でonclick変える */}
-        <div className={styles.button}>
-          <Button
-            variant="contained"
-            color="success"
-            className={styles.addbutton}
-            onClick={handleClickAddButton}
-          >
-            追加
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            className={styles.closebutton}
-            onClick={closeModal}
-          >
-            キャンセル
-          </Button>
-        </div>
       </Modal>
     </div>
   );
