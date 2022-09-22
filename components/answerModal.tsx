@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, SetStateAction } from "react";
 import {app, db} from '../components/fire/fire'
-import { collection, addDoc, query, where, serverTimestamp, collectionGroup } from "firebase/firestore";
+import { collection, addDoc, query, where, serverTimestamp, collectionGroup, increment, updateDoc } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import Button from "@mui/material/Button";
@@ -60,6 +60,12 @@ const Add: FC<props> = (props) => {
 
 //質問に対する回答ボタン
   const handleClickAddButton = async() => {
+    //回答数をカウントする処理
+    const ansRef = doc(db,"users",duserID,"ques", did,)
+    await updateDoc(ansRef,{
+      count: increment(1)
+    })
+    //回答ボタン処理
     const auth = getAuth(app)
     const ref = collection(db, "users", duserID,"ques", did, "ans")
     await addDoc(ref, {
