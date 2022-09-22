@@ -44,6 +44,7 @@ const Post: FC = () => {
   //詳細などの開閉処理の問題を解決しました。
   // const [open, setOpen] = useState(styles.display1);
 
+  
   // const onClick = () => {
   //   if (open == styles.display1) {
   //     setOpen(styles.display2);
