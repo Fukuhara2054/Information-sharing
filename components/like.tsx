@@ -16,8 +16,9 @@ type id = {
     id: string
     onMark: string
     check: boolean
+    userID: string
 }
-const Like: FC<id> = ({ id, onMark, check }) => {
+const Like: FC<id> = ({ id, onMark, check, userID }) => {
     const auth = getAuth(app)
     const [mark, setMark] = useState()
 
@@ -25,14 +26,15 @@ const Like: FC<id> = ({ id, onMark, check }) => {
     const bookMark = (e) => {
         console.log(e.target.checked)
         if (e.target.checked == true) {
-            const washingtonRef = doc(db, "users", auth.currentUser?.uid, 'info', id);
+            //
+            const washingtonRef = doc(db, "users", userID, 'info', id);
 
             // Set the "capital" field of the city 'DC'
             updateDoc(washingtonRef, {
                 bookmark: true
             });
         } else {
-            const washingtonRef = doc(db, "users", auth.currentUser?.uid, 'info', id);
+            const washingtonRef = doc(db, "users",  userID, 'info', id);
 
             // Set the "capital" field of the city 'DC'
             updateDoc(washingtonRef, {

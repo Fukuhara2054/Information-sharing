@@ -66,6 +66,7 @@ const Add: FC<path> = ({ path }) => {
       questioner: questioner,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
+      bookmark: false,
       tag: tag,
       userID: auth.currentUser?.uid,
       Timestamp: serverTimestamp(),

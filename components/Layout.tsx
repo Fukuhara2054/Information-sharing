@@ -4,7 +4,7 @@ import styles from "../styles/Layout.module.scss";
 import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
-import StarIcon from "@mui/icons-material/Star";
+import CheckIcon from '@mui/icons-material/Check';
 import {
   AppBar,
   Typography,
@@ -64,9 +64,9 @@ const navigations: Navigation[] = [
     icon: <InventoryIcon className={styles.icon} />,
   },
   {
-    pageName: "お気に入り",
+    pageName: "重要事項",
     path: "/page3",
-    icon: <StarIcon className={styles.icon} />,
+    icon: <CheckIcon className={styles.icon} />,
   },
   //   {
   //   pageName: "お気に入り",

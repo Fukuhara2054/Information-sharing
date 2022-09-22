@@ -9,7 +9,7 @@ import { ConnectingAirportsOutlined } from "@mui/icons-material";
 const Page3: NextPage = () => {
   return (
     <div className="">
-      <Layout title="お気に入り">
+      <Layout title="重要事項">
         <div>
           <div>
             <h1>こんばんは</h1>

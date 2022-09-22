@@ -11,6 +11,7 @@ import {
   collection,
   getDoc,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -54,6 +55,25 @@ const Post: FC = () => {
   // };
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+
+  const [saved, setSaved] = useState(false)
+
+  const bookmark = async(id, title, content, Timestamp, questioner, answer) => {
+    if(saved === false){
+      setSaved(true)
+      const savedPosts = ({ questioner, content, answer, title, id, Timestamp, data: "info",bookmark: true});
+      const ref = doc(db, "user", auth.currentUser?.uid, "bookmark", id);
+      await setDoc(ref, savedPosts);
+      console.log(savedPosts)
+    } else {
+      setSaved(false)
+      const b = doc(db, 'user', auth.currentUser?.uid, 'bookmark', id);
+
+      await deleteDoc(b);
+    }
+    
+  }
+
 
   useEffect(() => {
     const postData = collectionGroup(db, "info");
@@ -153,6 +173,7 @@ const Post: FC = () => {
                     id={dat.id}
                     onMark={styles.bookmark1}
                     check={true}
+                    userID={dat.userID}
                   />
                 </div>
                 <Accordion>
@@ -188,7 +209,7 @@ const Post: FC = () => {
                   <p>
                     回答者: {dat.answer} 記載者: {dat.questioner} タグ:{" "}
                     {dat.tag}
-                    {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm")}
+                    {dayjs(dat.Timestamp.toDate()).format("MM月DD日 HH:mm")}
                   </p>
                 </div>
               </div>
@@ -217,6 +238,7 @@ const Post: FC = () => {
                     id={dat.id}
                     onMark={styles.bookmark2}
                     check={false}
+                    userID={dat.userID}
                   />
                 </div>
                 <Accordion>
@@ -239,16 +261,18 @@ const Post: FC = () => {
                   </AccordionSummary>
                   <AccordionDetails>
                     <div id="">
-                      <label htmlFor="">詳細: {dat.content} </label>
+                      <label htmlFor="">詳細: {dat.content} </label><br></br>
+                      <label htmlFor="">回答者: {dat.answer} 記載者: {dat.questioner}</label><br></br>
                       {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
                     </div>
                   </AccordionDetails>
                 </Accordion>
                 <div className={styles.bottomtext}>
                   <p>
-                    回答者: {dat.answer} 記載者: {dat.questioner} タグ:{" "}
-                    {dat.tag}
-                    {dayjs(dat.Timestamp.toDate()).format("YYYY/MM/DD HH:mm")}
+                   タグ:{dat.tag}
+                  </p>
+                  <p>
+                  {dayjs(dat.Timestamp.toDate()).format("MM月DD日 HH:mm")}
                   </p>
                 </div>
               </div>
