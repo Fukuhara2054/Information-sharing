@@ -197,9 +197,11 @@ export const Layout: FC<Props> = memo((props) => {
               <Typography
                 sx={{
                   padding: "20px 20px 20px 20px",
+                  fontSize: "26px",
+                  fontWeight: "bold",
                 }}
               >
-                <p className={styles.title}>{props.title}</p>
+                {props.title}
               </Typography>
               <div>
                 {/* {props.title === "質問箱" ? (
