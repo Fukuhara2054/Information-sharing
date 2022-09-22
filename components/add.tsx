@@ -32,7 +32,7 @@ const Add: FC<path> = ({ path }) => {
   const [questioner, setQuestioner] = useState(""); //質問者
   const [answer, setAnswer] = useState(""); //回答者
   const [pass, setPass] = useState(false);
-  const [tag, setTag] = useState(undefined)
+  const [tag, setTag] = useState(undefined);
   useEffect(() => {
     if (path == "/") {
       setPass(true);
@@ -93,8 +93,21 @@ const Add: FC<path> = ({ path }) => {
       <Button
         variant="contained"
         onClick={openModal}
-        className={styles.plus}
         startIcon={<AddIcon />}
+        sx={{
+          position: "absolute",
+          right: "0px",
+          fontSize: "15px",
+          marginRight: "30px",
+          padding: "4px 30px 4px 30px",
+          borderRadius: "15px",
+          backgroundColor: "#0055FF",
+          color: "white",
+
+          "&:hover": {
+            backgroundColor: "#0022CC",
+          },
+        }}
       >
         投稿
       </Button>
@@ -134,7 +147,14 @@ const Add: FC<path> = ({ path }) => {
         }}
       >
         {/* モーダル内右上のバツ */}
-        <IconButton onClick={closeModal} className={styles.closeicon}>
+        <IconButton
+          onClick={closeModal}
+          sx={{
+            position: "absolute",
+            right: "0",
+            marginRight: "10px",
+          }}
+        >
           <CloseIcon />
         </IconButton>
 
@@ -153,7 +173,9 @@ const Add: FC<path> = ({ path }) => {
               <Button
                 variant="contained"
                 color="success"
-                className={styles.addbutton}
+                sx={{
+                  margin: "auto",
+                }}
                 onClick={handleClickAddButton}
               >
                 追加
@@ -161,7 +183,9 @@ const Add: FC<path> = ({ path }) => {
               <Button
                 variant="contained"
                 color="error"
-                className={styles.closebutton}
+                sx={{
+                  margin: "auto",
+                }}
                 onClick={closeModal}
               >
                 キャンセル
@@ -175,7 +199,9 @@ const Add: FC<path> = ({ path }) => {
               <Button
                 variant="contained"
                 color="success"
-                className={styles.addbutton}
+                sx={{
+                  margin: "auto",
+                }}
                 onClick={handleClickAddQuestButton}
               >
                 質問追加
@@ -184,7 +210,9 @@ const Add: FC<path> = ({ path }) => {
               <Button
                 variant="contained"
                 color="error"
-                className={styles.closebutton}
+                sx={{
+                  margin: "auto",
+                }}
                 onClick={closeModal}
               >
                 キャンセル

@@ -1,7 +1,13 @@
 import * as React from "react";
 import { FC, useState, useEffect } from "react";
 import { db } from "./fire/fire";
-import { collection, addDoc, query, where, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  serverTimestamp,
+} from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import Modal from "react-modal";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,31 +16,31 @@ import styles from "../styles/Add.module.scss";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, IconButton, Collapse, Alert } from "@mui/material";
 import EditText from "./EditText";
-import { app } from "./fire/fire"
-import { getAuth, signOut } from "firebase/auth"
+import { app } from "./fire/fire";
+import { getAuth, signOut } from "firebase/auth";
+import { Padding } from "@mui/icons-material";
 
 type props = {
-  dtitle: JSX.Element
-  dcontent: JSX.Element
-  did: string
-  duserID: string
-  dquestioner: JSX.Element
-  danswer: JSX.Element
-  dtag: JSX.Element
-}
+  dtitle: JSX.Element;
+  dcontent: JSX.Element;
+  did: string;
+  duserID: string;
+  dquestioner: JSX.Element;
+  danswer: JSX.Element;
+  dtag: JSX.Element;
+};
 
 const EditButton: FC<props> = (props) => {
-  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props
+  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props;
   const [title, setTitle] = useState(dtitle); //命題・質問
   const [content, setContent] = useState(dcontent); // 詳細・内容
   const [questioner, setQuestioner] = useState(dquestioner); //質問者
   const [answer, setAnswer] = useState(danswer); //回答者
-  const [tag, setTag] = useState('')//タグ付け
+  const [tag, setTag] = useState(""); //タグ付け
   const [pass, setPass] = useState(false);
   const [open, setOpen] = React.useState(false);
 
-
-  const auth = getAuth(app)
+  const auth = getAuth(app);
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -52,9 +58,8 @@ const EditButton: FC<props> = (props) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = async() => {
-
-    const ref = doc(db, "users", auth.currentUser?.uid,'info', did)
+  const handleClickAddButton = async () => {
+    const ref = doc(db, "users", auth.currentUser?.uid, "info", did);
     await setDoc(ref, {
       title: title,
       content: content,
@@ -64,13 +69,18 @@ const EditButton: FC<props> = (props) => {
       // questioner: auth.currentUser?.displayName,
       answer: answer,
       Timestamp: serverTimestamp(),
-    })
-    
-    window.location.reload()
-  }
+    });
+
+    window.location.reload();
+  };
   return (
     <div className={styles.Add}>
-      <IconButton onClick={openModal} className={styles.textbtn}>
+      <IconButton 
+      onClick={openModal} 
+      sx={{
+        color: "#606060",
+        padding: "0",
+        }}>
         <EditIcon sx={{ color: "#9f9f9f" }} />
       </IconButton>
       <Modal
@@ -109,7 +119,14 @@ const EditButton: FC<props> = (props) => {
         }}
       >
         {/* モーダル内右上のバツ */}
-        <IconButton onClick={closeModal} className={styles.closeicon}>
+        <IconButton
+          onClick={closeModal}
+          sx={{
+            position: "absolute",
+            right: "0",
+            marginRight: "10px",
+          }}
+        >
           <CloseIcon />
         </IconButton>
 
@@ -133,7 +150,9 @@ const EditButton: FC<props> = (props) => {
           <Button
             variant="contained"
             color="success"
-            className={styles.addbutton}
+            sx={{
+              margin: "auto",
+            }}
             onClick={handleClickAddButton}
           >
             追加
@@ -141,7 +160,9 @@ const EditButton: FC<props> = (props) => {
           <Button
             variant="contained"
             color="error"
-            className={styles.closebutton}
+            sx={{
+              margin: "auto",
+            }}
             onClick={() => {
               setOpen(true);
             }}
@@ -169,7 +190,13 @@ const EditButton: FC<props> = (props) => {
                 本当に投稿を削除してもよろしいですか？
                 <div className={styles.alertbtn}>
                   <Button
-                    className={styles.alertcancel}
+                    sx={{
+                      backgroundColor: "#BCBCBC",
+                      color: "#222222",
+                      "&:hover": {
+                        backgroundColor: "#9f9f9f",
+                      },
+                    }}
                     startIcon={<CloseIcon />}
                     onClick={() => {
                       setOpen(false);

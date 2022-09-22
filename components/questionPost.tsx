@@ -243,7 +243,7 @@ const Post: FC = () => {
                       {ansData.map((dat) => (
                         <ul key={dat.id} className={styles.contentbox}>
                           <label htmlFor="">
-                            A.{dat.content}{" "}
+                            A.{dat.id}{" "}
                             {dayjs(dat.Timestamp.toDate()).format(
                               "YYYY/MM/DD HH:mm"
                             )}
@@ -254,7 +254,6 @@ const Post: FC = () => {
                       <label>
                         <h2>
                           {/*質問:{dat.title}*/}
-                          {/* 開閉ボタン */}
                           <button
                             onClick={() =>
                               handleClickShowButton(dat.userID, dat.id)
