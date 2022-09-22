@@ -206,7 +206,7 @@ const Post: FC = () => {
               <div className={styles.link}>
                 <div className={styles.watch}>
                   <p>いいね：1</p>
-                  <p>回答数：0</p>
+                  <p>回答数：{dat.count}</p>
                 </div>
                 {/* お気に入りボタン */}
                 <Like id={dat.id} onMark={styles.bookmark1} check={true} />
