@@ -5,6 +5,7 @@ import { db } from "../components/fire/fire";
 import { collection, addDoc, query, where } from "firebase/firestore";
 import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
+import ImportantPost from "../components/importantPost";
 
 const Page3: NextPage = () => {
   return (
@@ -12,7 +13,7 @@ const Page3: NextPage = () => {
       <Layout title="重要事項">
         <div>
           <div>
-            <h1>こんばんは</h1>
+            <ImportantPost  />
           </div>
         </div>
       </Layout>
