@@ -72,6 +72,8 @@ const Add: FC<props> = (props) => {
       content: content,
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       // questioner: auth.currentUser?.displayName,
+
+      //これはソートするときのため
       Timestamp: serverTimestamp(),
     })
     

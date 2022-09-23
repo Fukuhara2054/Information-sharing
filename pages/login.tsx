@@ -23,7 +23,6 @@ const Login = () => {
   const handleLogin = (e: { preventDefault: () => void }) => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       signInWithPopup(auth, provider);
-      //ここにログインの分岐を入れたい
     });
   };
   const handleClose = async () => {

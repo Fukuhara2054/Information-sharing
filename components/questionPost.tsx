@@ -10,6 +10,7 @@ import Like from "./like";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import AnswerModal from "./answerModal";
+import Add from "../components/add";
 import {
   collectionGroup,
   deleteDoc,
@@ -19,6 +20,7 @@ import {
   query,
   setDoc,
   collection,
+  where,
 } from "firebase/firestore";
 import { app, db } from "./fire/fire";
 import { Bookmark } from "@mui/icons-material";
@@ -32,13 +34,17 @@ import { Paper, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
+type value = {
+  value: string
+}
+
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
   border: `0px solid ${theme.palette.divider}`,
 }));
 
-const Post: FC = () => {
+const Post: FC<value> = ({value}) => {
   //これはなんだろう（福原）
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -101,18 +107,35 @@ const Post: FC = () => {
   const [ansData, setAnsData] = useState([]);
   //const [show, setShow] = useState([])
   useEffect(() => {
-    const postData = collectionGroup(db, "ques");
-    const q = query(
-      postData,
-      orderBy("Timestamp", "desc")
-      // // , where('title', '==', '研修3')
-    );
-    getDocs(q).then((snapshot) => {
-      setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      setData2(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      //コンソールで確認のため
-      //  console.log(data);
-    });
+
+    if(value == '1'){
+      const postData = collectionGroup(db, "ques");
+      const q = query(
+        postData,
+        orderBy("Timestamp", "desc")
+        // // , where('title', '==', '研修3')
+      );
+      getDocs(q).then((snapshot) => {
+        setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setData2(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        //コンソールで確認のため
+        //  console.log(data);
+      });
+    }else{
+      const postData = collectionGroup(db, "ques");
+      const q = query(
+        postData,
+        orderBy("Timestamp", "desc"),
+        where('count', '==', '0')
+      );
+      getDocs(q).then((snapshot) => {
+        setData(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setData2(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        //コンソールで確認のため
+        //  console.log(data);
+      });
+
+    }
     //回答表示
     // const ansData = collectionGroup(db,"ans")
     // const a = query(ansData, orderBy('Timestamp', 'desc')
@@ -209,7 +232,7 @@ const Post: FC = () => {
                   <p>回答数：{dat.count}</p>
                 </div>
                 {/* お気に入りボタン */}
-                <Like id={dat.id} onMark={styles.bookmark1} check={true} />
+                <Like id={dat.id} onMark={styles.bookmark1} check={true} userID={dat.userID} />
               </div>
               <Accordion>
                 <AccordionSummary

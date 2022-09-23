@@ -83,6 +83,7 @@ const Add: FC<path> = ({ path }) => {
       content: content,
       userID: auth.currentUser?.uid,
       questioner: questioner,
+      count: '0',
       Timestamp: serverTimestamp(),
     });
 

@@ -8,13 +8,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import {
   AppBar,
   Typography,
-  Tabs,
-  Tab,
+  Tabs
 } from "@mui/material";
 import { pink } from '@mui/material/colors';
 import Add from "../components/add";
 import Search from "../components/search";
-import * as React from "react";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { app } from "./fire/fire";
 import { getAuth, signOut } from "firebase/auth";
@@ -22,7 +20,13 @@ import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthContext } from "./context/AuthContext";
 import { fontSize } from "@mui/system";
-
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import QuestionPost from "./questionPost";
 //ReactNodeからReactElementに変えた
 //もしかしたらここでエラー出るかも？
 type Props = {
@@ -82,7 +86,7 @@ export const Layout: FC<Props> = memo((props) => {
   const router = useRouter();
   const [path, setPath] = useState(router.route);
   const auth = getAuth(app);
-  const {} = useAuthContext();
+  const { } = useAuthContext();
   const handleLogout = async () => {
     await signOut(auth);
     await router.push("/login");
@@ -96,11 +100,12 @@ export const Layout: FC<Props> = memo((props) => {
   };
 
   //質問箱、お気に入りのページ切り替え用
-  const [value, setValue] = React.useState('one');
+  const [value, setValue] = React.useState('1');
+  
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-  
+
   return (
     <div className={styles.root}>
       {/* サイドバーの記述 */}
@@ -160,7 +165,38 @@ export const Layout: FC<Props> = memo((props) => {
             >
               <Typography className={styles.title}>{props.title}</Typography>
               <div>
-                {props.title === "質問箱" ? (                  
+                {props.title === "質問箱" ? (
+                  // <Tabs
+                  //   value={value}
+                  //   onChange={handleChange}
+                  //   variant="fullWidth"
+                  //   TabIndicatorProps={{
+                  //     style: {
+                  //       backgroundColor: '#0022CC',
+                  //       height: '3px'
+                  //     }
+                  //   }}
+                  //   aria-label="secondary tabs example"
+                  // >
+                  //   <Tab value="one" label="タイムライン" sx={{ fontSize: "17px"}} />
+                  //   <Tab value="two" label="回答募集中" sx={{ fontSize: "17px"}} />
+                  // </Tabs>
+                  <Box sx={{ width: '100%', typography: 'body1' }}>
+                    <TabContext value={value}>
+                      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <TabList onChange={handleChange} aria-label="lab API tabs example">
+                          <Tab label="タイムライン" value="1" />
+                          <Tab label="未回答質問" value="2" />
+                        </TabList>
+                      </Box>
+                      <TabPanel value="1"><QuestionPost value='1'/></TabPanel>
+                      <TabPanel value="2"><QuestionPost value='2'/></TabPanel>
+                    </TabContext>
+                  </Box>
+                ) : (
+                  <></>
+                )}
+                {/* {props.title === "お気に入り" ? (
                   <Tabs
                     value={value}
                     onChange={handleChange}
@@ -173,39 +209,19 @@ export const Layout: FC<Props> = memo((props) => {
                     }}
                     aria-label="secondary tabs example"
                   >
-                    <Tab value="one" label="タイムライン" sx={{ fontSize: "17px"}} />
-                    <Tab value="two" label="回答募集中" sx={{ fontSize: "17px"}} />
+                    <Tab value="one" label="共有事項" sx={{ fontSize: "17px" }} />
+                    <Tab value="two" label="質問箱" sx={{ fontSize: "17px" }} />
                   </Tabs>
                 ) : (
                   <></>
-                )}
-                {props.title === "お気に入り" ? (                  
-                  <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    variant="fullWidth"
-                    TabIndicatorProps={{
-                      style: {
-                        backgroundColor: '#0022CC',
-                        height: '3px'
-                      }
-                    }}
-                    aria-label="secondary tabs example"
-                  >
-                    <Tab value="one" label="共有事項" sx={{ fontSize: "17px"}} />
-                    <Tab value="two" label="質問箱" sx={{ fontSize: "17px"}} />
-                  </Tabs>
-                ) : (
-                  <></>
-                )}
+                )} */}
                 <div className={styles.line}></div>
                 <div className={styles.appbarbottom}>
-                  {props.title === "お気に入り" ? (
+                  {props.title === "質問箱" ? (
                     <></>
                   ) : (
                     <Add path={path} />
                   )}
-                  {/* <Search /> */}
                 </div>
               </div>
             </AppBar>
