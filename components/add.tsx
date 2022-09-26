@@ -94,6 +94,8 @@ const Add: FC<path> = ({ path }) => {
     <div className={styles.Add}>
       <Button
         variant="contained"
+        onClick={openModal}
+        startIcon={<AddIcon />}
         sx={{
           position: "absolute",
           right: "0px",
@@ -108,7 +110,6 @@ const Add: FC<path> = ({ path }) => {
             backgroundColor: "#0022CC",
           },
         }}
-        startIcon={<AddIcon />}
       >
         投稿
       </Button>
