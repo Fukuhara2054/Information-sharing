@@ -205,11 +205,11 @@ const Post: FC = () => {
                   </AccordionDetails>
                 </Accordion>
                 <div className={styles.bottomtext}>
-                <p>
-                   タグ:{dat.tag}
-                  </p>
                   <p>
                   {dayjs(dat.Timestamp.toDate()).format("MM月DD日 HH:mm")}
+                  </p>
+                  <p>
+                   タグ:{dat.tag}
                   </p>
                 </div>
               </div>
