@@ -200,13 +200,13 @@ const Post: FC<value> = ({ value }) => {
           //影
           elevation={3}
           sx={{
-            p: "0px 2px",
+            position: "absolute",
+            top: "10px",
             display: "flex",
             alignItems: "center",
             width: "100%",
             height: 35,
             borderRadius: "15px",
-            marginLeft: "10px",
           }}
         >
           <IconButton sx={{ p: "4%" }} aria-label="menu">

@@ -230,14 +230,14 @@ export const Layout: FC<Props> = memo((props) => {
                   // </Tabs>
                   <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={value}>
-                      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                      <Box sx={{ borderBottom: 3, borderColor: '#959BA5' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                           <Tab label="タイムライン" value="1" />
                           <Tab label="未回答質問" value="2" />
                         </TabList>
                       </Box>
-                      <TabPanel value="1"><QuestionPost value='1' /></TabPanel>
-                      <TabPanel value="2"><QuestionPost value='2' /></TabPanel>
+                      <TabPanel sx={{ backgroundColor: '#EFEFEF', paddingTop: '50px' }} value="1"><QuestionPost value='1' /></TabPanel>
+                      <TabPanel sx={{ backgroundColor: '#EFEFEF', paddingTop: '50px' }} value="2"><QuestionPost value='2' /></TabPanel>
                     </TabContext>
                   </Box>
                 ) : (

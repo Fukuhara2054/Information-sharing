@@ -24,9 +24,9 @@ import { getAuth, signOut } from "firebase/auth";
 
 type path = {
   path: string;
-  fuku:string;
+  fuku: string;
 };
-const Add: FC<path> = ({ path,fuku }) => {
+const Add: FC<path> = ({ path, fuku }) => {
   const auth = getAuth(app);
   const [title, setTitle] = useState(""); //命題・質問
   const [content, setContent] = useState(""); // 詳細・内容
@@ -40,7 +40,7 @@ const Add: FC<path> = ({ path,fuku }) => {
       setPass(true);
       setFukuhara('投稿')
 
-    }else{
+    } else {
       setPass(false);
       setFukuhara('質問投稿')
     }
@@ -99,29 +99,54 @@ const Add: FC<path> = ({ path,fuku }) => {
 
   return (
     <div className={styles.Add}>
-      <Button
-        variant="contained"
-        onClick={openModal}
-        startIcon={<AddIcon />}
-        sx={{
-          position: "absolute",
-          top: "100px",
-          right: "0px",
-          fontSize: "15px",
-          marginRight: "30px",
-          padding: "4px 30px 4px 30px",
-          borderRadius: "15px",
-          backgroundColor: "#0055FF",
-          color: "white",
+      {fukuhara === "質問投稿" ? (
+        <Button
+          variant="contained"
+          onClick={openModal}
+          startIcon={<AddIcon />}
+          sx={{
+            position: "absolute",
+            top: "-55px",
+            right: "0px",
+            fontSize: "15px",
+            marginRight: "30px",
+            padding: "4px 30px 4px 30px",
+            borderRadius: "15px",
+            backgroundColor: "#0055FF",
+            color: "white",
 
-          "&:hover": {
-            backgroundColor: "#0022CC",
-          },
-        }}
-      >
-        {fukuhara}
-      </Button>
-      <Modal
+            "&:hover": {
+              backgroundColor: "#0022CC",
+            },
+          }}
+        >
+          {fukuhara}
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          onClick={openModal}
+          startIcon={<AddIcon />}
+          sx={{
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            fontSize: "15px",
+            marginRight: "30px",
+            padding: "4px 30px 4px 30px",
+            borderRadius: "15px",
+            backgroundColor: "#0055FF",
+            color: "white",
+
+            "&:hover": {
+              backgroundColor: "#0022CC",
+            },
+          }}
+        >
+          {fukuhara}
+        </Button>
+      )}
+      <Modal Modal
         // isOpenがtrueならモダールが起動する
         isOpen={modalIsOpen}
         // モーダルが開いた後の処理を定義
@@ -232,7 +257,7 @@ const Add: FC<path> = ({ path,fuku }) => {
         )}
         {/* ↓後でonclick変える */}
       </Modal>
-    </div>
+    </div >
   );
 };
 
