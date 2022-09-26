@@ -267,7 +267,7 @@ export const Layout: FC<Props> = memo((props) => {
                   {props.title === "質問箱" ? (
                     <></>
                   ) : (
-                    <Add path={path} />
+                    <Add path={path} title='投稿'/>
                   )}
                 </div>
               </div>
