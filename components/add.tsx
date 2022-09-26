@@ -105,6 +105,7 @@ const Add: FC<path> = ({ path,fuku }) => {
         startIcon={<AddIcon />}
         sx={{
           position: "absolute",
+          top: "100px",
           right: "0px",
           fontSize: "15px",
           marginRight: "30px",
