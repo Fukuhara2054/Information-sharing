@@ -99,8 +99,18 @@ const Add: FC<path> = ({ path }) => {
         onClick={openModal}
         startIcon={<AddIcon />}
         sx={{
-          color: "#606060",
-          padding: "0",
+          position: "absolute",
+          right: "0px",
+          fontSize: "15px",
+          marginRight: "30px",
+          padding: "4px 30px 4px 30px",
+          borderRadius: "15px",
+          backgroundColor: "#0055FF",
+          color: "white",
+
+          "&:hover": {
+            backgroundColor: "#0022CC",
+          },
         }}
       >
         投稿
