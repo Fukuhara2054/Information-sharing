@@ -264,11 +264,11 @@ export const Layout: FC<Props> = memo((props) => {
                 )} */}
                 <div className={styles.line}></div>
                 <div className={styles.appbarbottom}>
-                  {props.title === "質問箱" ? (
+                  {/* {props.title === "質問箱" ? (
                     <></>
                   ) : (
                     <Add path={path} />
-                  )}
+                  )} */}
                 </div>
               </div>
             </AppBar>

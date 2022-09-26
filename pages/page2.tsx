@@ -21,6 +21,6 @@ export default Page2;
 
 //質問箱の投稿コンポーネント
 
-{/* <div className={styles.appbarbottom}>
-<Add path='page2' />
-</div> */}
+// <div className={styles.appbarbottom}>
+// <Add path='page2' />
+// </div> 
