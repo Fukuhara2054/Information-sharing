@@ -211,7 +211,8 @@ export const Layout: FC<Props> = memo((props) => {
                 }}
               >
                 {props.title}
-              </Typography>           <div>
+              </Typography>
+              <div>
                 {props.title === "質問箱" ? (
                   // <Tabs
                   //   value={value}
@@ -241,7 +242,7 @@ export const Layout: FC<Props> = memo((props) => {
                     </TabContext>
                   </Box>
                 ) : (
-                  <></>
+                  <div className={styles.line}></div>
                 )}
                 {/* {props.title === "お気に入り" ? (
                   <Tabs
@@ -262,12 +263,12 @@ export const Layout: FC<Props> = memo((props) => {
                 ) : (
                   <></>
                 )} */}
-                <div className={styles.line}></div>
+                
                 <div className={styles.appbarbottom}>
                   {props.title === "質問箱" ? (
                     <></>
                   ) : (
-                    <Add path={path} fuku='投稿'/>
+                    <Add path={path} fuku='投稿' />
                   )}
                 </div>
               </div>

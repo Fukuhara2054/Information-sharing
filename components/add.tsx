@@ -42,8 +42,13 @@ const Add: FC<path> = ({ path, fuku }) => {
 
     } else {
       setPass(false);
-      setFukuhara('質問投稿')
-    }
+      if(path == "/page3"){
+        setFukuhara('投稿')
+      }else{
+        setFukuhara('質問投稿')
+      }
+
+      }
   }, []);
   // アプリのルートを識別するクエリセレクタを指定する。
   Modal.setAppElement("#__next");
