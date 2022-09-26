@@ -34,11 +34,15 @@ const Add: FC<path> = ({ path,fuku }) => {
   const [answer, setAnswer] = useState(""); //回答者
   const [pass, setPass] = useState(false);
   const [tag, setTag] = useState(undefined)
+  const [fukuhara, setFukuhara] = useState('')
   useEffect(() => {
     if (path == "/") {
       setPass(true);
+      setFukuhara('投稿')
+
     }else{
       setPass(false);
+      setFukuhara('質問投稿')
     }
   }, []);
   // アプリのルートを識別するクエリセレクタを指定する。
@@ -114,7 +118,7 @@ const Add: FC<path> = ({ path,fuku }) => {
           },
         }}
       >
-        {fuku}
+        {fukuhara}
       </Button>
       <Modal
         // isOpenがtrueならモダールが起動する
