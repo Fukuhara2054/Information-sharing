@@ -120,7 +120,7 @@ const Add: FC<path> = ({ path }) => {
         // モーダルを閉じる処理を定義
         onRequestClose={closeModal}
         //React-modalのスタイルがデフォで当てられていたので下に記述
-        style={{
+        sx={{
           overlay: {
             position: "fixed",
             //MUIのz-indexが1100に設定されているため
