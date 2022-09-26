@@ -235,7 +235,6 @@ const Post: FC<value> = ({ value }) => {
                   <p>回答数：{dat.count}</p>
                 </div>
                 {/* お気に入りボタン */}
-                <Like id={dat.id} onMark={styles.bookmark1} check={true} userID={dat.userID} />
               </div>
               <Accordion>
                 <AccordionSummary

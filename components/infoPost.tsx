@@ -14,12 +14,6 @@ import {
   setDoc,
 } from "firebase/firestore";
 import SearchIcon from "@mui/icons-material/Search";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { pink } from "@mui/material/colors";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "next/link";
-import { Edit, EditAttributesTwoTone } from "@mui/icons-material";
 import EditButton from "./editButton";
 import { db } from "./fire/fire";
 import Like from "./like";
@@ -169,7 +163,12 @@ const Post: FC = () => {
                     <></>
                   )}
                   {/* お気に入りボタン */}
-
+                  <Like
+                    id={dat.id}
+                    onMark={styles.bookmark1}
+                    check={true}
+                    userID={dat.userID}
+                  />
                 </div>
                 <Accordion>
                   <AccordionSummary
