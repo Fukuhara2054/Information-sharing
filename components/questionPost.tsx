@@ -44,7 +44,7 @@ const Accordion = styled((props: AccordionProps) => (
   border: `0px solid ${theme.palette.divider}`,
 }));
 
-const Post: FC<value> = ({value}) => {
+const Post: FC<value> = ({ value }) => {
   //これはなんだろう（福原）
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -108,7 +108,7 @@ const Post: FC<value> = ({value}) => {
   //const [show, setShow] = useState([])
   useEffect(() => {
 
-    if(value == '1'){
+    if (value == '1') {
       const postData = collectionGroup(db, "ques");
       const q = query(
         postData,
@@ -121,7 +121,7 @@ const Post: FC<value> = ({value}) => {
         //コンソールで確認のため
         //  console.log(data);
       });
-    }else{
+    } else {
       const postData = collectionGroup(db, "ques");
       const q = query(
         postData,
@@ -321,6 +321,9 @@ const Post: FC<value> = ({value}) => {
           </div>
         </ul>
       ))}
+      <div className={styles.appbarbottom}>
+        <Add path='page2' />
+      </div>
     </div>
   );
 };
