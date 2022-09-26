@@ -222,6 +222,9 @@ const Post: FC<value> = ({ value }) => {
           />
         </Paper>
       </div>
+      <div className={styles.appbarbottom}>
+        <Add path='page2' />
+      </div>
       {data.map((dat) => (
         <ul key={dat.id} className={styles.contentbox}>
           <div className={styles.box2}>
@@ -321,9 +324,7 @@ const Post: FC<value> = ({ value }) => {
           </div>
         </ul>
       ))}
-      <div className={styles.appbarbottom}>
-        <Add path='page2' />
-      </div>
+
     </div>
   );
 };
