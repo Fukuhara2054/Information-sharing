@@ -43,7 +43,11 @@ const InfoText: FC<props> = (props) => {
           id="outlined-basic"
           label="タイトル"
           variant="outlined"
-          className={styles.input}
+          sx={{
+            maxWidth: "85%",
+            width: "100vw",
+            verticalAlign: "4px",
+          }}
           onChange={changeTitle}
         />
       </h2>
@@ -58,7 +62,11 @@ const InfoText: FC<props> = (props) => {
           <InputLabel>タグ</InputLabel>
           <Select
             label="タグ"
-            className={styles.inputform}
+            sx={{
+              maxWidth: "85%",
+              width: "100vw",
+              verticalAlign: "4px",
+            }}
             onChange={changeTag}
           >
             <MenuItem value={"緊急"}>緊急</MenuItem>
@@ -76,7 +84,11 @@ const InfoText: FC<props> = (props) => {
           <InputLabel>回答者</InputLabel>
           <Select
             label="回答者"
-            className={styles.inputform}
+            sx={{
+              maxWidth: "95%",
+              width: "100vw",
+              verticalAlign: "4px",
+            }}
             onChange={changeAnswer}
           >
             <MenuItem value={"鴨川さん"}>鴨川さん</MenuItem>
@@ -94,7 +106,11 @@ const InfoText: FC<props> = (props) => {
           label="投稿内容"
           multiline
           rows={4}
-          className={styles.detail}
+          sx={{
+            fontSize: "1vw",
+            width: "85%",
+            height: "200px",
+          }}
           onChange={changeContent}
         />
       </h2>

@@ -60,18 +60,49 @@ const navigations: Navigation[] = [
   {
     pageName: "共有事項",
     path: "/",
-    icon: <HomeIcon className={styles.icon} />,
+    icon: (
+      <HomeIcon
+        sx={{
+          display: "block",
+          flexShrink: "0",
+          fill: "white",
+          width: "25px",
+          fontSize: "30px",
+          margin: "12px 0",
+        }}
+      />
+    ),
   },
   {
     pageName: "質問箱",
     path: "/page2",
-    icon: <InventoryIcon className={styles.icon} />,
-  },
+    icon: (
+      <InventoryIcon
+        sx={{
+          display: "block",
+          flexShrink: "0",
+          fill: "white",
+          width: "25px",
+          fontSize: "30px",
+          margin: "12px 0",
+        }}
+      />
+    ),  },
   {
     pageName: "重要事項",
     path: "/page3",
-    icon: <CheckIcon className={styles.icon} />,
-  },
+    icon: (
+      <InventoryIcon
+        sx={{
+          display: "block",
+          flexShrink: "0",
+          fill: "white",
+          width: "25px",
+          fontSize: "30px",
+          margin: "12px 0",
+        }}
+      />
+    ),  },
   //   {
   //   pageName: "お気に入り",
   //   path: "/",
@@ -143,7 +174,14 @@ export const Layout: FC<Props> = memo((props) => {
           </Link>
         ))}
         <div className={styles.sidebarbottom}>
-          <IconButton className={styles.logout} onClick={handleLogout}>
+        <IconButton
+            sx={{
+              margin: "16px 0",
+              marginRight: "10px",
+              color: "white",
+            }}
+            onClick={handleLogout}
+          >
             <LogoutIcon />
           </IconButton>
           <p className={menuOpen ? styles.loginName : styles.loginNameNone}>
@@ -163,8 +201,13 @@ export const Layout: FC<Props> = memo((props) => {
                 color: "black",
               }}
             >
-              <Typography className={styles.title}>{props.title}</Typography>
-              <div>
+              <Typography
+                sx={{
+                  padding: "20px 20px 20px 20px",
+                }}
+              >
+                <p className={styles.title}>{props.title}</p>
+              </Typography>              <div>
                 {props.title === "質問箱" ? (
                   // <Tabs
                   //   value={value}

@@ -49,7 +49,11 @@ const EditText: FC<props> = (props) => {
           label="タイトル(編集）"
           variant="outlined"
           value={title}
-          className={styles.input}
+          sx={{
+            maxWidth: "85%",
+            width: "100vw",
+            verticalAlign: "4px",
+          }}
           onChange={changeTitle}
         />
       </h2>
@@ -64,7 +68,11 @@ const EditText: FC<props> = (props) => {
           <InputLabel>タグ</InputLabel>
           <Select
             label="タグ"
-            className={styles.inputform}
+            sx={{
+              maxWidth: "95%",
+              width: "100vw",
+              verticalAlign: "4px",
+            }}
             onChange={changeTag}
           >
             <MenuItem value={"緊急"}>緊急</MenuItem>
@@ -87,7 +95,11 @@ const EditText: FC<props> = (props) => {
               name: "回答者",
               id: "uncontrolled-native",
             }}
-            className={styles.inputform}
+            sx={{
+              maxWidth: "95%",
+              width: "100vw",
+              verticalAlign: "4px",
+            }}
             onChange={changeAnswer}
           >
             <MenuItem value={"鴨川さん"}>鴨川さん</MenuItem>
@@ -106,7 +118,11 @@ const EditText: FC<props> = (props) => {
           value={content}
           multiline
           rows={6}
-          className={styles.detail}
+          sx={{
+            fontSize: "1vw",
+            width: "85%",
+            height: "200px",
+          }}
           onChange={changeContent}
         />
       </h2>

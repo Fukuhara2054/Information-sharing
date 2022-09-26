@@ -125,7 +125,14 @@ const Add: FC<props> = (props) => {
         }}
       >
         {/* モーダル内右上のバツ */}
-        <IconButton onClick={closeModal} className={styles.closeicon}>
+        <IconButton
+          onClick={closeModal}
+          sx={{
+            position: "absolute",
+            right: "0",
+            marginRight: "10px",
+          }}
+        >
           <CloseIcon />
         </IconButton>
 
@@ -142,7 +149,11 @@ const Add: FC<props> = (props) => {
               label="投稿内容"
               multiline
               rows={6}
-              className={styles.detail}
+              sx={{
+                fontSize: "1vw",
+                width: "85%",
+                height: "200px",
+              }}
               onChange={changeContent}
             />
           </h2>
@@ -152,7 +163,9 @@ const Add: FC<props> = (props) => {
           <Button
             variant="contained"
             color="success"
-            className={styles.addbutton}
+            sx={{
+              margin: "auto",
+            }}
             onClick={handleClickAddButton}
           >
             回答
@@ -160,7 +173,9 @@ const Add: FC<props> = (props) => {
           <Button
             variant="contained"
             color="error"
-            className={styles.closebutton}
+            sx={{
+              margin: "auto",
+            }}
             onClick={closeModal}
           >
             キャンセル

@@ -26,7 +26,11 @@ const questionText: FC<props> = (props) =>{
               label="タイトル"
               rows={2}
               variant="outlined"
-              className={styles.input}
+              sx={{
+                maxWidth: "85%",
+                width: "100vw",
+                verticalAlign: "4px",
+              }}
               onChange={changeTitle}
             />
           </h2>       
@@ -37,7 +41,11 @@ const questionText: FC<props> = (props) =>{
               label="投稿内容"
               multiline
               rows={6}
-              className={styles.detail}
+              sx={{
+                fontSize: "1vw",
+                width: "85%",
+                height: "200px",
+              }}
               onChange={changeContent}
             />
           </h2>

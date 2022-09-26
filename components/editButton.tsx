@@ -52,9 +52,9 @@ const EditButton: FC<props> = (props) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleClickAddButton = async() => {
+  const handleClickAddButton = async () => {
 
-    const ref = doc(db, "users", auth.currentUser?.uid,'info', did)
+    const ref = doc(db, "users", auth.currentUser?.uid, 'info', did)
     await setDoc(ref, {
       title: title,
       content: content,
@@ -65,11 +65,11 @@ const EditButton: FC<props> = (props) => {
       answer: answer,
       Timestamp: serverTimestamp(),
     })
-    
+
     window.location.reload()
   }
 
-  const handleClickDeleteButton = async() => {
+  const handleClickDeleteButton = async () => {
     await deleteDoc(doc(db, "users", auth.currentUser?.uid, "info", did))
 
     window.location.reload();
@@ -77,7 +77,12 @@ const EditButton: FC<props> = (props) => {
 
   return (
     <div className={styles.Add}>
-      <IconButton onClick={openModal} className={styles.textbtn}>
+      <IconButton
+        onClick={openModal}
+        sx={{
+          color: "#606060",
+          padding: "0",
+        }}>
         <EditIcon sx={{ color: "#9f9f9f" }} />
       </IconButton>
       <Modal
@@ -116,7 +121,14 @@ const EditButton: FC<props> = (props) => {
         }}
       >
         {/* モーダル内右上のバツ */}
-        <IconButton onClick={closeModal} className={styles.closeicon}>
+        <IconButton
+          onClick={closeModal}
+          sx={{
+            position: "absolute",
+            right: "0",
+            marginRight: "10px",
+          }}
+        >
           <CloseIcon />
         </IconButton>
 
@@ -140,7 +152,9 @@ const EditButton: FC<props> = (props) => {
           <Button
             variant="contained"
             color="success"
-            className={styles.addbutton}
+            sx={{
+              margin: "auto",
+            }}
             onClick={handleClickAddButton}
           >
             追加
@@ -148,7 +162,9 @@ const EditButton: FC<props> = (props) => {
           <Button
             variant="contained"
             color="error"
-            className={styles.closebutton}
+            sx={{
+              margin: "auto",
+            }}
             onClick={() => {
               setOpen(true);
             }}
@@ -176,7 +192,13 @@ const EditButton: FC<props> = (props) => {
                 本当に投稿を削除してもよろしいですか？
                 <div className={styles.alertbtn}>
                   <Button
-                    className={styles.alertcancel}
+                    sx={{
+                      backgroundColor: "#BCBCBC",
+                      color: "#222222",
+                      "&:hover": {
+                        backgroundColor: "#9f9f9f",
+                      },
+                    }}
                     startIcon={<CloseIcon />}
                     onClick={() => {
                       setOpen(false);

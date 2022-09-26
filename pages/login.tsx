@@ -85,7 +85,10 @@ const Login = () => {
         <Button
           variant="contained"
           onClick={handleLogin}
-          className={styles.loginbtn}
+          sx={{
+            whiteSpace: "nowrap",
+            margin: "10px 43%",
+          }}
           startIcon={<GoogleIcon />}
         >
           ログイン
