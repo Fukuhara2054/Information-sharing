@@ -24,8 +24,9 @@ import { getAuth, signOut } from "firebase/auth";
 
 type path = {
   path: string;
+  title:string;
 };
-const Add: FC<path> = ({ path }) => {
+const Add: FC<path> = ({ path,title }) => {
   const auth = getAuth(app);
   const [title, setTitle] = useState(""); //命題・質問
   const [content, setContent] = useState(""); // 詳細・内容
@@ -113,7 +114,7 @@ const Add: FC<path> = ({ path }) => {
           },
         }}
       >
-        投稿
+        {title}
       </Button>
       <Modal
         // isOpenがtrueならモダールが起動する
