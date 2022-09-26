@@ -221,9 +221,9 @@ const Post: FC<value> = ({ value }) => {
             inputProps={{ "aria-label": "search" }}
           />
         </Paper>
-      </div>
-      <div className={styles.appbarbottom}>
-        <Add path='page2' />
+        <div className={styles.appbarbottom}>
+          <Add path='page2' />
+        </div>
       </div>
       {data.map((dat) => (
         <ul key={dat.id} className={styles.contentbox}>

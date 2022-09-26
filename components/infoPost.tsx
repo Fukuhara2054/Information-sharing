@@ -194,11 +194,13 @@ const Post: FC = () => {
                     /> */}
                     </h2>
                   </AccordionSummary>
+                  <AccordionDetails>
                   <div id="">
                       <label htmlFor="">詳細: {dat.content} </label><br></br>
                       <label htmlFor="">回答者: {dat.answer} 記載者: {dat.questioner}</label><br></br>
                       {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
                     </div>
+                  </AccordionDetails>
                 </Accordion>
                 <div className={styles.bottomtext}>
                 <p>
