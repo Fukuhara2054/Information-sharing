@@ -36,6 +36,8 @@ const Add: FC<path> = ({ path }) => {
   useEffect(() => {
     if (path == "/") {
       setPass(true);
+    }else{
+      setPass(false);
     }
   }, []);
   // アプリのルートを識別するクエリセレクタを指定する。
@@ -97,18 +99,8 @@ const Add: FC<path> = ({ path }) => {
         onClick={openModal}
         startIcon={<AddIcon />}
         sx={{
-          position: "absolute",
-          right: "0px",
-          fontSize: "15px",
-          marginRight: "30px",
-          padding: "4px 30px 4px 30px",
-          borderRadius: "15px",
-          backgroundColor: "#0055FF",
-          color: "white",
-
-          "&:hover": {
-            backgroundColor: "#0022CC",
-          },
+          color: "#606060",
+          padding: "0",
         }}
       >
         投稿
