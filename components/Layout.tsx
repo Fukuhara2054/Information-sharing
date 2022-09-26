@@ -87,7 +87,8 @@ const navigations: Navigation[] = [
           margin: "12px 0",
         }}
       />
-    ),  },
+    ),
+  },
   {
     pageName: "重要事項",
     path: "/page3",
@@ -102,7 +103,8 @@ const navigations: Navigation[] = [
           margin: "12px 0",
         }}
       />
-    ),  },
+    ),
+  },
   //   {
   //   pageName: "お気に入り",
   //   path: "/",
@@ -132,7 +134,7 @@ export const Layout: FC<Props> = memo((props) => {
 
   //質問箱、お気に入りのページ切り替え用
   const [value, setValue] = React.useState('1');
-  
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
@@ -174,7 +176,7 @@ export const Layout: FC<Props> = memo((props) => {
           </Link>
         ))}
         <div className={styles.sidebarbottom}>
-        <IconButton
+          <IconButton
             sx={{
               margin: "16px 0",
               marginRight: "10px",
@@ -204,10 +206,12 @@ export const Layout: FC<Props> = memo((props) => {
               <Typography
                 sx={{
                   padding: "20px 20px 20px 20px",
+                  fontSize: "26px",
+                  fontWeight: "bold",
                 }}
               >
-                <p className={styles.title}>{props.title}</p>
-              </Typography>              <div>
+                {props.title}
+              </Typography>           <div>
                 {props.title === "質問箱" ? (
                   // <Tabs
                   //   value={value}
@@ -232,8 +236,8 @@ export const Layout: FC<Props> = memo((props) => {
                           <Tab label="未回答質問" value="2" />
                         </TabList>
                       </Box>
-                      <TabPanel value="1"><QuestionPost value='1'/></TabPanel>
-                      <TabPanel value="2"><QuestionPost value='2'/></TabPanel>
+                      <TabPanel value="1"><QuestionPost value='1' /></TabPanel>
+                      <TabPanel value="2"><QuestionPost value='2' /></TabPanel>
                     </TabContext>
                   </Box>
                 ) : (
