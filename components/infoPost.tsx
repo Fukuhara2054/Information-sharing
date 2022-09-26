@@ -197,6 +197,8 @@ const Post: FC = () => {
                   <AccordionDetails>
                   <div id="">
                       <label htmlFor="">詳細: {dat.content} </label><br></br>
+                      <br></br>
+                      <br></br>
                       <label htmlFor="">回答者: {dat.answer} 記載者: {dat.questioner}</label><br></br>
                       {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
                     </div>
@@ -260,6 +262,8 @@ const Post: FC = () => {
                   <AccordionDetails>
                     <div id="">
                       <label htmlFor="">詳細: {dat.content} </label><br></br>
+                      <br></br>
+                      <br></br>
                       <label htmlFor="">回答者: {dat.answer} 記載者: {dat.questioner}</label><br></br>
                       {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
                     </div>
