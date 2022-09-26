@@ -204,7 +204,7 @@ const Post: FC<value> = ({ value }) => {
             display: "flex",
             alignItems: "center",
             width: "100%",
-            height: 50,
+            height: 35,
             borderRadius: "15px",
             marginLeft: "10px",
           }}
