@@ -103,7 +103,7 @@ const Add: FC<path> = ({ path }) => {
           right: "0px",
           fontSize: "15px",
           marginRight: "30px",
-          padding: "4px 0px 4px 30px",
+          padding: "4px 30px 4px 30px",
           borderRadius: "15px",
           backgroundColor: "#0055FF",
           color: "white",
