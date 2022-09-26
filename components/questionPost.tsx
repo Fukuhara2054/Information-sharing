@@ -223,7 +223,7 @@ const Post: FC<value> = ({ value }) => {
         </Paper>
       </div>
       <div className={styles.appbarbottom}>
-          <Add path='page2' title='質問投稿'/>
+          <Add path='page2' fuku='質問投稿'/>
         </div>
       {data.map((dat) => (
         <ul key={dat.id} className={styles.contentbox}>
