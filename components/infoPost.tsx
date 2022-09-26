@@ -194,22 +194,18 @@ const Post: FC = () => {
                     /> */}
                     </h2>
                   </AccordionSummary>
-                  <AccordionDetails>
-                    <div id="">
-                      {/* <p className={styles.uta}>詳細:</p>
-                  <p>
-                    現在研修に入っている全員が参加対象です場所はGATE5階セミナールームですが、オンラインでも参加可能です。
-                  </p> */}
-                      <label htmlFor="">詳細: {dat.content} </label>
+                  <div id="">
+                      <label htmlFor="">詳細: {dat.content} </label><br></br>
+                      <label htmlFor="">回答者: {dat.answer} 記載者: {dat.questioner}</label><br></br>
                       {/* <button onClick={() => deleteDat(dat.id)}>削除</button> */}
                     </div>
-                  </AccordionDetails>
                 </Accordion>
                 <div className={styles.bottomtext}>
+                <p>
+                   タグ:{dat.tag}
+                  </p>
                   <p>
-                    回答者: {dat.answer} 記載者: {dat.questioner} タグ:{" "}
-                    {dat.tag}
-                    {dayjs(dat.Timestamp.toDate()).format("MM月DD日 HH:mm")}
+                  {dayjs(dat.Timestamp.toDate()).format("MM月DD日 HH:mm")}
                   </p>
                 </div>
               </div>
