@@ -61,6 +61,7 @@ const EditButton: FC<props> = (props) => {
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       tag: tag,
       questioner: questioner,
+      bookmark: false,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
       Timestamp: serverTimestamp(),
