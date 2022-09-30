@@ -164,6 +164,7 @@ const ImportantPost: FC = () => {
                       dquestioner={dat.questioner}
                       danswer={dat.answer}
                       dtag={dat.tag}
+                      dbookmark={dat.bookmark}
                     />
                   ) : (
                     <></>
@@ -229,6 +230,7 @@ const ImportantPost: FC = () => {
                       dquestioner={dat.questioner}
                       danswer={dat.answer}
                       dtag={dat.tag}
+                      dbookmark={dat.bookmark}
                     />
                   ) : (
                     <></>
