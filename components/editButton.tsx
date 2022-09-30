@@ -63,7 +63,7 @@ const EditButton: FC<props> = (props) => {
       tag: tag,
       questioner: questioner,
       bookmark: dbookmark,
-      duserID: did,
+      userID: auth.currentUser?.uid,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
       Timestamp: serverTimestamp(),
