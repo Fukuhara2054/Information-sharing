@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const router = useRouter()
   const auth = getAuth(app)
   const [user, setUser] = useState<UserType>(null)
-  const isAvailableForViewing =router.pathname === "/login"
+  const isAvailableForViewing = router.pathname === "/login"
   const value = {
     user,
   }
@@ -32,16 +32,16 @@ export const AuthProvider = ({ children }: AuthProps) => {
   useEffect(() => {
     const authStateChanged = onAuthStateChanged(auth, async (user) => {
       setUser(user)
-      if(user == null){
-        !user && !isAvailableForViewing && (await router.push("/login"))
-      }else{
+      if (user == null) {
+        router.push("/login")
+      } else {
         user && isAvailableForViewing && (await router.push("/"))
       }
     })
     return () => {
       authStateChanged()
     }
-    
+
   }, [])
 
   return (
