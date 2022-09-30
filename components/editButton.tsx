@@ -15,6 +15,7 @@ import { getAuth, signOut } from "firebase/auth"
 
 type props = {
   dtitle: JSX.Element
+  dbookmark: boolean
   dcontent: JSX.Element
   did: string
   duserID: string
@@ -24,7 +25,7 @@ type props = {
 }
 
 const EditButton: FC<props> = (props) => {
-  const { dtitle, dcontent, did, duserID, dquestioner, danswer } = props
+  const { dtitle, dcontent, did, duserID, dquestioner, danswer,dbookmark } = props
   const [title, setTitle] = useState(dtitle); //命題・質問
   const [content, setContent] = useState(dcontent); // 詳細・内容
   const [questioner, setQuestioner] = useState(dquestioner); //質問者
@@ -61,8 +62,8 @@ const EditButton: FC<props> = (props) => {
       // 投稿者を任意で指定するには一つ目を、指定しない場合は二つ目を
       tag: tag,
       questioner: questioner,
-      bookmark: false,
-      userID: did,
+      bookmark: dbookmark,
+      duserID: did,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
       Timestamp: serverTimestamp(),

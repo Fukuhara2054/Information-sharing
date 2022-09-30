@@ -158,6 +158,7 @@ const Post: FC = () => {
                       dquestioner={dat.questioner}
                       danswer={dat.answer}
                       dtag={dat.tag}
+                      dbookmark={dat.bookmark}
                     />
                   ) : (
                     <></>
