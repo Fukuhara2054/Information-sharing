@@ -14,14 +14,14 @@ import { app } from "./fire/fire"
 import { getAuth, signOut } from "firebase/auth"
 
 type props = {
-  dtitle: JSX.Element
-  dbookmark: JSX.Element
-  dcontent: JSX.Element
+  dtitle: string
+  dbookmark:boolean
+  dcontent:  string
   did: string
   duserID: string
-  dquestioner: JSX.Element
-  danswer: JSX.Element
-  dtag: JSX.Element
+  dquestioner:string
+  danswer: string
+  dtag: string
 }
 
 const EditButton: FC<props> = (props) => {
