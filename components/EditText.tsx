@@ -9,15 +9,15 @@ import { VaccinesTwoTone } from "@mui/icons-material";
 
 //型指定もっといい書き方あるかも
 type props = {
-  setTitle: Dispatch<SetStateAction<JSX.Element>>;
-  setContent: Dispatch<SetStateAction<JSX.Element>>;
-  setQuestioner: Dispatch<SetStateAction<JSX.Element>>;
-  setAnswer: Dispatch<SetStateAction<JSX.Element>>;
+  setTitle: Dispatch<SetStateAction<string>>;
+  setContent: Dispatch<SetStateAction<string>>;
+  setQuestioner: Dispatch<SetStateAction<string>>;
+  setAnswer: Dispatch<SetStateAction<string>>;
   setTag: Dispatch<SetStateAction<string>>;
-  title: JSX.Element
-  content: JSX.Element
-  questioner: JSX.Element
-  answer: JSX.Element
+  title: string
+  content: string
+  questioner: string
+  answer: string
   tag: string
 };
 //情報共有の時しか使わないコンポーネント
