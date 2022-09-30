@@ -62,6 +62,7 @@ const EditButton: FC<props> = (props) => {
       tag: tag,
       questioner: questioner,
       bookmark: false,
+      userID: did,
       // questioner: auth.currentUser?.displayName,
       answer: answer,
       Timestamp: serverTimestamp(),
@@ -158,7 +159,7 @@ const EditButton: FC<props> = (props) => {
             }}
             onClick={handleClickAddButton}
           >
-            追加
+            保存
           </Button>
           <Button
             variant="contained"
