@@ -15,7 +15,7 @@ import { getAuth, signOut } from "firebase/auth"
 
 type props = {
   dtitle: JSX.Element
-  dbookmark: boolean
+  dbookmark: JSX.Element
   dcontent: JSX.Element
   did: string
   duserID: string

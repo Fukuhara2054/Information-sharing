@@ -231,7 +231,7 @@ const Post: FC<value> = ({ value }) => {
             <div className={styles.main}>
               <div className={styles.link}>
                 <div className={styles.watch}>
-                  <p>いいね：1</p>
+                  {/* <p>いいね：1</p> */}
                   <p>回答数：{dat.count}</p>
                 </div>
                 {/* お気に入りボタン */}
