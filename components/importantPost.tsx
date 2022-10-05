@@ -185,7 +185,7 @@ const ImportantPost: FC = () => {
                     id="panel1a-header"
                   >
                     <h2 className={styles.title}>
-                      タイトル: {dat.title}
+                      {dat.title}
                       {/* 開閉ボタン */}
                       {/* <Checkbox
                       {...label}
@@ -251,7 +251,7 @@ const ImportantPost: FC = () => {
                     id="panel1a-header"
                   >
                     <h2 className={styles.title}>
-                      タイトル: {dat.title}
+                      {dat.title}
                       {/* 開閉ボタン */}
                       {/* <Checkbox
                       {...label}
