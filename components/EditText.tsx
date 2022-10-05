@@ -43,7 +43,7 @@ const EditText: FC<props> = (props) => {
   return (
     <div className={styles.textsection}>
       <h2>
-        命題　：
+        タイトル　：
         <TextField
           id="outlined-basic"
           label="タイトル(編集）"
