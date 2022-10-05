@@ -38,7 +38,6 @@ const InfoText: FC<props> = (props) => {
   return (
     <div className={styles.textsection}>
       <h2>
-        タイトル　：
         <TextField
           id="outlined-basic"
           label="タイトル"
